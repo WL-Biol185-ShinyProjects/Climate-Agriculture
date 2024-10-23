@@ -11,10 +11,15 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # seeing whats up with our data and how big it is, also if its any good
 
+```{r}
+library(readr)
+```
 
 
 #changing names and deleting belgium-luxembourg 
 ```{r}
+
+afgan_cambo <- read_csv("RAW_CSV_DATA/afgan-cambo.csv")
 
 afgan_cambo$Area[afgan_cambo$Area == "Bolivia (Plurinational State of)"] <- "Bolivia"
 
@@ -26,7 +31,7 @@ afgan_cambo <- afgan_cambo[afgan_cambo$Area != "Belgium-Luxembourg", ]
 
 afgan_cambo <- read.csv("RAW_CSV_DATA/afgan-cambo.csv")
 
-write.csv(afgan_cambo, file = "afgan_cambo_cleaned.csv")
+write.csv(afgan_cambo, file = "fully_afgan_cambo_cleaned.csv")
 
 ```
 
