@@ -14,7 +14,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 
 
-#changing names to 
+#changing names and deleting belgium-luxembourg 
 ```{r}
 
 afgan_cambo$Area[afgan_cambo$Area == "Bolivia (Plurinational State of)"] <- "Bolivia"
@@ -23,9 +23,9 @@ afgan_cambo$Area[afgan_cambo$Area == "Brunei Darussalam"] <- "Brunei"
  
 afgan_cambo$Area[afgan_cambo$Area == "Cabo Verde"] <- "Cape Verde"
 
-afgan_cambo <- read.csv("RAW_CSV_DATA/afgan-cambo.csv")
+afgan_cambo <- afgan_cambo[afgan_cambo$Area != "Belgium-Luxembourg", ]
 
-write.csv(afgan_cambo, file = "afgan_cambo_cleaned")
+afgan_cambo <- read.csv("RAW_CSV_DATA/afgan-cambo.csv")
 
 write.csv(afgan_cambo, file = "afgan_cambo_cleaned.csv")
 
