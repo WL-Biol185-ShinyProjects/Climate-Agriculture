@@ -5,12 +5,136 @@ date: "10/16/2024"
 output: html_document
 ---
 
+
+
+
+
+
+
+
+#DATA VISUALIZATION CODE BITS
+#loading libraries
+``{r}
+library(tidyverse)
+library(ggplot2)
+library(scales)
+``
+
+
+
+
+#readfiles
+``{r}
+data <- read_csv("your_data.csv")
+``
+
+
+
+#basic scatterplot (labs = labels)
+
+``{r}
+ggplot(data, aes(x = x_variable, y = y_variable)) +
+  geom_point() +
+  labs(title = "Scatter Plot", x = "X-axis Label", y = "Y-axis Label")
+``
+
+
+
+#line plots
+
+``{r}
+ggplot(data, aes(x = x_variable, y = y_variable)) +
+  geom_line() +
+  labs(title = "Line Plot", x = "X-axis Label", y = "Y-axis Label")
+
+``
+
+
+#histogram
+
+``{r}
+ggplot(data, aes(x = numeric_variable)) +
+  geom_histogram(binwidth = 10) +
+  labs(title = "Histogram", x = "Values", y = "Frequency")
+``
+
+
+#boxplot
+``{r}
+ggplot(data, aes(x = category_variable, y = numeric_variable)) +
+  geom_boxplot() +
+  labs(title = "Box Plot", x = "Categories", y = "Values")
+``
+
+
+#add color to plots
+
+``{r}
+ggplot(data, aes(x = x_variable, y = y_variable, color = group_variable)) +
+  geom_point() +
+  labs(title = "Colored Scatter Plot", x = "X-axis Label", y = "Y-axis Label")
+``
+
+
+# CODE FOR CSV FILES
+
+
+
+
+
+
+#view structure of data
+``{r}
+str(data)
+summary(data)
+``
+
+
+#select specific columns
+
+``{r}
+library(dplyr)
+selected_data <- data %>% select(column1, column2, column3)
+``
+
+
+#Filter rows based on condition
+``{r}
+filtered_data <- data %>% filter(column1 > 10)
+``
+
+
+
+#create new column
+``{r}
+data <- data %>% mutate(new_column = column1 + column2)
+``
+
+#rename columns
+``{r}
+data <- data %>% rename(new_name = old_name)
+``
+
+
+#group data and make summary stats
+``{r}
+summary_data <- data %>%
+  group_by(category_column) %>%
+  summarise(
+    mean_value = mean(numeric_column),
+    max_value = max(numeric_column)
+  )
+``
+
+
+
+
+
+
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-# seeing whats up with our data and how big it is, also if its any good
-# Here is the code for changing var. name "table$colname[ table$colname == "oldcountryname"] <- "newcountryname""
 
 ```{r}
 library(readr)
