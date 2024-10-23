@@ -27,3 +27,4 @@ afgan_cambo$Area[afgan_cambo$Area == "Bolivia (Plurinational State of)"] <- "Bol
 
 ```
 
+#changed Tanz_Zimb names (Vietnam, Tanzania, Venezuela)
