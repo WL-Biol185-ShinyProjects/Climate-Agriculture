@@ -12,7 +12,18 @@ knitr::opts_chunk$set(echo = TRUE)
 # seeing whats up with our data and how big it is, also if its any good
 
 
+
+#changing names to 
 ```{r}
+
+afgan_cambo$Area[afgan_cambo$Area == "Bolivia (Plurinational State of)"] <- "Bolivia"
+
+```
+
+
+```{r}
+
+
 
 ```
 
