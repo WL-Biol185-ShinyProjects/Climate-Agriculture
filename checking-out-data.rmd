@@ -10,7 +10,6 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 # seeing whats up with our data and how big it is, also if its any good
-# Here is the code for changing var. name "table$colname[ table$colname == "oldcountryname"] <- "newcountryname""
 
 ```{r}
 library(readr)
@@ -39,7 +38,19 @@ write.csv(afgan_cambo, file = "fully_afgan_cambo_cleaned.csv")
 
 ```{r}
 
+Tanz_Zimb <- read_csv("RAW_CSV_DATA/Tanz-Zimb.csv")
 
+Tanz_Zimb$Area[Tanz_Zimb$Area == "United Republic of Tanzania"] <- "Tanzania"
+
+Tanz_Zimb$Area[Tanz_Zimb$Area == "Venezuela (Bolivarian Republic of)"] <- "Venezuela"
+
+Tanz_Zimb$Area[Tanz_Zimb$Area == "Viet Nam"] <- "Vietnam"
+
+Tanz_Zimb <- Tanz_Zimb[Tanz_Zimb$Area != "Yugoslav SFR", ]
+
+Tanz_Zimb <- read.csv("RAW_CSV_DATA/Tanz-Zimb.csv")
+
+write.csv(Tanz_Zimb, file = "fully_tanz_zimb_cleaned.csv")
 
 ```
 
