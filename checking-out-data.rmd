@@ -25,8 +25,6 @@ afgan_cambo$Area[afgan_cambo$Area == "Cabo Verde"] <- "Cape Verde"
 afgan_cambo <- read.csv("RAW_CSV_DATA/afgan-cambo.csv")
 
 write.csv(afgan_cambo, file = "afgan_cambo_cleaned")
- 
-write.csv(afgan_cambo, file = "afgan_cambo_cleaned")
 
 write.csv(afgan_cambo, file = "afgan_cambo_cleaned.csv")
 
