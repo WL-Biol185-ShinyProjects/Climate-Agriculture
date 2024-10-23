@@ -16,3 +16,4 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ```
 
+#changed Tanz_Zimb names (Vietnam, Tanzania, Venezuela)
