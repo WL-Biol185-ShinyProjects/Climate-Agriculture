@@ -164,6 +164,7 @@ write.csv(afgan_cambo, file = "fully_afgan_cambo_cleaned.csv")
 
 ```
 
+#changing names in camer_elsalv
 ```{r}
 camer_elsalv <- read_csv("RAW_CSV_DATA/camer-elsalv.csv")
 
