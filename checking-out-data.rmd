@@ -35,6 +35,32 @@ write.csv(afgan_cambo, file = "fully_afgan_cambo_cleaned.csv")
 
 ```
 
+```{r}
+camer_elsalv <- read_csv("RAW_CSV_DATA/camer-elsalv.csv")
+
+camer_elsalv <- camer_elsalv[camer_elsalv$Area != "China, mainland", ]
+
+camer_elsalv <- camer_elsalv[camer_elsalv$Area != "China, Macao SAR", ]
+
+camer_elsalv$Area[camer_elsalv$Area == "China, Hong Kong SAR"] <- "Hong Kong"
+ 
+camer_elsalv$Area[camer_elsalv$Area == "China, Taiwan Province of"] <- "Taiwan"
+
+camer_elsalv$Area[camer_elsalv$Area == "Côte d'Ivoire"] <- "Ivory Coast"
+
+camer_elsalv$Area[camer_elsalv$Area == "Czechia"] <- "Czech Republic"
+
+camer_elsalv$Area[camer_elsalv$Area == "Democratic People's Republic of Korea"] <- "North Korea"
+
+camer_elsalv <- read.csv("RAW_CSV_DATA/camer-elsalv.csv")
+
+write.csv(camer_elsalv, file = "fully_cleaned_camer_elsalv.csv")
+
+```
+
+
+
+
 
 ```{r}
 
