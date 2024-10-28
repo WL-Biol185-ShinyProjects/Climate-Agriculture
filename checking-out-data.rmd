@@ -135,7 +135,7 @@ library(readr)
 ```
 
 
-#changing names and deleting belgium-luxembourg 
+#changing names in afgan-cambo raw data
 ```{r}
 
 afgan_cambo <- read.csv("RAW_CSV_DATA/afgan-cambo.csv")
@@ -152,7 +152,9 @@ write.csv(afgan_cambo, file = "fully_afgan_cambo_cleaned.csv")
 
 ```
 
-#changing names in camer_elsalv
+
+
+#changing names in camer-elsalv raw data
 ```{r}
 camer_elsalv <- read.csv("RAW_CSV_DATA/camer-elsalv.csv")
 
@@ -175,7 +177,31 @@ write.csv(camer_elsalv, file = "fully_camer_elsalv_cleaned.csv")
 ```
 
 
+#changing names in eqgu-hung raw data
+```{r}
+eqgu_hung <- read.csv("RAW_CSV_DATA/eqgu-hung.csv")
 
+eqgu_hung$Area[eqgu_hung$Area == "Ethiopia PDR"] <- "Ethiopia"
+
+write.csv(eqgu_hung, file = "fully_eqgu_hung_cleaned.csv")
+
+```
+
+
+#changing names in ice-lib raw data
+```{r}
+ice_lib <- read.csv("RAW_CSV_DATA/ice-lib.csv")
+
+ice_lib$Area[ice_lib$Area == "Iran (Islamic Republic of)"] <- "Iran"
+
+ice_lib$Area[ice_lib$Area == "Lao People's Democratic Republic"] <- "Laos"
+
+write.csv(ice_lib, file = "fully_ice_lib_cleaned.csv")
+
+```
+
+
+#changing names in Tanz-Zimb raw data 
 ```{r}
 
 Tanz_Zimb <- read.csv("RAW_CSV_DATA/Tanz-Zimb.csv")
