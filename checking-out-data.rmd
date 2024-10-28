@@ -183,7 +183,7 @@ camer_elsalv$Area[camer_elsalv$Area == "Democratic People's Republic of Korea"] 
 
 camer_elsalv <- read.csv("RAW_CSV_DATA/camer-elsalv.csv")
 
-write.csv(camer_elsalv, file = "fully_cleaned_camer_elsalv.csv")
+write.csv(camer_elsalv, file = "fully_camer_elsalv_cleaned.csv")
 
 ```
 
