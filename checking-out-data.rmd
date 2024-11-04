@@ -128,17 +128,7 @@ summary_data <- data %>%
 
 
 
-
-
-
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
-
-<<<<<<< HEAD
-=======
 # seeing whats up with our data and how big it is, also if its any good
->>>>>>> bf4bfc1298d105fd0e414269a4b9ee1e950bd231
 
 ```{r}
 library(readr)
@@ -148,7 +138,7 @@ library(readr)
 #changing names and deleting belgium-luxembourg 
 ```{r}
 
-afgan_cambo <- read_csv("RAW_CSV_DATA/afgan-cambo.csv")
+afgan_cambo <- read.csv("RAW_CSV_DATA/afgan-cambo.csv")
 
 afgan_cambo$Area[afgan_cambo$Area == "Bolivia (Plurinational State of)"] <- "Bolivia"
 
@@ -158,15 +148,13 @@ afgan_cambo$Area[afgan_cambo$Area == "Cabo Verde"] <- "Cape Verde"
 
 afgan_cambo <- afgan_cambo[afgan_cambo$Area != "Belgium-Luxembourg", ]
 
-afgan_cambo <- read.csv("RAW_CSV_DATA/afgan-cambo.csv")
-
 write.csv(afgan_cambo, file = "fully_afgan_cambo_cleaned.csv")
 
 ```
 
 #changing names in camer_elsalv
 ```{r}
-camer_elsalv <- read_csv("RAW_CSV_DATA/camer-elsalv.csv")
+camer_elsalv <- read.csv("RAW_CSV_DATA/camer-elsalv.csv")
 
 camer_elsalv <- camer_elsalv[camer_elsalv$Area != "China, mainland", ]
 
@@ -182,19 +170,15 @@ camer_elsalv$Area[camer_elsalv$Area == "Czechia"] <- "Czech Republic"
 
 camer_elsalv$Area[camer_elsalv$Area == "Democratic People's Republic of Korea"] <- "North Korea"
 
-camer_elsalv <- read.csv("RAW_CSV_DATA/camer-elsalv.csv")
-
 write.csv(camer_elsalv, file = "fully_camer_elsalv_cleaned.csv")
 
 ```
 
 
 
-
-
 ```{r}
 
-Tanz_Zimb <- read_csv("RAW_CSV_DATA/Tanz-Zimb.csv")
+Tanz_Zimb <- read.csv("RAW_CSV_DATA/Tanz-Zimb.csv")
 
 Tanz_Zimb$Area[Tanz_Zimb$Area == "United Republic of Tanzania"] <- "Tanzania"
 
@@ -203,8 +187,6 @@ Tanz_Zimb$Area[Tanz_Zimb$Area == "Venezuela (Bolivarian Republic of)"] <- "Venez
 Tanz_Zimb$Area[Tanz_Zimb$Area == "Viet Nam"] <- "Vietnam"
 
 Tanz_Zimb <- Tanz_Zimb[Tanz_Zimb$Area != "Yugoslav SFR", ]
-
-Tanz_Zimb <- read.csv("RAW_CSV_DATA/Tanz-Zimb.csv")
 
 write.csv(Tanz_Zimb, file = "fully_tanz_zimb_cleaned.csv")
 
