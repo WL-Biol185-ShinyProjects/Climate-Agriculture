@@ -273,3 +273,183 @@ write.csv(Tanz_Zimb, file = "fully_tanz_zimb_cleaned.csv")
 ```
 
 #changed Tanz_Zimb names (Vietnam, Tanzania, Venezuela)
+
+
+
+
+
+
+#changing names in fully_temp_data_clean from raw Temperature-Data to match names in cleaned agriculture data
+```{r}
+temp_data <- read.csv("RAW_CSV_DATA/Temperature-Data.csv")
+
+temp_data$Country[temp_data$Country == "Afghanistan, Islamic Rep. of"] <- "Afghanistan"
+
+temp_data <- temp_data[temp_data$Country != "American Samoa", ]
+
+temp_data <- temp_data[temp_data$Country != "Andorra, Principality of", ]
+
+temp_data <- temp_data[temp_data$Country != "Anguilla", ]
+
+temp_data$Country[temp_data$Country == "Armenia, Rep. of"] <- "Armenia"
+
+temp_data <- temp_data[temp_data$Country != "Aruba, Kingdom of the Netherlands", ]
+
+temp_data$Country[temp_data$Country == "Azerbaijan, Rep. of"] <- "Azerbaijan"
+
+temp_data$Country[temp_data$Country == "Bahrain, Kingdom of"] <- "Bahrain"
+
+temp_data <- temp_data[temp_data$Country != "Bahamas, The", ]
+
+temp_data$Country[temp_data$Country == "Belarus, Rep. of"] <- "Belarus"
+
+temp_data <- temp_data[temp_data$Country != "British Virgin Islands", ]
+
+temp_data$Country[temp_data$Country == "Brunei Darussalam"] <- "Brunei"
+
+temp_data$Country[temp_data$Country == "Cabo Verde"] <- "Cape Verde"
+
+temp_data$Country[temp_data$Country == "Central African Rep."] <- "Central African Republic"
+
+temp_data$Country[temp_data$Country == "China, P.R.: Hong Kong"] <- "Hong Kong"
+
+temp_data$Country[temp_data$Country == "China, P.R.: Mainland"] <- "China"
+
+temp_data$Country[temp_data$Country == "Comoros, Union of the"] <- "Comoros"
+
+temp_data$Country[temp_data$Country == "Congo, Rep. of"] <- "Congo"
+
+temp_data$Country[temp_data$Country == "Congo, Dem. Rep. of the"] <- "Democratic Republic of the Congo"
+
+temp_data$Country[temp_data$Country == "Côte d'Ivoire"] <- "Ivory Coast"
+
+temp_data$Country[temp_data$Country == "Croatia, Rep. of"] <- "Croatia"
+
+temp_data$Country[temp_data$Country == "Czech Rep."] <- "Czech Republic"
+
+temp_data$Country[temp_data$Country == "Dominican Rep."] <- "Dominican Republic"
+
+temp_data$Country[temp_data$Country == "Egypt, Arab Rep. of"] <- "Egypt"
+
+temp_data$Country[temp_data$Country == "Equatorial Guinea, Rep. of"] <- "Equatorial Guinea"
+
+temp_data$Country[temp_data$Country == "Eritrea, The State of"] <- "Eritrea"
+
+temp_data$Country[temp_data$Country == "Estonia, Rep. of"] <- "Estonia"
+
+temp_data$Country[temp_data$Country == "Eswatini, Kingdom of"] <- "Eswatini"
+
+temp_data$Country[temp_data$Country == "Ethiopia, The Federal Dem. Rep. of"] <- "Ethiopia"
+
+temp_data$Country[temp_data$Country == "Fiji, Rep. of"] <- "Fiji"
+
+temp_data$Country[temp_data$Country == "Guiana, French"] <- "French Guiana"
+
+temp_data$Country[temp_data$Country == "Gambia, The"] <- "Gambia"
+
+temp_data$Country[temp_data$Country == "Iran, Islamic Rep. of"] <- "Iran"
+
+temp_data$Country[temp_data$Country == "Kazakhstan, Rep. of"] <- "Kazakhstan"
+
+temp_data$Country[temp_data$Country == "South Sudan, Rep. of"] <- "South Sudan"
+
+temp_data$Country[temp_data$Country == "St. Vincent and the Grenadines"] <- "Saint Vincent and the Grenadines"
+
+temp_data$Country[temp_data$Country == "Slovenia, Rep. of"] <- "Slovenia"
+
+temp_data$Country[temp_data$Country == "Slovak Rep."] <- "Slovakia"
+
+temp_data$Country[temp_data$Country == "Serbia, Rep. of"] <- "Serbia"
+
+temp_data$Country[temp_data$Country == "Korea, Dem. People's Rep. of"] <- "North Korea"
+
+temp_data$Country[temp_data$Country == "Korea, Rep. of"] <- "South Korea"
+
+temp_data$Country[temp_data$Country == "Kyrgyz Rep."] <- "Kyrgyzstan"
+
+temp_data$Country[temp_data$Country == "Lao People's Dem. Rep."] <- "Laos"
+
+temp_data$Country[temp_data$Country == "Lesotho, Kingdom of"] <- "Lesotho"
+
+temp_data$Country[temp_data$Country == "São Tomé and Príncipe, Dem. Rep. of"] <- "Sao Tome and Principe"
+
+temp_data$Country[temp_data$Country == "St. Lucia"] <- "Saint Lucia"
+
+temp_data$Country[temp_data$Country == "Russian Federation"] <- "Russia"
+
+temp_data$Country[temp_data$Country == "Türkiye. Rep. Of"] <- "Turkey"
+
+temp_data$Country[temp_data$Country == "Timor-Leste, Dem. Rep. Of"] <- "East Timor"
+
+temp_data$Country[temp_data$Country == "Tajikistan, Rep. Of"] <- "Tajikistan"
+
+temp_data$Country[temp_data$Country == "Syrian Arab Rep."] <- "Syria"
+
+temp_data$Country[temp_data$Country == "Yemen, Rep. Of"] <- "Yemen"
+
+temp_data$Country[temp_data$Country == "Venezuela, Rep. Bolivariana de"] <- "Venezuela"
+
+temp_data$Country[temp_data$Country == "Uzbekistan, Rep. of"] <- "Uzbekistan"
+
+temp_data$Country[temp_data$Country == "United States"] <- "United States of America"
+
+temp_data$Country[temp_data$Country == "Tanzania, United Rep. of"] <- "Tanzania"
+
+temp_data$Country[temp_data$Country == "Madagascar, Rep. of"] <- "Madagascar"
+
+temp_data$Country[temp_data$Country == "Marshall Islands, Rep. of the"] <- "Marshall Islands"
+
+temp_data$Country[temp_data$Country == "Mauritania, Islamic Rep. of"] <- "Mauritania"
+
+temp_data$Country[temp_data$Country == "Micronesia, Federated States of"] <- "Micronesia"
+
+
+temp_data$Country[temp_data$Country == "Moldova, Rep. of"] <- "Moldova"
+
+temp_data$Country[temp_data$Country == "Poland, Rep. of"] <- "Poland"
+
+temp_data$Country[temp_data$Country == "West Bank and Gaza"] <- "Palestine"
+
+temp_data$Country[temp_data$Country == "North Macedonia, Republic of"] <- "North Macedonia"
+
+temp_data$Country[temp_data$Country == "Netherlands, The"] <- "Netherlands"
+
+temp_data$Country[temp_data$Country == "Nauru, Rep. of"] <- "Nauru"
+
+temp_data$Country[temp_data$Country == "Mozambique, Rep. of"] <- "Mozambique"
+
+temp_data <- temp_data[temp_data$Country != "Cayman Islands", ]
+
+temp_data <- temp_data[temp_data$Country != "China, P.R.: Macao", ]
+
+temp_data <- temp_data[temp_data$Country != "Greenland", ]
+
+temp_data <- temp_data[temp_data$Country != "Svalbard Jan Mayen Islands", ]
+
+temp_data <- temp_data[temp_data$Country != "Holy See", ]
+
+temp_data <- temp_data[temp_data$Country != "Isle of Man", ]
+
+temp_data <- temp_data[temp_data$Country != "San Marino, Rep. of", ]
+
+temp_data <- temp_data[temp_data$Country != "Saint Helena", ]
+
+temp_data <- temp_data[temp_data$Country != "Saint Pierre and Miquelon", ]
+
+temp_data <- temp_data[temp_data$Country != "Western Sahara", ]
+
+temp_data <- temp_data[temp_data$Country != "Wallis and Futuna Islands", ]
+
+temp_data <- temp_data[temp_data$Country != "United States Virgin Islands", ]
+
+temp_data <- temp_data[temp_data$Country != "Mayotte", ]
+
+temp_data <- temp_data[temp_data$Country != "Montserrat", ]
+
+temp_data <- temp_data[temp_data$Country != "Pitcairn Islands", ]
+
+temp_data <- temp_data[temp_data$Country != "Norfolk Island", ]
+
+write.csv(temp_data, file = "fully_temp_data_cleaned.csv")
+
+```
