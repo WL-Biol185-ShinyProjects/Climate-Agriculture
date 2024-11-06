@@ -4,7 +4,7 @@ library(shiny)
 fluidPage(
   
   # Application title
-  titlePanel("Old Faithful Geyser Data"),
+  titlePanel("Crop Yield Data"),
   
   # Sidebar with a slider input for number of bins 
   sidebarLayout(
@@ -12,7 +12,7 @@ fluidPage(
       sliderInput("bins",
                   "Number of bins:",
                   min = 1,
-                  max = 50,
+                  max = 500,
                   value = 30)
     ),
     
@@ -20,5 +20,4 @@ fluidPage(
     mainPanel(
       plotOutput("distPlot")
     )
-  )
-)
+  ))
