@@ -287,11 +287,17 @@ temp_data$Country[temp_data$Country == "Afghanistan, Islamic Rep. of"] <- "Afgha
 
 temp_data <- temp_data[temp_data$Country != "American Samoa", ]
 
+temp_data <- temp_data[temp_data$Country != "Palau, Rep. of", ]
+
+temp_data <- temp_data[temp_data$Country != "Falkland Islands (Malvinas)", ]
+
 temp_data <- temp_data[temp_data$Country != "Andorra, Principality of", ]
 
 temp_data <- temp_data[temp_data$Country != "Anguilla", ]
 
 temp_data$Country[temp_data$Country == "Armenia, Rep. of"] <- "Armenia"
+
+temp_data$Country[temp_data$Country == "Taiwan Province of China"] <- "Taiwan"
 
 temp_data <- temp_data[temp_data$Country != "Aruba, Kingdom of the Netherlands", ]
 
@@ -341,6 +347,8 @@ temp_data$Country[temp_data$Country == "Eswatini, Kingdom of"] <- "Eswatini"
 
 temp_data$Country[temp_data$Country == "Ethiopia, The Federal Dem. Rep. of"] <- "Ethiopia"
 
+temp_data$Country[temp_data$Country == "St. Kitts and Nevis"] <- "Saint Kitts and Nevis"
+
 temp_data$Country[temp_data$Country == "Fiji, Rep. of"] <- "Fiji"
 
 temp_data$Country[temp_data$Country == "Guiana, French"] <- "French Guiana"
@@ -377,15 +385,15 @@ temp_data$Country[temp_data$Country == "St. Lucia"] <- "Saint Lucia"
 
 temp_data$Country[temp_data$Country == "Russian Federation"] <- "Russia"
 
-temp_data$Country[temp_data$Country == "Türkiye. Rep. Of"] <- "Turkey"
+temp_data$Country[temp_data$Country == "Türkiye, Rep. of"] <- "Turkey"
 
-temp_data$Country[temp_data$Country == "Timor-Leste, Dem. Rep. Of"] <- "East Timor"
+temp_data$Country[temp_data$Country == "Timor-Leste, Dem. Rep. of"] <- "East Timor"
 
-temp_data$Country[temp_data$Country == "Tajikistan, Rep. Of"] <- "Tajikistan"
+temp_data$Country[temp_data$Country == "Tajikistan, Rep. of"] <- "Tajikistan"
 
 temp_data$Country[temp_data$Country == "Syrian Arab Rep."] <- "Syria"
 
-temp_data$Country[temp_data$Country == "Yemen, Rep. Of"] <- "Yemen"
+temp_data$Country[temp_data$Country == "Yemen, Rep. of"] <- "Yemen"
 
 temp_data$Country[temp_data$Country == "Venezuela, Rep. Bolivariana de"] <- "Venezuela"
 
@@ -403,14 +411,13 @@ temp_data$Country[temp_data$Country == "Mauritania, Islamic Rep. of"] <- "Maurit
 
 temp_data$Country[temp_data$Country == "Micronesia, Federated States of"] <- "Micronesia"
 
-
 temp_data$Country[temp_data$Country == "Moldova, Rep. of"] <- "Moldova"
 
 temp_data$Country[temp_data$Country == "Poland, Rep. of"] <- "Poland"
 
 temp_data$Country[temp_data$Country == "West Bank and Gaza"] <- "Palestine"
 
-temp_data$Country[temp_data$Country == "North Macedonia, Republic of"] <- "North Macedonia"
+temp_data$Country[temp_data$Country == "North Macedonia, Republic of "] <- "North Macedonia"
 
 temp_data$Country[temp_data$Country == "Netherlands, The"] <- "Netherlands"
 
