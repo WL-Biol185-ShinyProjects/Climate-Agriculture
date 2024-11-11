@@ -138,7 +138,7 @@ library(readr)
 #changing names in afgan-cambo raw data
 ```{r}
 
-afgan_cambo <- read.csv("afgan-cambo-raw.csv")
+afgan_cambo <- read.csv("RAW_CSV_DATA/afgan-cambo-raw.csv")
 
 afgan_cambo$Area[afgan_cambo$Area == "Bolivia (Plurinational State of)"] <- "Bolivia"
 
