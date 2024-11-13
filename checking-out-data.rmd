@@ -135,28 +135,40 @@ library(readr)
 ```
 
 
-#changing names in afgan-cambo raw data
+#changing names in afgan-cambo raw data / also deleted failed states and small islands 
 ```{r}
 
-afgan_cambo <- read.csv("afgan-cambo-raw.csv")
+afgan_cambo <- read.csv("RAW_CSV_DATA/afgan-cambo-raw.csv")
+
+afgan_cambo <- afgan_cambo[afgan_cambo$Area != "Afghanistan", ]
+
+afgan_cambo <- afgan_cambo[afgan_cambo$Area != "Antigua and Barbuda", ]
+
+afgan_cambo <- afgan_cambo[afgan_cambo$Area != "Bahamas", ]
+
+afgan_cambo <- afgan_cambo[afgan_cambo$Area != "Barbados", ]
 
 afgan_cambo$Area[afgan_cambo$Area == "Bolivia (Plurinational State of)"] <- "Bolivia"
 
 afgan_cambo$Area[afgan_cambo$Area == "Brunei Darussalam"] <- "Brunei"
- 
-afgan_cambo$Area[afgan_cambo$Area == "Cabo Verde"] <- "Cape Verde"
+
+afgan_cambo <- afgan_cambo[afgan_cambo$Area != "Cabo Verde", ]
 
 afgan_cambo <- afgan_cambo[afgan_cambo$Area != "Belgium-Luxembourg", ]
 
-write.csv(afgan_cambo, file = "fully_afgan_cambo_cleanedV2.csv")
+write.csv(afgan_cambo, file = "afgan_cambo_cleaned.csv")
 
 ```
 
 
 
-#changing names in camer-elsalv raw data (Check Czecholslovakia)
+#changing names in camer-elsalv raw data (Check Czecholslovakia) / also deleted small islands and failed states 
 ```{r}
 camer_elsalv <- read.csv("RAW_CSV_DATA/camer-elsalv.csv")
+
+camer_elsalv <- camer_elsalv[camer_elsalv$Area != "Central African Republic", ]
+
+camer_elsalv <- camer_elsalv[camer_elsalv$Area != "Chad", ]
 
 camer_elsalv <- camer_elsalv[camer_elsalv$Area != "China, mainland", ]
 
@@ -166,29 +178,51 @@ camer_elsalv$Area[camer_elsalv$Area == "China, Hong Kong SAR"] <- "Hong Kong"
  
 camer_elsalv$Area[camer_elsalv$Area == "China, Taiwan Province of"] <- "Taiwan"
 
+camer_elsalv <- camer_elsalv[camer_elsalv$Area != "Comoros", ]
+
+camer_elsalv$Area[camer_elsalv$Area == "Congo"] <- "Republic of the Congo"
+
+camer_elsalv <- camer_elsalv[camer_elsalv$Area != "Cook Islands", ]
+
 camer_elsalv$Area[camer_elsalv$Area == "Côte d'Ivoire"] <- "Ivory Coast"
 
 camer_elsalv$Area[camer_elsalv$Area == "Czechia"] <- "Czech Republic"
 
 camer_elsalv$Area[camer_elsalv$Area == "Democratic People's Republic of Korea"] <- "North Korea"
 
-write.csv(camer_elsalv, file = "fully_camer_elsalv_cleaned.csv")
+camer_elsalv <- camer_elsalv[camer_elsalv$Area != "Dominica", ]
+
+camer_elsalv <- camer_elsalv[camer_elsalv$Area != "Democratic Republic of the Congo", ]
+
+write.csv(camer_elsalv, file = "camer_elsalv_cleaned.csv")
 
 ```
 
 
-#changing names in eqgu-hung raw data
+#changing names in eqgu-hung raw data / deleting failed states and small islands 
 ```{r}
 eqgu_hung <- read.csv("RAW_CSV_DATA/eqgu-hung.csv")
 
 eqgu_hung$Area[eqgu_hung$Area == "Ethiopia PDR"] <- "Ethiopia"
 
-write.csv(eqgu_hung, file = "fully_eqgu_hung_cleaned.csv")
+eqgu_hung <- eqgu_hung[eqgu_hung$Area != "Faroe Islands", ]
+
+eqgu_hung <- eqgu_hung[eqgu_hung$Area != "Fiji", ]
+
+eqgu_hung <- eqgu_hung[eqgu_hung$Area != "French Polynesia", ]
+
+eqgu_hung <- eqgu_hung[eqgu_hung$Area != "Grenada", ]
+
+eqgu_hung <- eqgu_hung[eqgu_hung$Area != "Guadeloupe", ]
+
+eqgu_hung <- eqgu_hung[eqgu_hung$Area != "Haiti", ]
+
+write.csv(eqgu_hung, file = "eqgu_hung_cleaned.csv")
 
 ```
 
 
-#changing names in ice-lib raw data
+#changing names in ice-lib raw data / deleting failed states and small islands
 ```{r}
 ice_lib <- read.csv("RAW_CSV_DATA/ice-lib.csv")
 
@@ -196,53 +230,107 @@ ice_lib$Area[ice_lib$Area == "Iran (Islamic Republic of)"] <- "Iran"
 
 ice_lib$Area[ice_lib$Area == "Lao People's Democratic Republic"] <- "Laos"
 
-write.csv(ice_lib, file = "fully_ice_lib_cleaned.csv")
+ice_lib <- ice_lib[ice_lib$Area != "Jamaica", ]
+
+write.csv(ice_lib, file = "ice_lib_cleaned.csv")
 
 ```
 
 
-#changing names in lith-monte raw data
+#changing names in lith-monte raw data / deleting failed states and small islands
 ```{r}
 lith_monte <- read.csv("RAW_CSV_DATA/lith-monte.csv")
 
-lith_monte$Area[lith_monte$Area == "Micronesia (Federated States of)"] <- "Micronesia"
+lith_monte <- lith_monte[lith_monte$Area != "Maldives", ]
 
-write.csv(lith_monte, file = "fully_lith_monte_cleaned.csv")
+lith_monte <- lith_monte[lith_monte$Area != "Malta", ]
+
+lith_monte <- lith_monte[lith_monte$Area != "Marshall Islands", ]
+
+lith_monte <- lith_monte[lith_monte$Area != "Martinique", ]
+
+lith_monte <- lith_monte[lith_monte$Area != "Mauritius", ]
+
+lith_monte <- lith_monte[lith_monte$Area != "Micronesia (Federated States of)", ]
+
+write.csv(lith_monte, file = "lith_monte_cleaned.csv")
 
 ```
 
 
-#changing names in moro-roma raw data
+#changing names in moro-roma raw data / deleting failed states and small islands
 ```{r}
 moro_roma <- read.csv("RAW_CSV_DATA/moro-roma.csv")
 
 moro_roma$Area[moro_roma$Area == "Netherlands (Kingdom of the)"] <- "Netherlands"
 
+moro_roma <- moro_roma[moro_roma$Area != "Nauru", ]
+
+moro_roma <- moro_roma[moro_roma$Area != "New Caledonia", ]
+
+moro_roma <- moro_roma[moro_roma$Area != "Niue", ]
+
+moro_roma <- moro_roma[moro_roma$Area != "Puerto Rico", ]
+
+moro_roma <- moro_roma[moro_roma$Area != "Réunion", ]
+
 moro_roma$Area[moro_roma$Area == "Republic of Korea"] <- "South Korea"
 
 moro_roma$Area[moro_roma$Area == "Republic of Moldova"] <- "Moldova"
 
-write.csv(moro_roma, file = "fully_moro_roma_cleaned.csv")
+write.csv(moro_roma, file = "moro_roma_cleaned.csv")
 
 ```
 
 
-#changing names in russfed-swed raw data  (need to change sudan (former) and serbia/montenegro)
+#changing names in russfed-swed raw data / deleting failed states and small islands (need to change serbia/montenegro)
 ```{r}
 russfed_swed <- read.csv("RAW_CSV_DATA/russfed-swed.csv")
 
 russfed_swed$Area[russfed_swed$Area == "Russian Federation"] <- "Russia"
 
-write.csv(russfed_swed, file = "fully_russfed_swed_cleaned.csv")
+russfed_swed <- russfed_swed[russfed_swed$Area != "Saint Kitts and Nevis", ]
+
+russfed_swed <- russfed_swed[russfed_swed$Area != "Saint Lucia", ]
+
+russfed_swed <- russfed_swed[russfed_swed$Area != "Saint Vincent and the Grenadines", ]
+
+russfed_swed <- russfed_swed[russfed_swed$Area != "Samoa", ]
+
+russfed_swed <- russfed_swed[russfed_swed$Area != "Sao Tome and Principe", ]
+
+russfed_swed <- russfed_swed[russfed_swed$Area != "Seychelles", ]
+
+russfed_swed <- russfed_swed[russfed_swed$Area != "Solomon Islands", ]
+
+russfed_swed <- russfed_swed[russfed_swed$Area != "Somalia", ]
+
+russfed_swed <- russfed_swed[russfed_swed$Area != "Seychelles", ]
+
+russfed_swed <- russfed_swed[russfed_swed$Area != "South Sudan", ]
+
+russfed_swed <- russfed_swed[russfed_swed$Area != "Sudan", ]
+
+russfed_swed <- russfed_swed[russfed_swed$Area != "Sudan (former)", ]
+
+write.csv(russfed_swed, file = "russfed_swed_cleaned.csv")
 
 ```
 
 
-#changing names in Switz-UK raw data
+#changing names in Switz-UK raw data/ deleting failed states and small islands
 ```{r}
 switz_uk <- read.csv("RAW_CSV_DATA/Switz-UK.csv")
 
-switz_uk$Area[switz_uk$Area == "Syrian Arab Republic"] <- "Syria"
+switz_uk <- switz_uk[switz_uk$Area != "Syrian Arab Republic", ]
+
+switz_uk <- switz_uk[switz_uk$Area != "Tongo", ]
+
+switz_uk <- switz_uk[switz_uk$Area != "Tokelau", ]
+
+switz_uk <- switz_uk[switz_uk$Area != "Trinidad and Tobago", ]
+
+switz_uk <- switz_uk[switz_uk$Area != "Tuvalu", ]
 
 switz_uk$Area[switz_uk$Area == "Timor-Leste"] <- "East Timor"
 
@@ -250,7 +338,7 @@ switz_uk$Area[switz_uk$Area == "Türkiye"] <- "Turkey"
 
 switz_uk$Area[switz_uk$Area == "United Kingdom of Great Britain and Northern Ireland"] <- "United Kingdom"
 
-write.csv(switz_uk, file = "fully_switz_uk_cleaned.csv")
+write.csv(switz_uk, file = "switz_uk_cleaned.csv")
 
 ```
 
@@ -268,7 +356,11 @@ Tanz_Zimb$Area[Tanz_Zimb$Area == "Viet Nam"] <- "Vietnam"
 
 Tanz_Zimb <- Tanz_Zimb[Tanz_Zimb$Area != "Yugoslav SFR", ]
 
-write.csv(Tanz_Zimb, file = "fully_tanz_zimb_cleaned.csv")
+Tanz_Zimb <- Tanz_Zimb[Tanz_Zimb$Area != "Vanuatu", ]
+
+Tanz_Zimb <- Tanz_Zimb[Tanz_Zimb$Area != "Yemen", ]
+
+write.csv(Tanz_Zimb, file = "tanz_zimb_cleaned.csv")
 
 ```
 
