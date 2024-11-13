@@ -135,28 +135,40 @@ library(readr)
 ```
 
 
-#changing names in afgan-cambo raw data
+#changing names in afgan-cambo raw data / also deleted failed states and small islands 
 ```{r}
 
 afgan_cambo <- read.csv("RAW_CSV_DATA/afgan-cambo-raw.csv")
 
+afgan_cambo <- afgan_cambo[afgan_cambo$Area != "Afghanistan", ]
+
+afgan_cambo <- afgan_cambo[afgan_cambo$Area != "Antigua and Barbuda", ]
+
+afgan_cambo <- afgan_cambo[afgan_cambo$Area != "Bahamas", ]
+
+afgan_cambo <- afgan_cambo[afgan_cambo$Area != "Barbados", ]
+
 afgan_cambo$Area[afgan_cambo$Area == "Bolivia (Plurinational State of)"] <- "Bolivia"
 
 afgan_cambo$Area[afgan_cambo$Area == "Brunei Darussalam"] <- "Brunei"
- 
-afgan_cambo$Area[afgan_cambo$Area == "Cabo Verde"] <- "Cape Verde"
+
+afgan_cambo <- afgan_cambo[afgan_cambo$Area != "Cabo Verde", ]
 
 afgan_cambo <- afgan_cambo[afgan_cambo$Area != "Belgium-Luxembourg", ]
 
-write.csv(afgan_cambo, file = "fully_afgan_cambo_cleanedV2.csv")
+write.csv(afgan_cambo, file = "afgan_cambo_cleaned.csv")
 
 ```
 
 
 
-#changing names in camer-elsalv raw data (Check Czecholslovakia)
+#changing names in camer-elsalv raw data (Check Czecholslovakia) / also deleted small islands and failed states 
 ```{r}
 camer_elsalv <- read.csv("RAW_CSV_DATA/camer-elsalv.csv")
+
+camer_elsalv <- camer_elsalv[camer_elsalv$Area != "Central African Republic", ]
+
+camer_elsalv <- camer_elsalv[camer_elsalv$Area != "Chad", ]
 
 camer_elsalv <- camer_elsalv[camer_elsalv$Area != "China, mainland", ]
 
@@ -166,13 +178,21 @@ camer_elsalv$Area[camer_elsalv$Area == "China, Hong Kong SAR"] <- "Hong Kong"
  
 camer_elsalv$Area[camer_elsalv$Area == "China, Taiwan Province of"] <- "Taiwan"
 
+camer_elsalv <- camer_elsalv[camer_elsalv$Area != "Comoros", ]
+
+camer_elsalv <- camer_elsalv[camer_elsalv$Area != "Congo", ]
+
+camer_elsalv <- camer_elsalv[camer_elsalv$Area != "Cook Islands", ]
+
 camer_elsalv$Area[camer_elsalv$Area == "Côte d'Ivoire"] <- "Ivory Coast"
 
 camer_elsalv$Area[camer_elsalv$Area == "Czechia"] <- "Czech Republic"
 
 camer_elsalv$Area[camer_elsalv$Area == "Democratic People's Republic of Korea"] <- "North Korea"
 
-write.csv(camer_elsalv, file = "fully_camer_elsalv_cleaned.csv")
+camer_elsalv <- camer_elsalv[camer_elsalv$Area != "Dominica", ]
+
+write.csv(camer_elsalv, file = "camer_elsalv_cleaned.csv")
 
 ```
 
