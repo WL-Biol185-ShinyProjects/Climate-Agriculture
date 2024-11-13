@@ -552,3 +552,94 @@ temp_data <- temp_data[temp_data$Country != "Norfolk Island", ]
 write.csv(temp_data, file = "fully_temp_data_cleaned.csv")
 
 ```
+
+
+
+
+
+
+#farming efficiency data cleanup
+```{r}
+efficiency_data <- read.csv("Countries_data_FailedStates_Islands/afgan_cambo_cleaned.csv")
+
+efficiency_data <- efficiency_data[efficiency_data$Unit != "ha", ]
+
+efficiency_data <- efficiency_data[efficiency_data$Unit != "t", ]
+
+write.csv(efficiency_data, file = "only_efficiency_afgan_cambo.csv")
+
+efficiency_data <- read.csv("Countries_data_FailedStates_Islands/camer_elsalv_cleaned.csv")
+
+efficiency_data <- efficiency_data[efficiency_data$Unit != "ha", ]
+
+efficiency_data <- efficiency_data[efficiency_data$Unit != "t", ]
+
+write.csv(efficiency_data, file = "only_efficiency_camer_elsalv.csv")
+
+efficiency_data <- read.csv("Countries_data_FailedStates_Islands/eqgu_hung_cleaned.csv")
+
+efficiency_data <- efficiency_data[efficiency_data$Unit != "ha", ]
+
+efficiency_data <- efficiency_data[efficiency_data$Unit != "t", ]
+
+write.csv(efficiency_data, file = "only_efficiency_eqgu_hung.csv")
+
+efficiency_data <- read.csv("Countries_data_FailedStates_Islands/ice_lib_cleaned.csv")
+
+efficiency_data <- efficiency_data[efficiency_data$Unit != "ha", ]
+
+efficiency_data <- efficiency_data[efficiency_data$Unit != "t", ]
+
+write.csv(efficiency_data, file = "only_efficiency_ice_lib.csv")
+
+efficiency_data <- read.csv("Countries_data_FailedStates_Islands/lith_monte_cleaned.csv")
+
+efficiency_data <- efficiency_data[efficiency_data$Unit != "ha", ]
+
+efficiency_data <- efficiency_data[efficiency_data$Unit != "t", ]
+
+write.csv(efficiency_data, file = "only_efficiency_lith_monte.csv")
+
+efficiency_data <- read.csv("Countries_data_FailedStates_Islands/moro_roma_cleaned.csv")
+
+efficiency_data <- efficiency_data[efficiency_data$Unit != "ha", ]
+
+efficiency_data <- efficiency_data[efficiency_data$Unit != "t", ]
+
+write.csv(efficiency_data, file = "only_efficiency_moro_roma.csv")
+
+efficiency_data <- read.csv("Countries_data_FailedStates_Islands/russfed_swed_cleaned.csv")
+
+efficiency_data <- efficiency_data[efficiency_data$Unit != "ha", ]
+
+efficiency_data <- efficiency_data[efficiency_data$Unit != "t", ]
+
+write.csv(efficiency_data, file = "only_efficiency_russfed_swed.csv")
+
+efficiency_data <- read.csv("Countries_data_FailedStates_Islands/switz_uk_cleaned.csv")
+
+efficiency_data <- efficiency_data[efficiency_data$Unit != "ha", ]
+
+efficiency_data <- efficiency_data[efficiency_data$Unit != "t", ]
+
+write.csv(efficiency_data, file = "only_efficiency_switz_uk.csv")
+
+efficiency_data <- read.csv("Countries_data_FailedStates_Islands/tanz_zimb_cleaned.csv")
+
+efficiency_data <- efficiency_data[efficiency_data$Unit != "ha", ]
+
+efficiency_data <- efficiency_data[efficiency_data$Unit != "t", ]
+
+write.csv(efficiency_data, file = "only_efficiency_tanz_zimb.csv")
+
+```
+
+
+
+
+
+
+
+
+
+
