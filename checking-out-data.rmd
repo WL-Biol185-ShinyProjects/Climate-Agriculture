@@ -289,16 +289,48 @@ russfed_swed <- read.csv("RAW_CSV_DATA/russfed-swed.csv")
 
 russfed_swed$Area[russfed_swed$Area == "Russian Federation"] <- "Russia"
 
-write.csv(russfed_swed, file = "fully_russfed_swed_cleaned.csv")
+russfed_swed <- russfed_swed[russfed_swed$Area != "Saint Kitts and Nevis", ]
+
+russfed_swed <- russfed_swed[russfed_swed$Area != "Saint Lucia", ]
+
+russfed_swed <- russfed_swed[russfed_swed$Area != "Saint Vincent and the Grenadines", ]
+
+russfed_swed <- russfed_swed[russfed_swed$Area != "Samoa", ]
+
+russfed_swed <- russfed_swed[russfed_swed$Area != "Sao Tome and Principe", ]
+
+russfed_swed <- russfed_swed[russfed_swed$Area != "Seychelles", ]
+
+russfed_swed <- russfed_swed[russfed_swed$Area != "Solomon Islands", ]
+
+russfed_swed <- russfed_swed[russfed_swed$Area != "Somalia", ]
+
+russfed_swed <- russfed_swed[russfed_swed$Area != "Seychelles", ]
+
+russfed_swed <- russfed_swed[russfed_swed$Area != "South Sudan", ]
+
+russfed_swed <- russfed_swed[russfed_swed$Area != "Sudan", ]
+
+russfed_swed <- russfed_swed[russfed_swed$Area != "Sudan (former)", ]
+
+write.csv(russfed_swed, file = "russfed_swed_cleaned.csv")
 
 ```
 
 
-#changing names in Switz-UK raw data
+#changing names in Switz-UK raw data/ deleting failed states and small islands
 ```{r}
 switz_uk <- read.csv("RAW_CSV_DATA/Switz-UK.csv")
 
-switz_uk$Area[switz_uk$Area == "Syrian Arab Republic"] <- "Syria"
+switz_uk <- switz_uk[switz_uk$Area != "Syrian Arab Republic", ]
+
+switz_uk <- switz_uk[switz_uk$Area != "Tongo", ]
+
+switz_uk <- switz_uk[switz_uk$Area != "Tokelau", ]
+
+switz_uk <- switz_uk[switz_uk$Area != "Trinidad and Tobago", ]
+
+switz_uk <- switz_uk[switz_uk$Area != "Tuvalu", ]
 
 switz_uk$Area[switz_uk$Area == "Timor-Leste"] <- "East Timor"
 
@@ -306,7 +338,7 @@ switz_uk$Area[switz_uk$Area == "Türkiye"] <- "Turkey"
 
 switz_uk$Area[switz_uk$Area == "United Kingdom of Great Britain and Northern Ireland"] <- "United Kingdom"
 
-write.csv(switz_uk, file = "fully_switz_uk_cleaned.csv")
+write.csv(switz_uk, file = "switz_uk_cleaned.csv")
 
 ```
 
@@ -324,7 +356,11 @@ Tanz_Zimb$Area[Tanz_Zimb$Area == "Viet Nam"] <- "Vietnam"
 
 Tanz_Zimb <- Tanz_Zimb[Tanz_Zimb$Area != "Yugoslav SFR", ]
 
-write.csv(Tanz_Zimb, file = "fully_tanz_zimb_cleaned.csv")
+Tanz_Zimb <- Tanz_Zimb[Tanz_Zimb$Area != "Vanuatu", ]
+
+Tanz_Zimb <- Tanz_Zimb[Tanz_Zimb$Area != "Yemen", ]
+
+write.csv(Tanz_Zimb, file = "tanz_zimb_cleaned.csv")
 
 ```
 
