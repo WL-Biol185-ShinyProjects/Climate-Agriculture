@@ -66,13 +66,14 @@ ui <- fluidPage(theme = shinytheme("cosmo"),
                  label = "Countries",
                  choices = c(unique(countrynames$Country)),
                  selected = "Albania",  
-                          )
+                          ),
+               p("")
                
              ),
              
     ),
   
-  
+    #Crop Data Panel
     tabPanel("Crop Data",
              
              
