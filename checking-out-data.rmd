@@ -650,15 +650,21 @@ file_paths <- c(
   "Countries_data_FailedStates_Islands/tanz_zimb_cleaned.csv"
 )
 
+#combine all datasets
+
 countries_data <- file_paths %>%
   lapply(read.csv) %>%
   bind_rows()
 
+
+#save the combine dataset in a text file 
+
 saveRDS(countries_data, file = "Countries_data_FailedStates_Islands/combined_countries_data.rds")
 
-df <- readRDS("Countries_data_FailedStates_Islands/combined_countries_data.rds")
-            
 
+#read the dataset back into R from RDS
+
+df <- readRDS("Countries_data_FailedStates_Islands/combined_countries_data.rds")
 
 ```
 
