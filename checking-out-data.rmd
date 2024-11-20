@@ -635,7 +635,32 @@ write.csv(efficiency_data, file = "only_efficiency_tanz_zimb.csv")
 ```
 
 
+#combined dataset with all countries 
+```{r}
 
+file_paths <- c(
+  "Countries_data_FailedStates_Islands/afgan_cambo_cleaned.csv",
+  "Countries_data_FailedStates_Islands/camer_elsalv_cleaned.csv",
+  "Countries_data_FailedStates_Islands/eqgu_hung_cleaned.csv",
+  "Countries_data_FailedStates_Islands/ice_lib_cleaned.csv",
+  "Countries_data_FailedStates_Islands/lith_monte_cleaned.csv",
+  "Countries_data_FailedStates_Islands/moro_roma_cleaned.csv",
+  "Countries_data_FailedStates_Islands/russfed_swed_cleaned.csv",
+  "Countries_data_FailedStates_Islands/switz_uk_cleaned.csv",
+  "Countries_data_FailedStates_Islands/tanz_zimb_cleaned.csv"
+)
+
+countries_data <- file_paths %>%
+  lapply(read.csv) %>%
+  bind_rows()
+
+saveRDS(countries_data, file = "Countries_data_FailedStates_Islands/combined_countries_data.rds")
+
+df <- readRDS("Countries_data_FailedStates_Islands/combined_countries_data.rds")
+            
+
+
+```
 
 
 
