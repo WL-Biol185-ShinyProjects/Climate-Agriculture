@@ -558,7 +558,6 @@ write.csv(temp_data, file = "fully_temp_data_cleaned.csv")
 
 
 
-
 #farming efficiency data cleanup
 ```{r}
 efficiency_data <- read.csv("Countries_data_FailedStates_Islands/afgan_cambo_cleaned.csv")

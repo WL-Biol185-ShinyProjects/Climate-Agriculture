@@ -2,10 +2,10 @@
 
 library(tidyverse)
 library(shiny)
-library(plotly)
-library(shinydashboard)
 library(leaflet)
 library(dplyr)
+library(plyr)
+library(ggplot2)
 library(shinythemes)
 
 file_paths <- c( 
@@ -20,8 +20,12 @@ file_paths <- c(
   "efficiency_data /only_efficiency_tanz_zimb.csv",
 )
 
-efficiency_data <- file_paths %>%
-  lapply(read.csv) %>% 
-  bind_rows()
+  efficiency_data <- file_paths %>%
+    lapply(read.csv) %>% 
+    bind_rows()
 
 
+  function(input, output, session) {
+    output$CountryMap <- renderLeaflet()
+    
+  }

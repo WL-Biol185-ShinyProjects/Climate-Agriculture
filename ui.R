@@ -65,9 +65,21 @@ ui <- fluidPage(theme = shinytheme("cosmo"),
                  inputId = "selectedCountry",
                  label = "Countries",
                  choices = c(unique(countrynames$Country)),
-                 selected = "Albania",  
-                          ),
-               p("")
+                 selected = "Albania",
+                 ),
+               
+              sliderInput(
+                inputId = "Year", 
+                label = "Year", 
+                min=1990, 
+                max=2022, 
+                value=1990, 
+                step=1
+                ),
+              
+            mainPanel(
+              
+            )
                
              ),
              
