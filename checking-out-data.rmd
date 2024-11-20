@@ -132,6 +132,7 @@ summary_data <- data %>%
 
 ```{r}
 library(readr)
+library(dplyr)
 ```
 
 
@@ -375,33 +376,9 @@ write.csv(Tanz_Zimb, file = "tanz_zimb_cleaned.csv")
 ```{r}
 temp_data <- read.csv("RAW_CSV_DATA/Temperature-Data.csv")
 
-temp_data <- temp_data[temp_data$Country != "Afghanistan, Islamic Rep. of", ]
+temp_data$Country[temp_data$Country == "Afghanistan, Islamic Rep. of"] <- "Afghanistan"
 
 temp_data <- temp_data[temp_data$Country != "American Samoa", ]
-
-temp_data <- temp_data[temp_data$Country != "Antigua and Barbuda", ]
-
-temp_data <- temp_data[temp_data$Country != "Barbados", ]
-
-temp_data <- temp_data[temp_data$Country != "Chad", ]
-
-temp_data <- temp_data[temp_data$Country != "Comoros, Union of the", ]
-
-temp_data <- temp_data[temp_data$Country != "Congo, Dem. Rep. of the", ]
-
-temp_data <- temp_data[temp_data$Country != "Cook Islands", ]
-
-temp_data <- temp_data[temp_data$Country != "Dominica", ]
-
-temp_data <- temp_data[temp_data$Country != "Gibraltar", ]
-
-temp_data <- temp_data[temp_data$Country != "Grenada", ]
-
-temp_data <- temp_data[temp_data$Country != "Guadeloupe", ]
-
-temp_data <- temp_data[temp_data$Country != "Haiti", ]
-
-temp_data <- temp_data[temp_data$Country != "Jamaica", ]
 
 temp_data <- temp_data[temp_data$Country != "Palau, Rep. of", ]
 
@@ -410,44 +387,6 @@ temp_data <- temp_data[temp_data$Country != "Falkland Islands (Malvinas)", ]
 temp_data <- temp_data[temp_data$Country != "Andorra, Principality of", ]
 
 temp_data <- temp_data[temp_data$Country != "Anguilla", ]
-
-temp_data <- temp_data[temp_data$Country != "French Polynesia", ]
-
-temp_data <- temp_data[temp_data$Country != "Martinique", ]
-
-temp_data <- temp_data[temp_data$Country != "Malta", ]
-
-temp_data <- temp_data[temp_data$Country != "Mauritius", ]
-
-temp_data <- temp_data[temp_data$Country != "Monaco", ]
-
-temp_data <- temp_data[temp_data$Country != "New Caledonia", ]
-
-temp_data <- temp_data[temp_data$Country != "Niue", ]
-
-temp_data <- temp_data[temp_data$Country != "Puerto Rico", ]
-
-temp_data <- temp_data[temp_data$Country != "Réunion", ]
-
-temp_data <- temp_data[temp_data$Country != "Samoa", ]
-
-temp_data <- temp_data[temp_data$Country != "Seychelles", ]
-
-temp_data <- temp_data[temp_data$Country != "Solomon Islands", ]
-
-temp_data <- temp_data[temp_data$Country != "Somalia", ]
-
-temp_data <- temp_data[temp_data$Country != "Sudan", ]
-
-temp_data <- temp_data[temp_data$Country != "Tokelau", ]
-
-temp_data <- temp_data[temp_data$Country != "Trinidad and Tobago", ]
-
-temp_data <- temp_data[temp_data$Country != "Tuvalu", ]
-
-temp_data <- temp_data[temp_data$Country != "Vanuatu", ]
-
-temp_data <- temp_data[temp_data$Country != "Liechtenstein", ]
 
 temp_data$Country[temp_data$Country == "Armenia, Rep. of"] <- "Armenia"
 
@@ -467,7 +406,7 @@ temp_data <- temp_data[temp_data$Country != "British Virgin Islands", ]
 
 temp_data$Country[temp_data$Country == "Brunei Darussalam"] <- "Brunei"
 
-temp_data <- temp_data[temp_data$Country != "Cabo Verde", ]
+temp_data$Country[temp_data$Country == "Cabo Verde"] <- "Cape Verde"
 
 temp_data$Country[temp_data$Country == "Central African Rep."] <- "Central African Republic"
 
@@ -475,7 +414,11 @@ temp_data$Country[temp_data$Country == "China, P.R.: Hong Kong"] <- "Hong Kong"
 
 temp_data$Country[temp_data$Country == "China, P.R.: Mainland"] <- "China"
 
-temp_data$Country[temp_data$Country == "Congo, Rep. of"] <- "Republic of the Congo"
+temp_data$Country[temp_data$Country == "Comoros, Union of the"] <- "Comoros"
+
+temp_data$Country[temp_data$Country == "Congo, Rep. of"] <- "Congo"
+
+temp_data$Country[temp_data$Country == "Congo, Dem. Rep. of the"] <- "Democratic Republic of the Congo"
 
 temp_data$Country[temp_data$Country == "Côte d'Ivoire"] <- "Ivory Coast"
 
@@ -497,11 +440,9 @@ temp_data$Country[temp_data$Country == "Eswatini, Kingdom of"] <- "Eswatini"
 
 temp_data$Country[temp_data$Country == "Ethiopia, The Federal Dem. Rep. of"] <- "Ethiopia"
 
-temp_data <- temp_data[temp_data$Country != "St. Kitts and Nevis", ]
+temp_data$Country[temp_data$Country == "St. Kitts and Nevis"] <- "Saint Kitts and Nevis"
 
-temp_data <- temp_data[temp_data$Country != "Fiji, Rep. of", ]
-
-temp_data <- temp_data[temp_data$Country != "Faroe Islands", ]
+temp_data$Country[temp_data$Country == "Fiji, Rep. of"] <- "Fiji"
 
 temp_data$Country[temp_data$Country == "Guiana, French"] <- "French Guiana"
 
@@ -511,9 +452,9 @@ temp_data$Country[temp_data$Country == "Iran, Islamic Rep. of"] <- "Iran"
 
 temp_data$Country[temp_data$Country == "Kazakhstan, Rep. of"] <- "Kazakhstan"
 
-temp_data <- temp_data[temp_data$Country != "South Sudan, Rep. of", ]
+temp_data$Country[temp_data$Country == "South Sudan, Rep. of"] <- "South Sudan"
 
-temp_data <- temp_data[temp_data$Country != "St. Vincent and the Grenadines", ]
+temp_data$Country[temp_data$Country == "St. Vincent and the Grenadines"] <- "Saint Vincent and the Grenadines"
 
 temp_data$Country[temp_data$Country == "Slovenia, Rep. of"] <- "Slovenia"
 
@@ -531,9 +472,9 @@ temp_data$Country[temp_data$Country == "Lao People's Dem. Rep."] <- "Laos"
 
 temp_data$Country[temp_data$Country == "Lesotho, Kingdom of"] <- "Lesotho"
 
-temp_data <- temp_data[temp_data$Country != "São Tomé and Príncipe, Dem. Rep. of", ]
+temp_data$Country[temp_data$Country == "São Tomé and Príncipe, Dem. Rep. of"] <- "Sao Tome and Principe"
 
-temp_data <- temp_data[temp_data$Country != "St. Lucia", ]
+temp_data$Country[temp_data$Country == "St. Lucia"] <- "Saint Lucia"
 
 temp_data$Country[temp_data$Country == "Russian Federation"] <- "Russia"
 
@@ -543,9 +484,9 @@ temp_data$Country[temp_data$Country == "Timor-Leste, Dem. Rep. of"] <- "East Tim
 
 temp_data$Country[temp_data$Country == "Tajikistan, Rep. of"] <- "Tajikistan"
 
-temp_data <- temp_data[temp_data$Country != "Syrian Arab Rep.", ]
+temp_data$Country[temp_data$Country == "Syrian Arab Rep."] <- "Syria"
 
-temp_data <- temp_data[temp_data$Country != "Yemen, Rep. of", ]
+temp_data$Country[temp_data$Country == "Yemen, Rep. of"] <- "Yemen"
 
 temp_data$Country[temp_data$Country == "Venezuela, Rep. Bolivariana de"] <- "Venezuela"
 
@@ -557,11 +498,11 @@ temp_data$Country[temp_data$Country == "Tanzania, United Rep. of"] <- "Tanzania"
 
 temp_data$Country[temp_data$Country == "Madagascar, Rep. of"] <- "Madagascar"
 
-temp_data <- temp_data[temp_data$Country != "Marshall Islands, Rep. of the", ]
+temp_data$Country[temp_data$Country == "Marshall Islands, Rep. of the"] <- "Marshall Islands"
 
 temp_data$Country[temp_data$Country == "Mauritania, Islamic Rep. of"] <- "Mauritania"
 
-temp_data <- temp_data[temp_data$Country != "Micronesia, Federated States of", ]
+temp_data$Country[temp_data$Country == "Micronesia, Federated States of"] <- "Micronesia"
 
 temp_data$Country[temp_data$Country == "Moldova, Rep. of"] <- "Moldova"
 
@@ -573,7 +514,7 @@ temp_data$Country[temp_data$Country == "North Macedonia, Republic of "] <- "Nort
 
 temp_data$Country[temp_data$Country == "Netherlands, The"] <- "Netherlands"
 
-temp_data <- temp_data[temp_data$Country != "Nauru, Rep. of", ]
+temp_data$Country[temp_data$Country == "Nauru, Rep. of"] <- "Nauru"
 
 temp_data$Country[temp_data$Country == "Mozambique, Rep. of"] <- "Mozambique"
 
@@ -609,8 +550,99 @@ temp_data <- temp_data[temp_data$Country != "Pitcairn Islands", ]
 
 temp_data <- temp_data[temp_data$Country != "Norfolk Island", ]
 
-temp_data <- temp_data[temp_data$Country != "Turks and Caicos Islands", ]
-
-write.csv(temp_data, file = "temp_data_cleaned.csv")
+write.csv(temp_data, file = "fully_temp_data_cleaned.csv")
 
 ```
+
+
+
+
+
+
+#farming efficiency data cleanup
+```{r}
+efficiency_data <- read.csv("Countries_data_FailedStates_Islands/afgan_cambo_cleaned.csv")
+
+efficiency_data <- efficiency_data[efficiency_data$Unit != "ha", ]
+
+efficiency_data <- efficiency_data[efficiency_data$Unit != "t", ]
+
+write.csv(efficiency_data, file = "only_efficiency_afgan_cambo.csv")
+
+efficiency_data <- read.csv("Countries_data_FailedStates_Islands/camer_elsalv_cleaned.csv")
+
+efficiency_data <- efficiency_data[efficiency_data$Unit != "ha", ]
+
+efficiency_data <- efficiency_data[efficiency_data$Unit != "t", ]
+
+write.csv(efficiency_data, file = "only_efficiency_camer_elsalv.csv")
+
+efficiency_data <- read.csv("Countries_data_FailedStates_Islands/eqgu_hung_cleaned.csv")
+
+efficiency_data <- efficiency_data[efficiency_data$Unit != "ha", ]
+
+efficiency_data <- efficiency_data[efficiency_data$Unit != "t", ]
+
+write.csv(efficiency_data, file = "only_efficiency_eqgu_hung.csv")
+
+efficiency_data <- read.csv("Countries_data_FailedStates_Islands/ice_lib_cleaned.csv")
+
+efficiency_data <- efficiency_data[efficiency_data$Unit != "ha", ]
+
+efficiency_data <- efficiency_data[efficiency_data$Unit != "t", ]
+
+write.csv(efficiency_data, file = "only_efficiency_ice_lib.csv")
+
+efficiency_data <- read.csv("Countries_data_FailedStates_Islands/lith_monte_cleaned.csv")
+
+efficiency_data <- efficiency_data[efficiency_data$Unit != "ha", ]
+
+efficiency_data <- efficiency_data[efficiency_data$Unit != "t", ]
+
+write.csv(efficiency_data, file = "only_efficiency_lith_monte.csv")
+
+efficiency_data <- read.csv("Countries_data_FailedStates_Islands/moro_roma_cleaned.csv")
+
+efficiency_data <- efficiency_data[efficiency_data$Unit != "ha", ]
+
+efficiency_data <- efficiency_data[efficiency_data$Unit != "t", ]
+
+write.csv(efficiency_data, file = "only_efficiency_moro_roma.csv")
+
+efficiency_data <- read.csv("Countries_data_FailedStates_Islands/russfed_swed_cleaned.csv")
+
+efficiency_data <- efficiency_data[efficiency_data$Unit != "ha", ]
+
+efficiency_data <- efficiency_data[efficiency_data$Unit != "t", ]
+
+write.csv(efficiency_data, file = "only_efficiency_russfed_swed.csv")
+
+efficiency_data <- read.csv("Countries_data_FailedStates_Islands/switz_uk_cleaned.csv")
+
+efficiency_data <- efficiency_data[efficiency_data$Unit != "ha", ]
+
+efficiency_data <- efficiency_data[efficiency_data$Unit != "t", ]
+
+write.csv(efficiency_data, file = "only_efficiency_switz_uk.csv")
+
+efficiency_data <- read.csv("Countries_data_FailedStates_Islands/tanz_zimb_cleaned.csv")
+
+efficiency_data <- efficiency_data[efficiency_data$Unit != "ha", ]
+
+efficiency_data <- efficiency_data[efficiency_data$Unit != "t", ]
+
+write.csv(efficiency_data, file = "only_efficiency_tanz_zimb.csv")
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
