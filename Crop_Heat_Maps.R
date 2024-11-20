@@ -15,3 +15,19 @@ library(dplyr)
 #                              mainPanel(p("placeholder description of map")),
 #                              leafletOutPut("MAPNAME", height = ("80vh")))
 
+
+crop_data <- readRDS("combined_countries_data.rds")
+
+
+geo_countries <- geojson_read("countries.geo.json", what = "sp")
+
+geo_countries_data <- left_join(geo_countries_data, crop_data, by = c("name" = "Country"))
+
+
+
+color_palet <- colorBin("YlOrRd", domain = crop_data$X1990)
+
+
+leaflet(geo_countries) %>%
+  addPolygons(fillColor = ~color_pal(X1990))
+
