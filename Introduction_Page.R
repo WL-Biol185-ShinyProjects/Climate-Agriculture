@@ -9,23 +9,6 @@ library(dplyr)
 library(shinythemes)
 
 
-# trying to combine datasets into one - still working through says it cannot allocate a vector of this size - need to talk about whether we should delete more countries (failed states/small islands)
-file_paths <- c( 
-  "Countries_Data/fully_afgan_cambo_cleanedV2.csv",
-  "Countries_Data/fully_camer_elsalv_cleaned.csv",
-  "Countries_Data/fully_eqgu_hung_cleaned.csv",
-  "Countries_Data/fully_ice_lib_cleaned.csv",
-  "Countries_Data/fully_lith_monte_cleaned.csv",
-  "Countries_Data/fully_moro_roma_cleaned.csv",
-  "Countries_Data/fully_russfed_swed_cleaned.csv",
-  "Countries_Data/fully_switz_uk_cleaned.csv",
-  "Countries_Data/fully_tanz_zimb_cleaned.csv"
-  )
-
-countries_data <- file_paths %>%
-  lapply(read.csv) %>% 
-  bind_rows()
-
 
 #ui 
 Introduction_Page_ui <- fluidPage(
