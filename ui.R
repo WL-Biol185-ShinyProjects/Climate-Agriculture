@@ -5,11 +5,11 @@ library(shinydashboard)
 library(leaflet)
 library(dplyr)
 library(shinythemes)
-
+library(base)
 
 #File Designations
-temperaturefile <- "Countries_data_FailedStates_Islands/temp_data_cleaned.csv"
-countrynames <- read.csv(temperaturefile)
+countryfile <- "Countries_data_FailedStates_Islands/combined_countries_data.rds"
+countrynames <- readRDS(countryfile)
 
 
 
@@ -61,24 +61,22 @@ ui <- fluidPage(theme = shinytheme("cosmo"),
           
              sidebarPanel(
                
-               selectInput(
-                 inputId = "selectedCountry",
-                 label = "Countries",
-                 choices = c(unique(countrynames$Country)),
-                 selected = "Albania",
-                 ),
-               
-              sliderInput(
-                inputId = "Year", 
-                label = "Year", 
-                min=1990, 
-                max=2022, 
-                value=1990, 
-                step=1
+              selectInput(
+                inputId = "selectedCountry",
+                label = "Countries",
+                choices = c(unique(countrynames$Area)),
+                selected = "Albania",
+                ),
+              
+              selectInput(
+                inputId = "selectedProduct",
+                label = "Products",
+                choices = NULL
                 ),
               
             mainPanel(
               
+              plotOutput("", width = 1000, height = 600)
             )
                
              ),
