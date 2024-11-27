@@ -27,35 +27,33 @@ countries_data <- file_paths %>%
 saveRDS(countries_data, file = "efficiency_data /combined_efficiency_data.rds")
 
 efficiencydata <- readRDS("efficiency_data /combined_efficiency_data.rds")
- 
+
 
 
 ##Function for creating the products to be dependent on the selected
-  function(input, output, session) {
+function(input, output, session) {
+  
+  
+  observeEvent(input$selectedCountry, {
+    
+    filtered_efficiencydata <- efficiencydata %>%
+      filter(Area == input$selectedCountry)
     
     
-    observeEvent(input$selectedCountry, {
-      
-      filtered_efficiencydata <- efficiencydata %>%
-        filter(Area == input$selectedCountry)
-      
-      
-      updateSelectInput(session, "selectedProduct",
-        choices = c(unique(filtered_efficiencydata$Item)),
-      )
-    })
-    
-    output$EfficiencyvsTime <- renderPlot({
-      efficiencydata %>%
-        filter(Country %in% input$selectedCountry & Product %in% input$selectedProduct) %>%
-      ggplot(aes(Year,Value)) + geom_line()
-      
-    })
-    
-    
-  }
-
-
+    updateSelectInput(session, "selectedProduct",
+                      choices = c(unique(filtered_efficiencydata$Item)),
+    )
+  })
+  
+  output$EfficiencyvsTime <- renderPlot({
+    efficiencydata %>%
+      filter(Area %in% input$selectedCountry & Item %in% input$selectedProduct) %>%
+      ggplot(aes(Year, Value)) + 
+      geom_line()
+  })
+  
+  
+}
 
 
 
