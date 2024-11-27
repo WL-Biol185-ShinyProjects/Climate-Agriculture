@@ -68,6 +68,9 @@ ui <- fluidPage(theme = shinytheme("cosmo"),
                 selected = "Albania",
                 ),
               
+              hr(),
+              
+              helpText("Available Products for Selected Country"),
               selectInput(
                 inputId = "selectedProduct",
                 label = "Products",
@@ -76,10 +79,10 @@ ui <- fluidPage(theme = shinytheme("cosmo"),
               
             mainPanel(
               
-              plotOutput("", width = 1000, height = 600)
+              plotOutput("EfficiencyvsTime", width = 1000, height = 600)
             )
                
-             ),
+          ),
              
     ),
   

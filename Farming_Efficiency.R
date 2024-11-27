@@ -4,6 +4,7 @@ library(tidyverse)
 library(shiny)
 library(dplyr)
 library(ggplot2)
+library(plotly)
 
 
 ##Combining all efficiency data into one plot
@@ -42,6 +43,13 @@ efficiencydata <- readRDS("efficiency_data /combined_efficiency_data.rds")
       updateSelectInput(session, "selectedProduct",
         choices = c(unique(filtered_efficiencydata$Item)),
       )
+    })
+    
+    output$EfficiencyvsTime <- renderPlot({
+      efficiencydata %>%
+        filter(Country %in% input$selectedCountry & Product %in% input$selectedProduct) %>%
+      ggplot(aes(Year,Value)) + geom_line()
+      
     })
     
     
