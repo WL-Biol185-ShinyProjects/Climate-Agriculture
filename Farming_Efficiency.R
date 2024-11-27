@@ -1,6 +1,7 @@
 #Farming Efficiency
 
 library(tidyverse)
+library(shiny)
 library(dplyr)
 library(ggplot2)
 
@@ -34,19 +35,22 @@ efficiencydata <- readRDS("efficiency_data /combined_efficiency_data.rds")
     
     observeEvent(input$selectedCountry, {
       
-      updateSelectInput(
-        inputId = "selectedProduct",
-        choices = c(filter(efficiencydata, unique(countrynames$Item & countrynames$Area))),
+      filtered_efficiencydata <- efficiencydata %>%
+        filter(Area == input$selectedCountry)
+      
+      
+      updateSelectInput(session, "selectedProduct",
+        choices = c(unique(filtered_efficiencydata$Item)),
       )
     })
     
     
-    
-    output$efficiencyplot <- renderPlot({
-      ggplot(efficiencydata, mapping = aes())
-      
-    }
-  
-    )
-    
   }
+
+
+
+
+
+
+
+
