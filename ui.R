@@ -12,8 +12,6 @@ countryfile <- "Countries_data_FailedStates_Islands/combined_countries_data.rds"
 countrynames <- readRDS(countryfile)
 
 
-
-
 #defining the UI
 
 ui <- fluidPage(theme = shinytheme("cosmo"),
@@ -27,8 +25,8 @@ ui <- fluidPage(theme = shinytheme("cosmo"),
   #Intro panel
     tabPanel("Introduction",
              
-              leafletOutput("Intro_Map", width = "100%", height = "600"),
-                p("Hover over a country marker to see details.")
+              leafletOutput("Intro_Map", width = "100%", height = "600px"),
+                p("Hover over a country to see the most produced crop and production in tons.")
              
             ),
   
