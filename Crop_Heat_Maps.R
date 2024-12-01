@@ -12,7 +12,12 @@ library(geojsonio)
 crop_data <- readRDS("efficiency_data /combined_efficiency_data.rds")
 
 
+total_yield <- crop_data %>% 
+  group_by(Area, Year) %>%
+  summarise(Total_Yield = sum(Value, na.rm = TRUE))
 
+crop_data <- crop_data %>%
+  left_join(total_yield, by = c("Area", "Year"))
 
 #using our new long_dataframe with shiny function "plot_geo" for its world map
 
@@ -28,8 +33,8 @@ lapply(crop_data, class)
 
 
 yield_map <- plot_geo(crop_data, locationmode = 'world') %>%
-  add_trace(  x = ~crop_data$Value, locations = crop_data$Area, frame=~crop_data$Year,
-              color = ~crop_data$Value)
+  add_trace(  x = ~Total_Yield, locations = ~Area, frame=~Year,
+              color = ~Total_Yield)
 
 
 yield_map
