@@ -33,14 +33,26 @@ lapply(crop_data, class)
 
 
 yield_map <- plot_geo(crop_data, locationmode = 'world') %>%
-  add_trace(  x = ~Total_Yield, locations = ~Area, frame=~Year,
-              color = ~Total_Yield)
+  add_trace(  x          = ~Total_Yield, 
+              locations  = ~Area, 
+              frame      = ~Year,
+              color      = ~Total_Yield
+              )
 
 
 yield_map
 
 
-# #Mock Code for UI once chloropleth is finalized
+
+
+
+
+
+
+
+
+
+#Mock Code for UI once chloropleth is finalized
 # Crop_Heat_Map_ui <- fluidPage("Climate + Agriculture Research",
 #                         navbarMenu("Crop Yield Cloropleth"),
 #                              tabPanel("Historic Crop Yield Data by Country"),
