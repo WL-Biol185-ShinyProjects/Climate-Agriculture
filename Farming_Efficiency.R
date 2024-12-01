@@ -1,10 +1,13 @@
 #Farming Efficiency
 
-
+library(tidyverse)
+library(shiny)
 library(dplyr)
 library(ggplot2)
+library(plotly)
 
 
+##Combining all efficiency data into one plot
 file_paths <- c(
   "efficiency_data /only_efficiency_afgan_cambo.csv",
   "efficiency_data /only_efficiency_camer_elsalv.csv",
@@ -23,19 +26,37 @@ countries_data <- file_paths %>%
 
 saveRDS(countries_data, file = "efficiency_data /combined_efficiency_data.rds")
 
-df <- readRDS("efficiency_data /combined_efficiency_data.rds")
- 
+efficiencydata <- readRDS("efficiency_data /combined_efficiency_data.rds")
 
 
 
-  function(input, output, session) {
+##Function for creating the products to be dependent on the selected
+function(input, output, session) {
+  
+  
+  observeEvent(input$selectedCountry, {
     
-    output$efficiencyplot <- renderPlot({
-      input_scatterplot <- ggplot()
-      
-    }
+    filtered_efficiencydata <- efficiencydata %>%
+      filter(Area == input$selectedCountry)
     
-      
+    
+    updateSelectInput(session, "selectedProduct",
+                      choices = c(unique(filtered_efficiencydata$Item)),
     )
-    
-  }
+  })
+  
+  output$EfficiencyvsTime <- renderPlot({
+    efficiencydata %>%
+      filter(Area %in% input$selectedCountry & Item %in% input$selectedProduct) %>%
+      ggplot(aes(Year, Value)) + 
+      geom_line()
+  })
+  
+  
+}
+
+
+
+
+
+

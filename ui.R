@@ -5,13 +5,11 @@ library(shinydashboard)
 library(leaflet)
 library(dplyr)
 library(shinythemes)
-
+library(base)
 
 #File Designations
-temperaturefile <- "Countries_data_FailedStates_Islands/temp_data_cleaned.csv"
-countrynames <- read.csv(temperaturefile)
-
-
+countryfile <- "Countries_data_FailedStates_Islands/combined_countries_data.rds"
+countrynames <- readRDS(countryfile)
 
 
 #defining the UI
@@ -27,8 +25,8 @@ ui <- fluidPage(theme = shinytheme("cosmo"),
   #Intro panel
     tabPanel("Introduction",
              
-              leafletOutput("Intro_Map", width = "100%", height = "600"),
-                p("Hover over a country marker to see details.")
+              leafletOutput("Intro_Map", width = "100%", height = "600px"),
+                p("Hover over a country to see the most produced crop and production in tons.")
              
             ),
   
@@ -61,27 +59,28 @@ ui <- fluidPage(theme = shinytheme("cosmo"),
           
              sidebarPanel(
                
-               selectInput(
-                 inputId = "selectedCountry",
-                 label = "Countries",
-                 choices = c(unique(countrynames$Country)),
-                 selected = "Albania",
-                 ),
-               
-              sliderInput(
-                inputId = "Year", 
-                label = "Year", 
-                min=1990, 
-                max=2022, 
-                value=1990, 
-                step=1
+              selectInput(
+                inputId = "selectedCountry",
+                label = "Countries",
+                choices = c(unique(countrynames$Area)),
+                selected = "Albania",
+                ),
+              
+              hr(),
+              
+              helpText("Available Products for Selected Country"),
+              selectInput(
+                inputId = "selectedProduct",
+                label = "Products",
+                choices = NULL
                 ),
               
             mainPanel(
               
+              plotOutput("EfficiencyvsTime", width = 700, height = 400)
             )
                
-             ),
+          ),
              
     ),
   
