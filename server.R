@@ -71,6 +71,7 @@ server <- function(input, output, session) {
 
   output$Yield_Plot <- renderPlot ({
   
+  #picking years and the country of focus for the event
   details_for_events <- list(
     "Great Flood of 1993" = list(year = 1995, country = "United States of America"),
     "1994 Rwandan Genocide" = list(year = 1996, country = "Rwanda"),
@@ -81,19 +82,19 @@ server <- function(input, output, session) {
     "2014 Ebola Outbreak in West Africa" = list(year = 2016, country = "Sierra Leone")
   )
   
-  #get the selected event and the year that goes with it  
+  #getting the event from the UI   
     selected_event <- input$World_Event
     
     event <- details_for_events[[selected_event]]
-    event_year <- event$year
-    event_country <- event$country
+    event_year <- event$year    #the year that goes with the event 
+    event_country <- event$country #the country that goes with the event 
     
   #filtering the data
     data_for_event_tab <- countries_data %>% 
       filter(
         Year >= (event_year - 4) & Year <= event_year,
         Area %in% event_country, #searched this up - %in% checks if something belongs to a vector or list - so it is checking if the countries in event_country is in the column AREA
-        Unit == "t" ) %>%
+        Unit == "t" ) %>%   #only data unit is in tons 
       
       group_by(Year, Area) %>% 
       summarize(Total_Production = sum(Value, na.rm = TRUE)) %>%
@@ -101,13 +102,13 @@ server <- function(input, output, session) {
     
     #create the actual plot 
     plot(
-      data_for_event_tab$Year, 
-      data_for_event_tab$Total_Production, 
+      data_for_event_tab$Year, #xaxis - years
+      data_for_event_tab$Total_Production, #yaxis - total production
       type = "b", 
-      col = "blue", 
-      xlab = "Year",
-      ylab = "Total Crop Production (tons)",
-      main = paste("Agriculture Production During", selected_event)
+      col = "blue", #line and point color 
+      xlab = "Year", #label for the x axis
+      ylab = "Total Crop Production (tons)", #label for y-axis 
+      main = paste("Agriculture Production During", selected_event) #title 
     )
     
   })

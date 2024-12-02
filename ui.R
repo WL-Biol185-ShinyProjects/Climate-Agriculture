@@ -115,7 +115,7 @@ ui <- fluidPage(theme = shinytheme("cosmo"),
     
   ), 
   
-  #TIMELINE OF WORLD EVENTS 
+  #WORLD EVENTS AFFECT ON AGRICULTURE  
   
   tabPanel("World Events",
     titlePanel("Major World Events Effect on Agriculture"), 
