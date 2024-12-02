@@ -106,7 +106,7 @@ server <- function(input, output, session) {
       data_for_event_tab$Year, #xaxis - years
       data_for_event_tab$Total_Production, #yaxis - total production
       type = "b", 
-      col = "blue", #line and point color 
+      col = "red", #line and point color 
       xlab = "Year", #label for the x axis
       ylab = "Total Crop Production (tons)", #label for y-axis 
       main = paste("Agriculture Production During", selected_event) #title 
