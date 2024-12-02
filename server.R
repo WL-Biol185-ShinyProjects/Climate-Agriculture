@@ -32,7 +32,7 @@ server <- function(input, output, session) {
  
    #input introduction map 
   output$Intro_Map <- renderLeaflet({
-    pal <- colorBin("Blues", domain = geo@data$Max_Production, na.color = "transparent")
+    pal <- colorBin("Blues", domain = geo@data$Max_Production, na.color = "black")
     
     leaflet(geo) %>% 
       addTiles() %>% 
