@@ -26,7 +26,8 @@ tabPanel("World Events",
            The 2003 Iraq War which is when the United States invaded  Iraq.
            The 2004 Indian Ocean Tsunami, which decimated Indonesia
            The 2011 Arab Spring, which was a wave of pro-democracy protests and uprising that took place in the Middle East in North Africa (we are focusing on the agriculture production in Egypt)
-           The 2014 Russia Annexation of Crimea which was when russia invaded the crimean P", 
+           The 2014 Russia Annexation of Crimea which was when russia invaded the Crimean Peninsula
+           The 2014 Ebola Outbreak in West Africa, where we will be focusing on the country most affected: Sierra Leone", 
            style = "font-size: 15px; text-align: left; margin-bottom: 45px;"
          ),
          
