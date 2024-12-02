@@ -38,7 +38,7 @@ ui <- fluidPage(theme = shinytheme("cosmo"),
               ),
              
               p(
-                "Also, this application only takes into account temperature data and agriculture data from the years of 1990 through 2022.", 
+                "IMPORTANT: this application only takes into account temperature data and agriculture data from the years of 1990 through 2022.", 
                 style = "font-size: 15px; text-align: center; margin-bottom: 45px;"
               ),
              
@@ -47,7 +47,12 @@ ui <- fluidPage(theme = shinytheme("cosmo"),
              div(
                p(
                  "To get you started. The map above shows the total production (in tons) of the most produced crop in each country for the year 2022. Hover over a country to see detailed information, including the name of the most popular crop and its total production quantity across all agriculture products!",
-                 style = "font-size: 30px; text-align: center; margin-top: 35px;"
+                 style = "font-size: 30px; text-align: center; margin-bottom: 35px;"
+               ),
+               
+               p(
+                 "The darker the shade over a country the more agricultural products they produced. As you can tell, Brazil is the darkest shade, meaning they have produced the most total agricultural products",
+                 style = "font-size: 20px; text-align: center; margin-top: 15px;"
                )
              )
              
