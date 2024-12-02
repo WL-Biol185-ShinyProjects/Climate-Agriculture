@@ -2,6 +2,7 @@ library(shiny)
 library(leaflet) 
 library(geojsonio)
 library(dplyr)
+library(ggplot2)
 
 #INTRODUCTION PAGE
 
@@ -65,8 +66,52 @@ server <- function(input, output, session) {
       )
     
   })
-}
 
+#WORLD EVENTS AFFECT ON AGRICULTURE 
+
+  output$Yield_Plot <- renderPlot ({
+  
+  details_for_events <- list(
+    "Great Flood of 1993" = list(year = 1995, country = "United States of America"),
+    "1994 Rwandan Genocide" = list(year = 1996, country = "Rwanda"),
+    "2003 Iraq War" = list(year = 2005, country = "Iraq"),
+    "2004 Indian Ocean Tsunami" = list(year = 2006, country = "Indonesia"),
+    "2011 Arab Spring" = list(year = 2013, country = "Egypt"),
+    "2014 Russia Annexation of Crimea" = list(year = 2016, country = "Ukraine"),
+    "2014 Ebola Outbreak in West Africa" = list(year = 2016, country = "Sierra Leone")
+  )
+  
+  #get the selected event and the year that goes with it  
+    selected_event <- input$World_Event
+    
+    event <- details_for_events[[selected_event]]
+    event_year <- event$year
+    event_country <- event$country
+    
+  #filtering the data
+    data_for_event_tab <- countries_data %>% 
+      filter(
+        Year >= (event_year - 4) & Year <= event_year,
+        Area %in% event_country, #searched this up - %in% checks if something belongs to a vector or list - so it is checking if the countries in event_country is in the column AREA
+        Unit == "t" ) %>%
+      
+      group_by(Year, Area) %>% 
+      summarize(Total_Production = sum(Value, na.rm = TRUE)) %>%
+      ungroup()
+    
+    #create the actual plot 
+    plot(
+      data_for_event_tab$Year, 
+      data_for_event_tab$Total_Production, 
+      type = "b", 
+      col = "blue", 
+      xlab = "Year",
+      ylab = "Total Crop Production (tons)",
+      main = paste("Agriculture Production During", selected_event)
+    )
+    
+  })
+}
 
 # Define server logic required to draw a histogram
 #function(input, output) {

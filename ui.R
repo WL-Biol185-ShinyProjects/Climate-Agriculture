@@ -105,7 +105,7 @@ ui <- fluidPage(theme = shinytheme("cosmo"),
                
           ),
              
-    ),
+    
   
     #Crop Data Panel
     tabPanel("Crop Data",
@@ -115,7 +115,41 @@ ui <- fluidPage(theme = shinytheme("cosmo"),
     
   ), 
   
+  #TIMELINE OF WORLD EVENTS 
+  
+  tabPanel("World Events",
+    titlePanel("Major World Events Effect on Agriculture"), 
+    
+    sidebarLayout(
+      sidebarPanel(
+        selectInput(
+          inputId = "World_Event",
+          label = "Select a World Event",
+          choices = c(
+            "Great Flood of 1993",
+            "1994 Rwandan Genocide",
+            "2003 Iraq War",
+            "2004 Indian Ocean Tsunami",
+            "2011 Arab Spring",
+            "2014 Russia Annexation of Crimea",
+            "2014 Ebola Outbreak in West Africa"
+          ), 
+          
+          selected = "2020 COVID-19 Pandemic"
+        )
+      ),
+      
+      
+      #displays scatterplot 
+      mainPanel(
+        plotOutput("Yield_Plot")
+      )
+    )
+    
+  )
+  
 
+)
 )
 
 
