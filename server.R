@@ -9,10 +9,12 @@ countries_data <- readRDS("Countries_data_FailedStates_Islands/combined_countrie
 geo <- geojson_read("countries.geo.json", what = "sp")
 
 most_produced_crop <- countries_data %>%
-  filter(Unit == "t") %>% 
-  group_by(Area) %>%
+  
+   
+  filter(Year == 2022, Unit == "t") %>% #filtering finding the most crops produced in tons in 2022
+  group_by(Area) %>%  #grouping by country
   filter(Value == max(Value, na.rm = TRUE)) %>%
-  ungroup() %>%
+  ungroup() %>%  #remove the grouping
   select(
     Area, 
     Most_Produced_Crop = Item, 
@@ -28,7 +30,7 @@ server <- function(input, output, session) {
  
    #input introduction map 
   output$Intro_Map <- renderLeaflet({
-    pal <- colorBin("YlOrRd", domain = geo@data$Max_Production, na.color = "transparent")
+    pal <- colorBin("Blues", domain = geo@data$Max_Production, na.color = "transparent")
     
     leaflet(geo) %>% 
       addTiles() %>% 
@@ -44,13 +46,15 @@ server <- function(input, output, session) {
           bringToFront = TRUE
         ), 
         
+        #adding the labels 
         label = ~paste(
           "Country: ", name,",",
           "Most Produced Crop: ", Most_Produced_Crop,",", 
           "Max Production: ", Max_Production, " Tons"
         ),
         
-        labelOptions = labelOptions(
+       #styling the labels 
+         labelOptions = labelOptions(
           style = list("font-weight" = "normal", padding = "3px 8px"), 
           textsize = "13px", 
           direction = "auto"
