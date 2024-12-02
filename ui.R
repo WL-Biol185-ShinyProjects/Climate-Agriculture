@@ -160,7 +160,7 @@ ui <- fluidPage(theme = shinytheme("cosmo"),
             "2014 Ebola Outbreak in West Africa"
           ), 
           
-          selected = "2020 COVID-19 Pandemic"
+          selected = "1994 Rwandan Genocide"
         )
       ),
       
