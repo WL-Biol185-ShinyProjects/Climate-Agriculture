@@ -74,7 +74,7 @@ server <- function(input, output, session) {
   
   #picking years and the country of focus for the event
   details_for_events <- list(
-    "Great Flood of 1993" = list(year = 1995, country = "United States of America"),
+    "Great Flood of 1993 (Mississippi River)" = list(year = 1995, country = "United States of America"),
     "1994 Rwandan Genocide" = list(year = 1996, country = "Rwanda"),
     "2003 Iraq War" = list(year = 2005, country = "Iraq"),
     "2004 Indian Ocean Tsunami" = list(year = 2006, country = "Indonesia"),

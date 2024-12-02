@@ -80,6 +80,7 @@ ui <- fluidPage(theme = shinytheme("cosmo"),
     #Efficiency Panel
     tabPanel("Farming Efficiency",
           
+          sidebarLayout(   
              sidebarPanel(
               
                p(
@@ -100,8 +101,9 @@ ui <- fluidPage(theme = shinytheme("cosmo"),
                 inputId = "selectedProduct",
                 label = "Products",
                 choices = NULL
-                ),
-              
+                )
+             ),
+             
             mainPanel(
               
               p(
@@ -135,7 +137,7 @@ ui <- fluidPage(theme = shinytheme("cosmo"),
           inputId = "World_Event",
           label = "Select a World Event",
           choices = c(
-            "Great Flood of 1993",
+            "Great Flood of 1993 (Mississippi River)",
             "1994 Rwandan Genocide",
             "2003 Iraq War",
             "2004 Indian Ocean Tsunami",
