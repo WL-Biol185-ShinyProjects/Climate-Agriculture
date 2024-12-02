@@ -1,4 +1,8 @@
 #Crop Heat Maps
+
+install.packages("countrycode")
+
+
 library(dplyr)
 library(plotly)
 library(htmlwidgets)
@@ -6,10 +10,15 @@ library(tidyr)
 library(leaflet)
 library(geojsonio)
 
+library(countrycode)
+
+
 
 #creates a "crop_data" file from the rds
 
 crop_data <- readRDS("efficiency_data /combined_efficiency_data.rds")
+
+ISO <- read.csv("fully_temp_data_cleaned.csv")
 
 
 total_yield <- crop_data %>% 
@@ -18,6 +27,13 @@ total_yield <- crop_data %>%
 
 crop_data <- crop_data %>%
   left_join(total_yield, by = c("Area", "Year"))
+
+crop_data$Country_Code <- countrycode(crop_data$Area, origin = "country.name", destination = "iso3c")
+
+  
+
+
+
 
 #using our new long_dataframe with shiny function "plot_geo" for its world map
 
@@ -32,9 +48,9 @@ crop_data <- crop_data %>%
 lapply(crop_data, class)
 
 
-yield_map <- plot_geo(crop_data, locationmode = 'world') %>%
-  add_trace(  x          = ~Total_Yield, 
-              locations  = ~Area, 
+yield_map <- plot_geo(crop_data, locationmode = 'iso_a3') %>%
+  add_trace(  z          = ~Total_Yield, 
+              locations  = ~Country_Code, 
               frame      = ~Year,
               color      = ~Total_Yield
               )
