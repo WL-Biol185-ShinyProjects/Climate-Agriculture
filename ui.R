@@ -27,7 +27,7 @@ ui <- fluidPage(theme = shinytheme("cosmo"),
              
              div(
                p( 
-                 "Welcome to this application! Our goal is to help you explore the impacts of climate change on agriculture across the world. Click on the tabs above to see how changes in the climate affects agriculture in different countries.",
+                "Welcome to this application! Our goal is to help you explore the impacts of climate change on agriculture across the world. Click on the tabs above to see how changes in the climate affects agriculture in different countries.",
                  style = "font-size: 30px; text-align: center; margin-bottom: 45px;"
                  )
              ),
@@ -130,6 +130,20 @@ ui <- fluidPage(theme = shinytheme("cosmo"),
   
   tabPanel("World Events",
     titlePanel("Major World Events Effect on Agriculture"), 
+    
+    
+    div(
+      p( 
+        "This is how various natural disasters and wars affect agriculture production.",
+        style = "font-size: 30px; text-align: center; margin-bottom: 45px;"
+      )
+    ),
+    
+    p(
+      "Example text.",
+      style = "font-size: 20px; text-align: center; margin-bottom: 30px;"
+    ),
+    
     
     sidebarLayout(
       sidebarPanel(
