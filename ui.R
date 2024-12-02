@@ -79,8 +79,8 @@ ui <- fluidPage(theme = shinytheme("cosmo"),
               
             mainPanel(
               
-              plotOutput("EfficiencyvsTime", width = 700, height = 400)
-            )
+              plotOutput("EfficiencyvsTime", width = 500, height = 400)
+            ),
                
           ),
              

@@ -45,11 +45,16 @@ function(input, output, session) {
     )
   })
   
+  ##GGplot for the given data
+  
   output$EfficiencyvsTime <- renderPlot({
     efficiencydata %>%
       filter(Area %in% input$selectedCountry & Item %in% input$selectedProduct) %>%
       ggplot(aes(Year, Value)) + 
-      geom_line()
+      geom_line() +
+      labs(title = paste("Efficiency vs Time for", input$selectedCountry, "and", paste(input$selectedProduct)),
+           x = "Production Years",
+           y = "Efficiency (kg/ha)")
   })
   
   
