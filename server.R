@@ -26,6 +26,7 @@ most_produced_crop <- countries_data %>%
 #joining geojson with country data 
 geo@data <-left_join(geo@data, most_produced_crop, by = c("name" = "Area"))
 
+efficiencydata <- readRDS("efficiency_data /combined_efficiency_data.rds")
 
 server <- function(input, output, session) {
  
@@ -112,6 +113,36 @@ server <- function(input, output, session) {
     )
     
   })
+  
+  ##Code for Farming efficiency tab
+  observeEvent(input$selectedCountry, {
+    
+    filtered_efficiencydata <- efficiencydata %>%
+      filter(Area == input$selectedCountry)
+    
+    
+    updateSelectInput(session, "selectedProduct",
+                      choices = c(unique(filtered_efficiencydata$Item)),
+    )
+  })
+  
+  ##GGplot for the given data
+  
+  output$EfficiencyvsTime <- renderPlot({
+    efficiencydata %>%
+      filter(Area %in% input$selectedCountry & Item %in% input$selectedProduct) %>%
+      ggplot(aes(Year, Value)) + 
+      geom_line() +
+      labs(title = paste("Efficiency vs Time for", input$selectedCountry, "and", paste(input$selectedProduct)),
+           x = "Production Years",
+           y = "Efficiency (kg/ha)")
+  })
+  
+  ##Raw data code
+  output$Raw_Product_Data = DT::renderDataTable({
+    countries_data
+  })
+    
 }
 
 # Define server logic required to draw a histogram

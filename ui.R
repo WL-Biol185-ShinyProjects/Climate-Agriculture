@@ -81,6 +81,10 @@ ui <- fluidPage(theme = shinytheme("cosmo"),
     tabPanel("Farming Efficiency",
           
              sidebarPanel(
+              
+               p(
+                 "Select a country and product from their list of choices."
+               ), 
                
               selectInput(
                 inputId = "selectedCountry",
@@ -100,6 +104,10 @@ ui <- fluidPage(theme = shinytheme("cosmo"),
               
             mainPanel(
               
+              p(
+                "The plot below depicts the efficiency by which a given country produced a product over the time period 1990 to 2022 (in Kilograms per Hectare). Some products were not produced over that entire time range, and for those the x-axis is adjusted to show this."
+              ), 
+              
               plotOutput("EfficiencyvsTime", width = 500, height = 400)
             ),
                
@@ -108,7 +116,8 @@ ui <- fluidPage(theme = shinytheme("cosmo"),
     
   
     #Crop Data Panel
-    tabPanel("Crop Data",
+    tabPanel("Raw Data",
+             
              
              
              )
