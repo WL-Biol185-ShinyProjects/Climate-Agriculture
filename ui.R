@@ -33,7 +33,7 @@ ui <- fluidPage(theme = shinytheme("cosmo"),
              ),
              
               p(
-                "We did not include small islands and the top ten failed states as they have other factors that could affect agriculture production other than climate change. We wanted to focus only on the effect of climate change on agriculture production.",
+                "We did not include small islands and the top ten failed states as they have other factors that could affect agriculture production other than climate change. We wanted to focus only on the effect of climate change on agriculture production (countries in black are not included in the dataset).",
                 style = "font-size: 20px; text-align: center; margin-bottom: 20px;"
               ),
              
@@ -46,7 +46,7 @@ ui <- fluidPage(theme = shinytheme("cosmo"),
              
              div(
                p(
-                 "To get you started. The map above shows the total production (in tons) of the most produced crop in each country for the year 2022. Hover over a country to see detailed information, including the name of the crop and its production quantity!",
+                 "To get you started. The map above shows the total production (in tons) of the most produced crop in each country for the year 2022. Hover over a country to see detailed information, including the name of the most popular crop and its total production quantity across all agriculture products!",
                  style = "font-size: 30px; text-align: center; margin-top: 35px;"
                )
              )
@@ -129,32 +129,56 @@ ui <- fluidPage(theme = shinytheme("cosmo"),
   #WORLD EVENTS AFFECT ON AGRICULTURE  
   
   tabPanel("World Events",
-    titlePanel("Major World Events Effect on Agriculture"), 
+    titlePanel("How do Major Events in a Country Affect the Agriculture Production for that Country?"), 
     
     
     div(
-      p( 
-        "How do major events in a country affect the total agriculture production in various countries?",
-        style = "font-size: 30px; text-align: center; margin-bottom: 30px;"
+    
+      p(
+        "In this tab, you can see the effects of seven different events. These events range from natural disasters, wars, uprisings, and epidemics. All of these events affect the country's infrastructure potentially leading to lower agriculture production",
+        style = "font-size: 20px; text-align: left; margin-bottom: 30px;"
       )
     ),
     
     p(
-      "In this tab, you can see the effects of seven different events. These events range from natural disasters, wars, uprisings, and epidemics. All of these events affect the country's infrastructure potentially leading to lower agriculture production",
-      style = "font-size: 20px; text-align: center; margin-bottom: 30px;"
+      "The Seven Events that we Focused on:",
+      style = "font-size: 25px; text-align: left; margin-bottom: 30px;"
+      ),
+      
+          p(
+      "1. The Great Flood of 1993 which is when the Mississippi River flooded and it affected major states in the United States, including North Dakota, south Dakota, Nebraska, Kansas, Missouri, Wisconsin, and Illinois.",
+      style = "font-size: 20px; text-align: left; margin-bottom: 20px;"
     ),
     
     p(
-      "The seven events that we have focused on are: 
-           The Great Flood of 1993 which is when the Mississippi River flooded and it affected major states in the United States, including North Dakota, south Dakota, Nebraska, Kansas, Missouri, Wisconsin, and Illinois. 
-           The 1994 Rwandan Civil War which was the most intense conflict in Rwanda.
-           The 2003 Iraq War which is when the United States invaded  Iraq.
-           The 2004 Indian Ocean Tsunami, which decimated Indonesia
-           The 2011 Arab Spring, which was a wave of pro-democracy protests and uprising that took place in the Middle East in North Africa (we are focusing on the agriculture production in Egypt)
-           The 2014 Russia Annexation of Crimea which was when russia invaded the Crimean Peninsula
-           The 2014 Ebola Outbreak in West Africa, where we will be focusing on the country most affected: Sierra Leone", 
-      style = "font-size: 15px; text-align: left; margin-bottom: 45px;"
+      "2. The 1994 Rwandan Civil War which was the most intense conflict in Rwanda.",
+      style = "font-size: 20px; text-align: left; margin-bottom: 20px;"
     ),
+    
+    p(
+      "3. The 2003 Iraq War which is when the United States invaded Iraq.",
+      style = "font-size: 20px; text-align: left; margin-bottom: 20px;"
+    ),
+    
+    p(
+      "4. The 2004 Indian Ocean Tsunami, which decimated Indonesia.",
+      style = "font-size: 20px; text-align: left; margin-bottom: 20px;"
+    ),     
+           
+    p(
+      "5. The 2011 Arab Spring, which was a wave of pro-democracy protests and uprising that took place in the Middle East in North Africa (we are focusing on the agriculture production in Egypt)",
+      style = "font-size: 20px; text-align: left; margin-bottom: 20px;"
+    ), 
+    
+    p(
+      "6. The 2014 Russia Annexation of Crimea which was when russia invaded the Crimean Peninsula",
+      style = "font-size: 20px; text-align: left; margin-bottom: 20px;"
+    ),       
+
+    p(
+      "7. The 2014 Ebola Outbreak in West Africa, where we will be focusing on the country most affected: Sierra Leone",
+      style = "font-size: 20px; text-align: left; margin-bottom: 20px;"
+    ),     
     
     
     sidebarLayout(
