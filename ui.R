@@ -28,13 +28,18 @@ ui <- fluidPage(theme = shinytheme("cosmo"),
              div(
                p( 
                  "Welcome to this application! Our goal is to help you explore the impacts of climate change on agriculture across the world. Click on the tabs above to see how changes in the climate affects agriculture in different countries.",
-                 style = "font-size: 18px; text-align: center; margin-bottom: 20px;"
+                 style = "font-size: 30px; text-align: center; margin-bottom: 45px;"
                  )
              ),
              
               p(
                 "We did not include small islands and the top ten failed states as they have other factors that could affect agriculture production other than climate change. We wanted to focus only on the effect of climate change on agriculture production.",
-                style = "font-size: 16px; text-align: center; margin-bottom: 30px;"
+                style = "font-size: 20px; text-align: center; margin-bottom: 20px;"
+              ),
+             
+              p(
+                "Also, this application only takes into account temperature data and agriculture data from the years of 1990 through 2022.", 
+                style = "font-size: 15px; text-align: center; margin-bottom: 45px;"
               ),
              
               leafletOutput("Intro_Map", width = "100%", height = "600px"),
@@ -42,7 +47,7 @@ ui <- fluidPage(theme = shinytheme("cosmo"),
              div(
                p(
                  "To get you started. The map above shows the total production (in tons) of the most produced crop in each country for the year 2022. Hover over a country to see detailed information, including the name of the crop and its production quantity!",
-                 style = "font-size: 16px; text-align: center; margin-top: 25px;"
+                 style = "font-size: 30px; text-align: center; margin-top: 35px;"
                )
              )
              
