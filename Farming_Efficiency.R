@@ -5,7 +5,7 @@ library(shiny)
 library(dplyr)
 library(ggplot2)
 library(plotly)
-
+library(tidyr)
 
 ##Combining all efficiency data into one plot
 file_paths <- c(
@@ -26,9 +26,13 @@ countries_data <- file_paths %>%
 
 saveRDS(countries_data, file = "efficiency_data /combined_efficiency_data.rds")
 
+##Needed to clean dataset to tidy set for graph
 efficiencydata <- readRDS("efficiency_data /combined_efficiency_data.rds")
 
+cleanefficiency <- efficiencydata[, -c(1, 2, 3, 4, 5, 7, 8, 9, 11, 13, 15, 16)]
 
+spreadefficiency <- cleanefficiency %>%
+  pivot_wider(names_from = Year, values_from = Value)
 
 ##Function for creating the products to be dependent on the selected
 function(input, output, session) {
@@ -61,7 +65,13 @@ function(input, output, session) {
 }
 
 
+## for the UI later
 
+sliderInput("Years", "Years of Production:",
+            min = 1990,
+            max = 2022,
+            value = 1990
+            )
 
 
 

@@ -138,6 +138,7 @@ server <- function(input, output, session) {
            y = "Efficiency (kg/ha)")
   })
   
+  
   ##Raw data code
   output$Raw_Product_Data = DT::renderDataTable({
     countries_data
