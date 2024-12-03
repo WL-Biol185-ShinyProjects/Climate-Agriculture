@@ -83,7 +83,8 @@ ui <- fluidPage(theme = shinytheme("cosmo"),
   
     #Efficiency Panel
     tabPanel("Farming Efficiency",
-          
+         
+        titlePanel("This tab shows various graphs surrounding the products and their efficiency"),
           sidebarLayout(   
              sidebarPanel(
               
@@ -95,7 +96,7 @@ ui <- fluidPage(theme = shinytheme("cosmo"),
                 inputId = "selectedCountry",
                 label = "Countries",
                 choices = c(unique(countrynames$Area)),
-                selected = "Albania",
+                selected = "Albania"
                 ),
               
               hr(),
@@ -110,26 +111,30 @@ ui <- fluidPage(theme = shinytheme("cosmo"),
              
             mainPanel(
               
-              p(
-                "The plot below depicts the efficiency by which a given country produced a product over the time period 1990 to 2022 (in Kilograms per Hectare). Some products were not produced over that entire time range, and for those the x-axis is adjusted to show this.",
+              tabsetPanel(
+                tabPanel("Efficiency Vs Product Graph",
+              
+              p("The plot below depicts the efficiency by which a given country produced a product over the time period 1990 to 2022 (in Kilograms per Hectare). Some products were not produced over that entire time range, and for those the x-axis is adjusted to show this.",
                 style = "font-size: 20px; text-align: center; margin-botton: 20px;"
               ), 
               
-              plotOutput("EfficiencyvsTime", width = 500, height = 400)
-            ),
+              plotOutput("EfficiencyvsTime", width = 800, height = 500),
+              
+              p("It is apparent that some crops have decreased in production over the time period, which could be due to climate, geopolitical, or financial considerations.",
+                style = "font-size: 15px; text-align: center; margin-botton: 15px:"
+              ),
+              
+                ),
+                tabPanel("Percent Variation in Production"
+                  
+                )
+            )
                
-          ),
+          )
              
-    
-  
-    #Crop Data Panel
-    tabPanel("Raw Data",
-             
-             
-             
-             )
-    
-  ), 
+      )
+      
+    ),
   
   #WORLD EVENTS AFFECT ON AGRICULTURE  
   
@@ -211,20 +216,10 @@ ui <- fluidPage(theme = shinytheme("cosmo"),
       #displays scatterplot 
       mainPanel(
         plotOutput("Yield_Plot")
-      )
-    )
+          )
+        )
     
-  )
+      )
   
-
+  )
 )
-)
-
-
-
-
-
-
-
-
-
