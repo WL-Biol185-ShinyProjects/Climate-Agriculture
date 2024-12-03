@@ -1,6 +1,5 @@
 library(shiny)
 library(tidyverse)
-library(plotly)
 library(shinydashboard)
 library(leaflet)
 library(dplyr)
@@ -112,7 +111,8 @@ ui <- fluidPage(theme = shinytheme("cosmo"),
             mainPanel(
               
               p(
-                "The plot below depicts the efficiency by which a given country produced a product over the time period 1990 to 2022 (in Kilograms per Hectare). Some products were not produced over that entire time range, and for those the x-axis is adjusted to show this."
+                "The plot below depicts the efficiency by which a given country produced a product over the time period 1990 to 2022 (in Kilograms per Hectare). Some products were not produced over that entire time range, and for those the x-axis is adjusted to show this.",
+                style = "font-size: 20px; text-align: center; margin-botton: 20px;"
               ), 
               
               plotOutput("EfficiencyvsTime", width = 500, height = 400)
