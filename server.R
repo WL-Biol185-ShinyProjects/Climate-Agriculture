@@ -157,7 +157,9 @@ server <- function(input, output, session) {
   output$PercentChangevsProduct <- renderPlot({
     percent_change_data %>%
       filter(Area %in% input$selectedCountry & Year %in% input$Years) %>%
-      ggplot(percent_change_data, aes(x=Item, y=BaselineChange, label=BaselineChange)) + 
+      arrange(Value) %>%
+      mutate(Item = factor(Item, levels = Item, ordered = TRUE)) %>%
+      ggplot(aes(x=Item, y=BaselineChange, label=BaselineChange)) + 
       geom_bar(stat='identity', aes(fill=belowabove), width=.5)  +
       scale_fill_manual(name="Efficiency", 
                         labels = c("Above Average", "Below Average"), 

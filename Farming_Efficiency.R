@@ -84,7 +84,10 @@ percent_change_data <- efficiencydata %>%
                      TRUE ~ 1 * NA)) %>%            
   select(Year, Item, Value,                 
          ChangefromLast, BaselineChange)
+
 percent_change_data$belowabove <- ifelse(percent_change_data$BaselineChange < 0, "below", "above")
+
+
 percent_change_data <- percent_change_data[order(percent_change_data$BaselineChange), ] 
 percent_change_data$Item <- factor(percent_change_data$Item, levels = percent_change_data$Item) 
 
