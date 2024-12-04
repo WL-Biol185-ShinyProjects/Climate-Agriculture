@@ -8,7 +8,7 @@ library(htmlwidgets)
 library(tidyr)
 library(leaflet)
 library(geojsonio)
-
+library(shiny)
 library(countrycode)
 
 

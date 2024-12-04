@@ -3,7 +3,8 @@ library(leaflet)
 library(geojsonio)
 library(dplyr)
 library(ggplot2)
-
+library(tidyverse)
+library(tidyr)
 #INTRODUCTION PAGE
 
 countries_data <- readRDS("Countries_data_FailedStates_Islands/combined_countries_data.rds")
@@ -27,6 +28,19 @@ most_produced_crop <- countries_data %>%
 geo@data <-left_join(geo@data, most_produced_crop, by = c("name" = "Area"))
 
 efficiencydata <- readRDS("efficiency_data /combined_efficiency_data.rds")
+
+percent_change_data <- efficiencydata %>%                                     
+  group_by(Area, Item) %>%                        
+  mutate(lag = lag(Value),                        
+         ChangefromLast = (Value - lag) * 100 / lag,    
+         First = head(Value, 1),                  
+         BaselineChange =                       
+           case_when(Value != First ~ (Value - First) * 100 / First,
+                     TRUE ~ 1 * NA)) %>%            
+  select(Year, Item, Value,                 
+         ChangefromLast, BaselineChange)
+percent_change_data$belowabove <- ifelse(percent_change_data$BaselineChange < 0, "below", "above")
+ 
 
 server <- function(input, output, session) {
  
@@ -138,11 +152,23 @@ server <- function(input, output, session) {
            y = "Efficiency (kg/ha)")
   })
   
+  ##farming efficiency plot 2 (not working yet)
   
-  ##Raw data code
-  output$Raw_Product_Data = DT::renderDataTable({
-    countries_data
+  output$PercentChangevsProduct <- renderPlot({
+    percent_change_data %>%
+      filter(Area %in% input$selectedCountry & Year %in% input$Years) %>%
+      ggplot(percent_change_data, aes(x=Item, y=BaselineChange, label=BaselineChange)) + 
+      geom_bar(stat='identity', aes(fill=belowabove), width=.5)  +
+      scale_fill_manual(name="Efficiency", 
+                        labels = c("Above Average", "Below Average"), 
+                        values = c("above"="#00ba38", "below"="#f8766d")) +
+      labs(subtitle="Percent change from earliest production value based on selected year", 
+           title= "Diverging Bar Graph") + 
+      coord_flip()
+    
   })
+  
     
 }
+
 

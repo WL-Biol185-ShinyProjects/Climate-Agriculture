@@ -60,16 +60,18 @@ ui <- fluidPage(theme = shinytheme("cosmo"),
   
   #Heat Maps Panel
     tabPanel("Heat Maps", 
-            
-             sidebarPanel(
-               radioButtons("heatmap_type", "Select Heatmap Type:", 
+           
+          titlePanel("This page details heat maps for both crop production and temperature change across our selected countries"),
+             sidebarLayout(
+                sidebarPanel(
+                  radioButtons("heatmap_type", "Select Heatmap Type:", 
                               choices = list("Temperature Change" = "temp",
                                              "Crop Yield Change" = "yield")
                             ), 
                  
-                checkboxInput("baseline_toggle", "Show values relative to baseline year (1990)")
+                  checkboxInput("baseline_toggle", "Show values relative to baseline year (1990)")
                 
-              ), 
+                ), 
              
              
              
@@ -77,6 +79,7 @@ ui <- fluidPage(theme = shinytheme("cosmo"),
               mainPanel(
                  leafletOutput("heatmap", width = "100%", height = "600")
                         )
+             )
     ),
     
   
@@ -125,14 +128,22 @@ ui <- fluidPage(theme = shinytheme("cosmo"),
               ),
               
                 ),
-                tabPanel("Percent Variation in Production"
+                tabPanel("Percent Variation in Production",
                   
+                sliderInput("Years", "Years of Production:",
+                  min = 1990,
+                  max = 2022,
+                  value = 1990
+                         ),
+                hr(),
+                
+                plotOutput("PercentChangevsProduct"),
                 )
-            )
+              )
                
-          )
+            )
              
-      )
+        )
       
     ),
   

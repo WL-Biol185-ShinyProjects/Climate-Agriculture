@@ -4,7 +4,6 @@ library(tidyverse)
 library(shiny)
 library(dplyr)
 library(ggplot2)
-library(plotly)
 library(tidyr)
 
 ##Combining all efficiency data into one plot
@@ -74,4 +73,59 @@ sliderInput("Years", "Years of Production:",
             )
 
 
+##working percent change code
+percent_change_data <- efficiencydata %>%                                     
+  group_by(Area, Item) %>%                        
+  mutate(lag = lag(Value),                        
+         ChangefromLast = (Value - lag) * 100 / lag,    
+         First = head(Value, 1),                  
+         BaselineChange =                       
+           case_when(Value != First ~ (Value - First) * 100 / First,
+                     TRUE ~ 1 * NA)) %>%            
+  select(Year, Item, Value,                 
+         ChangefromLast, BaselineChange)
+percent_change_data$belowabove <- ifelse(percent_change_data$BaselineChange < 0, "below", "above")
+percent_change_data <- percent_change_data[order(percent_change_data$BaselineChange), ] 
+percent_change_data$Item <- factor(percent_change_data$Item, levels = percent_change_data$Item) 
 
+ggplot(percent_change_data, aes(x=Item, y=BaselineChange, label=BaselineChange)) + 
+  geom_bar(stat='identity', aes(fill=belowabove), width=.5)  +
+  ##this part is fine
+  scale_fill_manual(name="Efficiency", 
+                    labels = c("Above Average", "Below Average"), 
+                    values = c("above"="#00ba38", "below"="#f8766d")) +
+  labs(subtitle="Percent change from earliest production value based on selected year", 
+       title= "Diverging Bar Graph") + 
+  coord_flip()
+
+
+
+
+
+observeEvent(input$selectedCountry, {
+    
+    filtered_percent_change_data <- percent_change_data %>%
+      filter(Area == input$selectedCountry)
+    
+    
+    updateSelectInput(session, "Years",
+                      choices = c(unique(filtered_efficiencydata$Item)),
+    )
+  })
+  
+
+##possibly might need to group by years as well but check once we run the document
+  
+  output$PercentChangevsProduct <- renderPlot({
+    percent_change_data %>%
+      filter(Area %in% input$selectedCountry & Year %in% input$Years) %>%
+      ggplot(percent_change_data, aes(x=Item, y=BaselineChange, label=BaselineChange)) + 
+      geom_bar(stat='identity', aes(fill=belowabove), width=.5)  +
+      scale_fill_manual(name="Efficiency", 
+                        labels = c("Above Average", "Below Average"), 
+                        values = c("above"="#00ba38", "below"="#f8766d")) +
+      labs(subtitle="Percent change from earliest production value based on selected year", 
+           title= "Diverging Bar Graph") + 
+      coord_flip()
+    
+  })
