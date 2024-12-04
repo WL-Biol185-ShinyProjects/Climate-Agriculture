@@ -4,7 +4,6 @@ install.packages("countrycode")
 
 
 library(dplyr)
-library(plotly)
 library(htmlwidgets)
 library(tidyr)
 library(leaflet)
@@ -30,8 +29,51 @@ crop_data <- crop_data %>%
 
 crop_data$Country_Code <- countrycode(crop_data$Area, origin = "country.name", destination = "iso3c")
 
-  
 
+yield_geo <- geojson_read("countries.geo.json", what = "sp")
+
+GEO_iso <- yield_geo
+GEO_iso@data <- GEO_iso@data %>%
+  left_join(crop_data, by = c("id" = "Country_Code"))
+
+
+palette <- colorNumeric(palette = "YlGnBu", domain = crop_data$Total_Yield, na.color = "#f0f0f0")
+
+yield_map <- leaflet(yield_geo) %>%
+  addTiles() %>%
+  addPolygons(
+    fillColor = ~palette(Total_Yield),
+    weight = 1,
+    color = "white",
+    fillOpacity = 0.5
+    ) %>%
+  addLegend(
+    pal = palette,
+    values = crop_data$Total_Yield,
+    title = "Total Yield",
+    position = "bottomright"
+  )
+    
+filter_geo <- reactive({
+  year_data <- total_yield %>%
+    filter(Year == input$year)
+  
+  geo@data <- left_join(geo@data, year_data, by = c("name" = "Area"))
+  geo
+})
+
+output$slider_map <- renderLeaflet({
+  pal <- colorBin("YlGnBu", domain = total_yield$Total_Yield, na.color = "transparent")
+  leaflet(filtered_geo()) %>%
+    addTiles() %>%
+    addPolygons(
+      fillColor = ~pal(Total_Yield),
+      color = "white",
+      weight = 1,
+      fillOpacity = 0.7)
+})
+
+#***Not sure where to go from here
 
 
 
@@ -45,18 +87,6 @@ crop_data$Country_Code <- countrycode(crop_data$Area, origin = "country.name", d
 
 #locations allows for hover over country with popup
 
-lapply(crop_data, class)
-
-
-yield_map <- plot_geo(crop_data, locationmode = 'iso_a3') %>%
-  add_trace(  z          = ~Total_Yield, 
-              locations  = ~Country_Code, 
-              frame      = ~Year,
-              color      = ~Total_Yield
-              )
-
-
-yield_map
 
 
 
