@@ -121,7 +121,7 @@ ui <- fluidPage(theme = shinytheme("cosmo"),
                 style = "font-size: 20px; text-align: center; margin-botton: 20px;"
               ), 
               
-              plotOutput("EfficiencyvsTime", width = 800, height = 500),
+              plotOutput("EfficiencyvsTime", width = 1600, height = 800),
               
               p("It is apparent that some crops have decreased in production over the time period, which could be due to climate, geopolitical, or financial considerations.",
                 style = "font-size: 15px; text-align: center; margin-botton: 15px:"
@@ -130,18 +130,18 @@ ui <- fluidPage(theme = shinytheme("cosmo"),
                 ),
                 tabPanel("Percent Variation in Production",
                   
-                sliderInput("Years", "Years of Production:",
-                  min = 1990,
-                  max = 2022,
-                  value = 1990
-                         ),
-                hr(),
+              sliderInput("Years", "Years of Production:",
+                min = 1990,
+                max = 2022,
+                value = 1990
+                        ),
+              hr(),
                 
-                plotOutput("PercentChangevsProduct"),
+              plotOutput("PercentChangevsProduct", width = 2000, height = 800),
                 )
-              )
-               
             )
+               
+          )
              
         )
       

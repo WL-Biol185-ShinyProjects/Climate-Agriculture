@@ -29,23 +29,23 @@ most_produced_crop <- countries_data %>%
 #joining geojson with country data 
 geo@data <-left_join(geo@data, most_produced_crop, by = c("name" = "Area"))
 
+
 efficiencydata <- readRDS("efficiency_data /combined_efficiency_data.rds")
 
+
+##for efficiency data plot 2
 percent_change_data <- efficiencydata %>%                                     
-  group_by(Area, Item) %>%                        
+  group_by(Area) %>%                        
   mutate(lag = lag(Value),                        
          ChangefromLast = (Value - lag) * 100 / lag,    
          First = head(Value, 1),                  
          BaselineChange =                       
            case_when(Value != First ~ (Value - First) * 100 / First,
                      TRUE ~ 1 * NA)) %>%            
-  select(Year, Item, Value,                 
+  select(Year, Area, Item, Value,                 
          ChangefromLast, BaselineChange)
 percent_change_data$belowabove <- ifelse(percent_change_data$BaselineChange < 0, "below", "above")
  
-
-
-
 
 
 server <- function(input, output, session) {
@@ -158,13 +158,13 @@ server <- function(input, output, session) {
            y = "Efficiency (kg/ha)")
   })
   
-  ##farming efficiency plot 2 (not working yet)
+  ##farming efficiency plot 2 (almost there)
   
   output$PercentChangevsProduct <- renderPlot({
     percent_change_data %>%
       filter(Area %in% input$selectedCountry) %>%
-      arrange(Value) %>%
-      mutate(Item = factor(Item, levels = Item, ordered = TRUE)) %>%
+      arrange(BaselineChange) %>%
+      mutate(Item = factor(Item, ordered = TRUE)) %>%
       ggplot(aes(x=Item, y=BaselineChange, label=BaselineChange)) + 
       geom_bar(stat='identity', aes(fill=belowabove), width=.5)  +
       scale_fill_manual(name="Efficiency", 
