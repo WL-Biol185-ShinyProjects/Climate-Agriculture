@@ -28,6 +28,7 @@ saveRDS(countries_data, file = "efficiency_data /combined_efficiency_data.rds")
 ##Needed to clean dataset to tidy set for graph
 efficiencydata <- readRDS("efficiency_data /combined_efficiency_data.rds")
 
+
 cleanefficiency <- efficiencydata[, -c(1, 2, 3, 4, 5, 7, 8, 9, 11, 13, 15, 16)]
 
 spreadefficiency <- cleanefficiency %>%

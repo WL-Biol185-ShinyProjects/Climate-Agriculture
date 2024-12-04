@@ -29,9 +29,10 @@ most_produced_crop <- countries_data %>%
 #joining geojson with country data 
 geo@data <-left_join(geo@data, most_produced_crop, by = c("name" = "Area"))
 
-
+#reading and processing efficiency data call
 efficiencydata <- readRDS("efficiency_data /combined_efficiency_data.rds")
 
+efficiencydata <- efficiencydata[efficiencydata$Item != "Hen eggs in shell, fresh", ]
 
 ##for efficiency data plot 2
 percent_change_data <- efficiencydata %>%                                     
@@ -162,7 +163,7 @@ server <- function(input, output, session) {
   
   output$PercentChangevsProduct <- renderPlot({
     percent_change_data %>%
-      filter(Area %in% input$selectedCountry) %>%
+      filter(Area %in% input$selectedCountry & Year == input$Years) %>%
       arrange(BaselineChange) %>%
       mutate(Item = factor(Item, ordered = TRUE)) %>%
       ggplot(aes(x=Item, y=BaselineChange, label=BaselineChange)) + 
