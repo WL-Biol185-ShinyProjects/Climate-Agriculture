@@ -5,6 +5,8 @@ library(dplyr)
 library(ggplot2)
 library(tidyverse)
 library(tidyr)
+
+
 #INTRODUCTION PAGE
 
 countries_data <- readRDS("Countries_data_FailedStates_Islands/combined_countries_data.rds")
@@ -41,6 +43,10 @@ percent_change_data <- efficiencydata %>%
          ChangefromLast, BaselineChange)
 percent_change_data$belowabove <- ifelse(percent_change_data$BaselineChange < 0, "below", "above")
  
+
+
+
+
 
 server <- function(input, output, session) {
  
@@ -156,7 +162,7 @@ server <- function(input, output, session) {
   
   output$PercentChangevsProduct <- renderPlot({
     percent_change_data %>%
-      filter(Area %in% input$selectedCountry & Year %in% input$Years) %>%
+      filter(Area %in% input$selectedCountry) %>%
       arrange(Value) %>%
       mutate(Item = factor(Item, levels = Item, ordered = TRUE)) %>%
       ggplot(aes(x=Item, y=BaselineChange, label=BaselineChange)) + 
@@ -169,6 +175,7 @@ server <- function(input, output, session) {
       coord_flip()
     
   })
+  
   
     
 }

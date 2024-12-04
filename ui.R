@@ -77,7 +77,7 @@ ui <- fluidPage(theme = shinytheme("cosmo"),
              
              
               mainPanel(
-                 leafletOutput("heatmap", width = "100%", height = "600")
+                 leafletOutput("slider_map", width = "100%", height = "600")
                         )
              )
     ),
