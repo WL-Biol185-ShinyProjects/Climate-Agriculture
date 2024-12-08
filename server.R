@@ -5,6 +5,8 @@ library(dplyr)
 library(ggplot2)
 library(tidyverse)
 library(tidyr)
+
+
 #INTRODUCTION PAGE
 
 countries_data <- readRDS("Countries_data_FailedStates_Islands/combined_countries_data.rds")
@@ -27,20 +29,25 @@ most_produced_crop <- countries_data %>%
 #joining geojson with country data 
 geo@data <-left_join(geo@data, most_produced_crop, by = c("name" = "Area"))
 
+#reading and processing efficiency data call
 efficiencydata <- readRDS("efficiency_data /combined_efficiency_data.rds")
 
+efficiencydata <- efficiencydata[efficiencydata$Item != "Hen eggs in shell, fresh", ]
+
+##for efficiency data plot 2
 percent_change_data <- efficiencydata %>%                                     
-  group_by(Area, Item) %>%                        
+  group_by(Area) %>%                        
   mutate(lag = lag(Value),                        
          ChangefromLast = (Value - lag) * 100 / lag,    
          First = head(Value, 1),                  
          BaselineChange =                       
            case_when(Value != First ~ (Value - First) * 100 / First,
                      TRUE ~ 1 * NA)) %>%            
-  select(Year, Item, Value,                 
+  select(Year, Area, Item, Value,                 
          ChangefromLast, BaselineChange)
 percent_change_data$belowabove <- ifelse(percent_change_data$BaselineChange < 0, "below", "above")
  
+
 
 server <- function(input, output, session) {
  
@@ -152,12 +159,14 @@ server <- function(input, output, session) {
            y = "Efficiency (kg/ha)")
   })
   
-  ##farming efficiency plot 2 (not working yet)
+  ##farming efficiency plot 2 (almost there)
   
   output$PercentChangevsProduct <- renderPlot({
     percent_change_data %>%
-      filter(Area %in% input$selectedCountry & Year %in% input$Years) %>%
-      ggplot(percent_change_data, aes(x=Item, y=BaselineChange, label=BaselineChange)) + 
+      filter(Area %in% input$selectedCountry & Year == input$Years) %>%
+      arrange(BaselineChange) %>%
+      mutate(Item = factor(Item, ordered = TRUE)) %>%
+      ggplot(aes(x=Item, y=BaselineChange, label=BaselineChange)) + 
       geom_bar(stat='identity', aes(fill=belowabove), width=.5)  +
       scale_fill_manual(name="Efficiency", 
                         labels = c("Above Average", "Below Average"), 
@@ -167,6 +176,7 @@ server <- function(input, output, session) {
       coord_flip()
     
   })
+  
   
     
 }
