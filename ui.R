@@ -156,13 +156,13 @@ ui <- fluidPage(theme = shinytheme("cosmo"),
     div(
     
       p(
-        "In this tab, you can see the effects of seven different events. These events range from natural disasters, wars, uprisings, and epidemics. All of these events affect the country's infrastructure potentially leading to lower agriculture production",
+        "In this tab, you can see the effects of seven different events. These events range from natural disasters, wars, uprisings, and epidemics. All of these events affect the country's infrastructure potentially leading to lower agriculture production.",
         style = "font-size: 20px; text-align: left; margin-bottom: 30px;"
       )
     ),
     
     p(
-      "The Seven Events that we Focused on:",
+      "The seven events that we focused on:",
       style = "font-size: 25px; text-align: left; margin-bottom: 30px;"
       ),
       
@@ -226,7 +226,16 @@ ui <- fluidPage(theme = shinytheme("cosmo"),
       
       #displays scatterplot 
       mainPanel(
-        plotOutput("Yield_Plot")
+        plotOutput("Yield_Plot"),
+        
+        
+        div(
+          
+          p(
+            "Event Descriptions",
+            style = "font-size: 20px; text-align: left; margin-top: 30px;"
+          )
+        )    
           )
         )
     
