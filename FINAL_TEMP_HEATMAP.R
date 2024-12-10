@@ -54,8 +54,8 @@ temp.server <- function(input, output, session) {
       mutate(Year = as.numeric(Year))
     
     # json file
-    world <- st_read("countries.geojson") %>%
-      rename(ISO3 = iso_a3)
+    world <- st_read("countries.geo.json") %>%
+      rename(ISO3 = id)
     
     #  merge by left join
     world %>%

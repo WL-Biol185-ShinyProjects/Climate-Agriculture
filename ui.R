@@ -6,6 +6,8 @@ library(dplyr)
 library(shinythemes)
 library(base)
 library(lubridate)
+library(sf)
+
 #File Designations
 countryfile <- "Countries_data_FailedStates_Islands/combined_countries_data.rds"
 countrynames <- readRDS(countryfile)
@@ -64,21 +66,45 @@ ui <- fluidPage(theme = shinytheme("cosmo"),
           titlePanel("This page details heat maps for both crop production and temperature change across our selected countries"),
              sidebarLayout(
                 sidebarPanel(
-                  radioButtons("heatmap_type", "Select Heatmap Type:", 
-                              choices = list("Temperature Change" = "temp",
-                                             "Crop Yield Change" = "yield")
-                            ), 
+                  # Create the slider for year
+                  sliderInput("selected_year", 
+                              "Select Year:",  min = 1990, max = 2020, 
+                              value = 2000,
+                              step = 1,
+                              sep = ""),
+                
+                  # Cool feature that allows us to change up color scheme for our data
+                  selectInput("color_palette", 
+                              "Color Palette:", 
+                              choices = c("Viridis" = "viridis", 
+                                          "Magma" = "magma", 
+                                          "Inferno" = "inferno"),
+                              selected = "viridis"),
                  
                   checkboxInput("baseline_toggle", "Show values relative to baseline year (1990)")
                 
                 ), 
              
              
-             
-             
               mainPanel(
-                 leafletOutput("slider_map", width = "100%", height = "600")
-                        )
+                tabsetPanel(
+                  tabPanel("Global Temperature Visualization",
+                           
+                      #map output     
+                      leafletOutput("temperature_map", height = 600),
+                           
+                      # explanatory panel NOTE: look on stackoverflow for fix, ... wont show up
+                      verbatimTextOutput("This")
+                    ),
+                  
+                  tabPanel("Global Crop Visualization",
+                      
+                      #Cambell map output
+                      
+                      
+                    )
+                ),
+              )
              )
     ),
     
@@ -133,7 +159,8 @@ ui <- fluidPage(theme = shinytheme("cosmo"),
               sliderInput("Years", "Years of Production:",
                 min = 1990,
                 max = 2022,
-                value = 1990
+                value = 1991,
+                sep = ""
                         ),
               hr(),
                 

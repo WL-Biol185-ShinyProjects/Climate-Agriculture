@@ -5,7 +5,7 @@ library(dplyr)
 library(ggplot2)
 library(tidyverse)
 library(tidyr)
-
+library(sf)
 
 #INTRODUCTION PAGE
 
@@ -31,7 +31,6 @@ geo@data <-left_join(geo@data, most_produced_crop, by = c("name" = "Area"))
 
 #reading and processing efficiency data call
 efficiencydata <- readRDS("efficiency_data /combined_efficiency_data.rds")
-
 efficiencydata <- efficiencydata[efficiencydata$Item != "Hen eggs in shell, fresh", ]
 
 ##for efficiency data plot 2
@@ -47,8 +46,31 @@ percent_change_data <- efficiencydata %>%
          ChangefromLast, BaselineChange)
 percent_change_data$belowabove <- ifelse(percent_change_data$BaselineChange < 0, "below", "above")
  
+#Temp Heat Map Data Modification
+temp_merged <- reactive({
+  
+  fixed <- read.csv("fully_temp_data_cleaned.csv")
+
+  temp.data <- fixed %>%
+    pivot_longer(
+      cols = starts_with("X"),
+      names_to = "Year",
+      names_prefix = "X",
+      values_to = "Celsius"
+    ) %>%
+    mutate(Year = as.numeric(Year))
+  
+  # json file
+  world <- st_read("countries.geo.json") %>%
+    rename(ISO3 = id)
+  
+  #  merge by left join
+  world %>%
+    left_join(temp.data, by = "ISO3")
+})
 
 
+#start of server outputs
 server <- function(input, output, session) {
  
    #input introduction map 
@@ -135,7 +157,7 @@ server <- function(input, output, session) {
     
   })
   
-  ##Code for Farming efficiency tab
+##Code for Farming efficiency tab
   observeEvent(input$selectedCountry, {
     
     filtered_efficiencydata <- efficiencydata %>%
@@ -147,7 +169,7 @@ server <- function(input, output, session) {
     )
   })
   
-  ##GGplot for the given data
+##GGplot for the given data
   
   output$EfficiencyvsTime <- renderPlot({
     efficiencydata %>%
@@ -159,7 +181,7 @@ server <- function(input, output, session) {
            y = "Efficiency (kg/ha)")
   })
   
-  ##farming efficiency plot 2 (almost there)
+##farming efficiency plot variance (almost there)
   
   output$PercentChangevsProduct <- renderPlot({
     percent_change_data %>%
@@ -175,6 +197,45 @@ server <- function(input, output, session) {
            title= "Diverging Bar Graph") + 
       coord_flip()
     
+  })
+  
+  
+#Temp variance heat map
+  
+  output$temperature_map <- renderLeaflet({
+    # Filter data for selected year
+    year_data <- temp_merged() %>% 
+      filter(Year == input$selected_year)
+    
+    # color p
+    pal <- colorNumeric(
+      palette = input$color_palette, 
+      domain = year_data$Celsius,
+      na.color = "transparent"
+    )
+    
+    # make leaflet map + create sick hover pop up
+    leaflet(year_data) %>%
+      addTiles() %>%
+      addPolygons(
+        fillColor = ~pal(Celsius),
+        weight = 0.5,
+        opacity = 1,
+        color = "white",
+        fillOpacity = 0.7,
+        popup = ~paste(
+          Country, "<br>",
+          "Year: ", Year, "<br>",
+          "Temperature Change: ", round(Celsius, 2), "°C"
+        )
+      ) %>%
+      addLegend(
+        "bottomright",
+        pal = pal,
+        values = ~Celsius,
+        title = paste("Temp Change", input$selected_year, "(°C)"),
+        opacity = 1
+      )
   })
   
   
