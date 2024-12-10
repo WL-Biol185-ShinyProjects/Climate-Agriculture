@@ -184,7 +184,7 @@ ui <- fluidPage(theme = shinytheme("cosmo"),
     
       p(
         "In this tab, you can see the effects of different world events on agriculture production. These events range from natural disasters, wars, uprisings, and epidemics. All of these events affect the country's infrastructure potentially leading to lower agriculture production.",
-        style = "font-size: 20px; text-align: center; margin-bottom: 30px;"
+        style = "font-size: 20px; text-align: center; margin-bottom: 45px; margin-top: 30px;"
       )
     ),
     
@@ -212,7 +212,7 @@ ui <- fluidPage(theme = shinytheme("cosmo"),
       
       #displays scatterplot 
       mainPanel(
-        plotOutput("Yield_Plot"),
+        plotOutput("Yield_Plot", height = "600px"),
         
         p(
           "The seven events that we focused on:",
