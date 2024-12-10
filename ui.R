@@ -28,33 +28,29 @@ ui <- fluidPage(theme = shinytheme("cosmo"),
              
              div(
                p( 
-                "Welcome to this application! Our goal is to help you explore the impacts of climate change on agriculture across the world. Click on the tabs above to see how changes in the climate affects agriculture in different countries.",
+                "Welcome to our application! Here, you can explore the impacts of climate change on agriculture across the globe. Use the tabs above to discover how climate shifts influence agricultural systems
+                in various countries. Additionally, dive into our tab on significant world events to gain a broader understanding on how other factors, such as natural disasters and conflicts, also affect agricultural
+                production. To avoid biasing the results, we exluded small islands nations and the top ten failed states, as these regions are influenced by additional factors beyond climate change that could impact agricultural
+                production. These countries are shown in black on the map, meaning they are not included in the analysis.",
                  style = "font-size: 30px; text-align: center; margin-bottom: 45px;"
                  )
              ),
              
               p(
-                "We did not include small islands and the top ten failed states as they have other factors that could affect agriculture production other than climate change. We wanted to focus only on the effect of climate change on agriculture production (countries in black are not included in the dataset).",
-                style = "font-size: 20px; text-align: center; margin-bottom: 20px;"
-              ),
-             
-              p(
                 "IMPORTANT: this application only takes into account temperature data and agriculture data from the years of 1990 through 2022.", 
-                style = "font-size: 15px; text-align: center; margin-bottom: 45px;"
+                style = "font-size: 20px; text-align: center; margin-bottom: 45px;"
               ),
              
               leafletOutput("Intro_Map", width = "100%", height = "600px"),
              
              div(
                p(
-                 "To get you started. The map above shows the total production (in tons) of the most produced crop in each country for the year 2022. Hover over a country to see detailed information, including the name of the most popular crop and its total production quantity across all agriculture products!",
-                 style = "font-size: 30px; text-align: center; margin-bottom: 35px;"
-               ),
-               
-               p(
-                 "The darker the shade over a country the more agricultural products they produced. As you can tell, Brazil is the darkest shade, meaning they have produced the most total agricultural products",
-                 style = "font-size: 20px; text-align: center; margin-top: 15px;"
+                 "The map above provides an introduction to global agricultural production, showing two key insights for each country in 2022. the shading represents the total agricultural production in tons - the darker the shade, the higher the production. 
+                 For example, Brazil, the darkest shade, has the highest total agriculture production. Additionally, the map highlights the most produced crop in each country. Hover over a country to see its total production in tons and its most produced crop. 
+                 To dive deeper into how climate change and significant world events affect agriculture, explore the other tabs.",
+                 style = "font-size: 30px; text-align: center; margin-top: 45px;"
                )
+              
              )
              
             ),
@@ -183,10 +179,50 @@ ui <- fluidPage(theme = shinytheme("cosmo"),
     div(
     
       p(
-        "In this tab, you can see the effects of different world events on agriculture production. These events range from natural disasters, wars, uprisings, and epidemics. All of these events affect the country's infrastructure potentially leading to lower agriculture production.",
-        style = "font-size: 20px; text-align: center; margin-bottom: 45px; margin-top: 30px;"
+        "In this tab, we explore the impact of significant world events on agricultural production to provide a different perspective on factors influencing agriculture other than climate change. While climate change is an importaant issue for agriculture, other events - such as natural disasters, wars, political uprisings, and epidemics. These events can affect infrastructure and hinder the production of crops. It is important to note that these charts are in the context of one country. Also, focus on the year of the event and the year following the event.",
+        style = "font-size: 25px; text-align: center; margin-bottom: 45px; margin-top: 30px;"
       )
     ),
+    
+    p(
+      "The Seven Events Explored:",
+      style = "font-size: 23px; text-align: center; margin-bottom: 30px;"
+    ),
+    
+    p(
+      "1. The Great Flood of 1993: The Mississippi River flooded and it affected numerous states in the USA, including North Dakota, South Dakota, Nebraska, Kansas, Missouri, Wisconsin, and Illinois.",
+      style = "font-size: 18px; text-align: center; margin-bottom: 20px;"
+    ),
+    
+    p(
+      "2. The Rwandan Civil War (1994): A violent conflict in Rwanda that resulted in the loss of over 800,000 lives within approximately 100 days.",
+      style = "font-size: 18px; text-align: center; margin-bottom: 20px;"
+    ),
+    
+    p(
+      "3. The Iraq War (2003): The United States invaded Iraq to overthrow Saddam Hussein's regime, leading to prolonged violence.",
+      style = "font-size: 18px; text-align: center; margin-bottom: 20px;"
+    ),
+    
+    p(
+      "4. The Indian Ocean Tsunami (2004): A massive undersea earthquake, causing widespread destruction and loss of life across several countries in Southeast Asia, especially Indonesia.",
+      style = "font-size: 18px; text-align: center; margin-bottom: 20px;"
+    ),     
+    
+    p(
+      "5. Arab Spring (2011): A series of pro-democracy uprisings and protests across the Middle East and North Africa (we are focusing on the impact of agricultural production in Egypt).",
+      style = "font-size: 18px; text-align: center; margin-bottom: 20px;"
+    ), 
+    
+    p(
+      "6. The Russia Annexation of Crimea (2014): A controversial takeover in which Russia seized control of the Crimean Peninsula from Ukraine.",
+      style = "font-size: 18px; text-align: center; margin-bottom: 20px;"
+    ),       
+    
+    p(
+      "7. The Ebola Outbreak in West Africa (2014): A severe public health crisis that highlighted the need for global health preparedness.",
+      style = "font-size: 18px; text-align: center; margin-bottom: 40px;"
+    ),     
     
     
     sidebarLayout(
@@ -212,91 +248,9 @@ ui <- fluidPage(theme = shinytheme("cosmo"),
       
       #displays scatterplot 
       mainPanel(
-        plotOutput("Yield_Plot", height = "600px"),
-        
-        p(
-          "The seven events that we focused on:",
-          style = "font-size: 25px; text-align: left; margin-bottom: 30px;"
-        ),
-        
-        p(
-          "1. The Great Flood of 1993 (Mississippi River).",
-          style = "font-size: 20px; text-align: left; margin-bottom: 20px;"
-        ),
-        
-        p(
-          "2. The Rwandan Civil War (1994).",
-          style = "font-size: 20px; text-align: left; margin-bottom: 20px;"
-        ),
-        
-        p(
-          "3. The Iraq War (2003)",
-          style = "font-size: 20px; text-align: left; margin-bottom: 20px;"
-        ),
-        
-        p(
-          "4. The Indian Ocean Tsunami (2004)",
-          style = "font-size: 20px; text-align: left; margin-bottom: 20px;"
-        ),     
-        
-        p(
-          "5. Arab Spring (2011)",
-          style = "font-size: 20px; text-align: left; margin-bottom: 20px;"
-        ), 
-        
-        p(
-          "6. The Russia Annexation of Crimea (2014)",
-          style = "font-size: 20px; text-align: left; margin-bottom: 20px;"
-        ),       
-        
-        p(
-          "7. The Ebola Outbreak in West Africa (2014)",
-          style = "font-size: 20px; text-align: left; margin-bottom: 40px;"
-        ),     
+        plotOutput("Yield_Plot", height = "600px")
         
         
-        div(
-          #severe public health crisis that claimed over 11,000 lives, primarily in Guinea, Liberia, and Sierra Leone, and highlighted the need for global health preparedness.
-          p(
-            "Event Descriptions",
-            style = "font-size: 20px; text-align: left; margin-top: 30px;"
-          )
-        ), 
-        
-        p(
-          "1. The Great Flood of 1993: The Mississippi River flooded and it affected numerous states in the USA, including North Dakota, South Dakota, Nebraska, Kansas, Missouri, Wisconsin, and Illinois.",
-          style = "font-size: 10px; text-align: left; margin-bottom: 10px;"
-        ),
-        
-        p(
-          "2. The Rwandan Civil War (1994): A violent conflict in Rwanda that resulted in the loss of over 800,000 lives within approximately 100 days.",
-          style = "font-size: 10px; text-align: left; margin-bottom: 10px;"
-        ),
-        
-        p(
-          "3. The Iraq War (2003): The United States invaded Iraq to overthrow Saddam Hussein's regime, leading to prolonged violence.",
-          style = "font-size: 10px; text-align: left; margin-bottom: 10px;"
-        ),
-        
-        p(
-          "4 The Indian Ocean Tsunami (2004): A massive undersea earthquake, causing widespread destruction and loss of life across several countries in Southeast Asia, especially Indonesia.",
-          style = "font-size: 10px; text-align: left; margin-bottom: 10px;"
-        ),
-        
-        p(
-          "5. Arab Spring (2011): A series of pro-democracy uprisings and protests across the Middle East and North Africa (we are focusing on the impact of agricultural production in Egypt).",
-          style = "font-size: 10px; text-align: left; margin-bottom: 10px;"
-        ), 
-        
-        p(
-          "6. The Russia Annexation of Crimea (2014): A controversial takeover in which Russia seized control of the Crimean Peninsula from Ukraine.",
-          style = "font-size: 10px; text-align: left; margin-bottom: 10px;"
-        ),  
-        
-        p(
-          "7. The Ebola Outbreak in West Africa (2014): A severe public health crisis that highlighted the need for global health preparedness.",
-          style = "font-size: 10px; text-align: left; margin-bottom: 10px;"
-        )    
         
           )
         )
