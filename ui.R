@@ -180,7 +180,7 @@ ui <- fluidPage(theme = shinytheme("cosmo"),
     
       p(
         "In this tab, we explore the impact of significant world events on agricultural production to provide a different perspective on factors influencing agriculture other than climate change. While climate change is an importaant issue for agriculture, other events - such as natural disasters, wars, political uprisings, and epidemics. These events can affect infrastructure and hinder the production of crops. It is important to note that these charts are in the context of one country. Also, focus on the year of the event and the year following the event.",
-        style = "font-size: 25px; text-align: center; margin-bottom: 45px; margin-top: 30px;"
+        style = "font-size: 25px; text-align: center; margin-bottom: 45px; margin-top: 45px;"
       )
     ),
     
