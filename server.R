@@ -118,12 +118,12 @@ server <- function(input, output, session) {
   #picking years and the country of focus for the event
   details_for_events <- list(
     "Great Flood of 1993 (Mississippi River)" = list(year = 1995, country = "United States of America"),
-    "1994 Rwandan Civil War" = list(year = 1996, country = "Rwanda"),
-    "2003 Iraq War" = list(year = 2005, country = "Iraq"),
-    "2004 Indian Ocean Tsunami" = list(year = 2006, country = "Indonesia"),
-    "2011 Arab Spring" = list(year = 2013, country = "Egypt"),
-    "2014 Russia Annexation of Crimea" = list(year = 2016, country = "Ukraine"),
-    "2014 Ebola Outbreak in West Africa" = list(year = 2016, country = "Sierra Leone")
+    "The Rwandan Civil War (1994)" = list(year = 1996, country = "Rwanda"),
+    "The Iraq War (2003)" = list(year = 2005, country = "Iraq"),
+    "The Indian Ocean Tsunami (2004)" = list(year = 2006, country = "Indonesia"),
+    "Arab Spring (2011)" = list(year = 2013, country = "Egypt"),
+    "Russia Annexation of Crimea (2014)" = list(year = 2016, country = "Ukraine"),
+    "Ebola Outbreak in West Africa (2014)" = list(year = 2016, country = "Sierra Leone")
   )
   
   #getting the event from the UI   

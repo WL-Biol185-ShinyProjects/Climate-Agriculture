@@ -183,50 +183,10 @@ ui <- fluidPage(theme = shinytheme("cosmo"),
     div(
     
       p(
-        "In this tab, you can see the effects of seven different events. These events range from natural disasters, wars, uprisings, and epidemics. All of these events affect the country's infrastructure potentially leading to lower agriculture production.",
-        style = "font-size: 20px; text-align: left; margin-bottom: 30px;"
+        "In this tab, you can see the effects of different world events on agriculture production. These events range from natural disasters, wars, uprisings, and epidemics. All of these events affect the country's infrastructure potentially leading to lower agriculture production.",
+        style = "font-size: 20px; text-align: center; margin-bottom: 30px;"
       )
     ),
-    
-    p(
-      "The seven events that we focused on:",
-      style = "font-size: 25px; text-align: left; margin-bottom: 30px;"
-      ),
-      
-          p(
-      "1. The Great Flood of 1993 which is when the Mississippi River flooded and it affected major states in the United States, including North Dakota, south Dakota, Nebraska, Kansas, Missouri, Wisconsin, and Illinois.",
-      style = "font-size: 20px; text-align: left; margin-bottom: 20px;"
-    ),
-    
-    p(
-      "2. The 1994 Rwandan Civil War which was the most intense conflict in Rwanda.",
-      style = "font-size: 20px; text-align: left; margin-bottom: 20px;"
-    ),
-    
-    p(
-      "3. The 2003 Iraq War which is when the United States invaded Iraq.",
-      style = "font-size: 20px; text-align: left; margin-bottom: 20px;"
-    ),
-    
-    p(
-      "4. The 2004 Indian Ocean Tsunami, which decimated Indonesia.",
-      style = "font-size: 20px; text-align: left; margin-bottom: 20px;"
-    ),     
-           
-    p(
-      "5. The 2011 Arab Spring, which was a wave of pro-democracy protests and uprising that took place in the Middle East in North Africa (we are focusing on the agriculture production in Egypt)",
-      style = "font-size: 20px; text-align: left; margin-bottom: 20px;"
-    ), 
-    
-    p(
-      "6. The 2014 Russia Annexation of Crimea which was when russia invaded the Crimean Peninsula",
-      style = "font-size: 20px; text-align: left; margin-bottom: 20px;"
-    ),       
-
-    p(
-      "7. The 2014 Ebola Outbreak in West Africa, where we will be focusing on the country most affected: Sierra Leone",
-      style = "font-size: 20px; text-align: left; margin-bottom: 20px;"
-    ),     
     
     
     sidebarLayout(
@@ -236,14 +196,13 @@ ui <- fluidPage(theme = shinytheme("cosmo"),
           label = "Select a World Event",
           choices = c(
             "Great Flood of 1993 (Mississippi River)",
-            "1994 Rwandan Civil War",
-            "2003 Iraq War",
-            "2004 Indian Ocean Tsunami",
-            "2011 Arab Spring",
-            "2014 Russia Annexation of Crimea",
-            "2014 Ebola Outbreak in West Africa"
+            "The Rwandan Civil War (1994)",
+            "The Iraq War (2003)",
+            "The Indian Ocean Tsunami (2004)",
+            "Arab Spring (2011)",
+            "Russia Annexation of Crimea (2014)",
+            "Ebola Outbreak in West Africa (2014)"
           ), 
-          
           
           
           selected = "1994 Rwandan Civil War"
@@ -255,14 +214,90 @@ ui <- fluidPage(theme = shinytheme("cosmo"),
       mainPanel(
         plotOutput("Yield_Plot"),
         
+        p(
+          "The seven events that we focused on:",
+          style = "font-size: 25px; text-align: left; margin-bottom: 30px;"
+        ),
+        
+        p(
+          "1. The Great Flood of 1993 (Mississippi River).",
+          style = "font-size: 20px; text-align: left; margin-bottom: 20px;"
+        ),
+        
+        p(
+          "2. The Rwandan Civil War (1994).",
+          style = "font-size: 20px; text-align: left; margin-bottom: 20px;"
+        ),
+        
+        p(
+          "3. The Iraq War (2003)",
+          style = "font-size: 20px; text-align: left; margin-bottom: 20px;"
+        ),
+        
+        p(
+          "4. The Indian Ocean Tsunami (2004)",
+          style = "font-size: 20px; text-align: left; margin-bottom: 20px;"
+        ),     
+        
+        p(
+          "5. Arab Spring (2011)",
+          style = "font-size: 20px; text-align: left; margin-bottom: 20px;"
+        ), 
+        
+        p(
+          "6. The Russia Annexation of Crimea (2014)",
+          style = "font-size: 20px; text-align: left; margin-bottom: 20px;"
+        ),       
+        
+        p(
+          "7. The Ebola Outbreak in West Africa (2014)",
+          style = "font-size: 20px; text-align: left; margin-bottom: 40px;"
+        ),     
+        
         
         div(
-          
+          #severe public health crisis that claimed over 11,000 lives, primarily in Guinea, Liberia, and Sierra Leone, and highlighted the need for global health preparedness.
           p(
             "Event Descriptions",
             style = "font-size: 20px; text-align: left; margin-top: 30px;"
           )
+        ), 
+        
+        p(
+          "1. The Great Flood of 1993: The Mississippi River flooded and it affected numerous states in the USA, including North Dakota, South Dakota, Nebraska, Kansas, Missouri, Wisconsin, and Illinois.",
+          style = "font-size: 10px; text-align: left; margin-bottom: 10px;"
+        ),
+        
+        p(
+          "2. The Rwandan Civil War (1994): A violent conflict in Rwanda that resulted in the loss of over 800,000 lives within approximately 100 days.",
+          style = "font-size: 10px; text-align: left; margin-bottom: 10px;"
+        ),
+        
+        p(
+          "3. The Iraq War (2003): The United States invaded Iraq to overthrow Saddam Hussein's regime, leading to prolonged violence.",
+          style = "font-size: 10px; text-align: left; margin-bottom: 10px;"
+        ),
+        
+        p(
+          "4 The Indian Ocean Tsunami (2004): A massive undersea earthquake, causing widespread destruction and loss of life across several countries in Southeast Asia, especially Indonesia.",
+          style = "font-size: 10px; text-align: left; margin-bottom: 10px;"
+        ),
+        
+        p(
+          "5. Arab Spring (2011): A series of pro-democracy uprisings and protests across the Middle East and North Africa (we are focusing on the impact of agricultural production in Egypt).",
+          style = "font-size: 10px; text-align: left; margin-bottom: 10px;"
+        ), 
+        
+        p(
+          "6. The Russia Annexation of Crimea (2014): A controversial takeover in which Russia seized control of the Crimean Peninsula from Ukraine.",
+          style = "font-size: 10px; text-align: left; margin-bottom: 10px;"
+        ),  
+        
+        p(
+          "7. The Ebola Outbreak in West Africa (2014): A severe public health crisis that highlighted the need for global health preparedness.",
+          style = "font-size: 10px; text-align: left; margin-bottom: 10px;"
         )    
+        
           )
         )
     
