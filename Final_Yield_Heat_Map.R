@@ -47,8 +47,6 @@ crop.server <- function(input, output, session) {
     # loadup data
     crop_data <- readRDS("efficiency_data /combined_efficiency_data.rds")
     
-    ISO <- read.csv("fully_temp_data_cleaned.csv")
-    
  #Filtering and joining data so that we can see the total yield of each country in each year for all crops   
     yield_table <- crop_data %>% 
       group_by(Area, Year) %>%
@@ -77,6 +75,8 @@ crop.server <- function(input, output, session) {
     yield_geo <- subset(yield_geo, !is.na(yield_geo@data$Country_Code))
     
     yield_geo@data <- left_join(yield_geo@data, crop_data, by = c("Country_Code" = "Country_Code"))
+    
+    return(yield_geo)
     
   })
   
@@ -120,4 +120,4 @@ crop.server <- function(input, output, session) {
   
 }
 
-shinyApp(crop.ui, crop.server)
+
