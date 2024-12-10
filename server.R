@@ -32,7 +32,9 @@ geo@data <-left_join(geo@data, most_produced_crop, by = c("name" = "Area"))
 efficiencydata <- readRDS("efficiency_data /combined_efficiency_data.rds")
 efficiencydata <- efficiencydata[efficiencydata$Item != "Hen eggs in shell, fresh", ]
 
- 
+#for the yield data map
+crop_data <- readRDS("efficiency_data /combined_efficiency_data.rds")
+
 #Temp Heat Map Data Modification
 temp_merged <- reactive({
   
@@ -61,7 +63,7 @@ temp_merged <- reactive({
 crop_merged <- reactive({
   
   #Filtering and joining data so that we can see the total yield of each country in each year for all crops   
-  yield_table <- efficiencydata %>% 
+  yield_table <- crop_data %>% 
     group_by(Area, Year) %>%
     summarise(Total_Yield = sum(Value, na.rm = TRUE))
   
