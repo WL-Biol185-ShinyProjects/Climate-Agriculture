@@ -95,7 +95,7 @@ server <- function(input, output, session) {
         label = ~paste(
           "Country: ", name,",",
           "Most Produced Crop: ", Most_Produced_Crop,",", 
-          "Max Production: ", Max_Production, " Tons"
+          "Total Production: ", Max_Production, " Tons"
         ),
         
        #styling the labels 
