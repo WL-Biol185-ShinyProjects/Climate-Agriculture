@@ -1,19 +1,13 @@
 #Crop Heat Maps
 
-install.packages("countrycode")
-
-
-library(dplyr)
-library(htmlwidgets)
-library(tidyr)
-library(leaflet)
-library(geojsonio)
-library(shiny)
-library(countrycode)
 
 
 
 #creates a "crop_data" file from the rds
+
+
+# Run the application 
+shinyApp(temp.ui, temp.server)
 
 crop_data <- readRDS("efficiency_data /combined_efficiency_data.rds")
 
