@@ -86,7 +86,7 @@ ui <- fluidPage(theme = shinytheme("cosmo"),
                 tabsetPanel(
                   tabPanel("Global Temperature Visualization",
                            
-                      #map output     
+                      #temp map output     
                       leafletOutput("temperature_map", height = 600),
                            
                       # explanatory panel NOTE: look on stackoverflow for fix, ... wont show up
@@ -95,13 +95,14 @@ ui <- fluidPage(theme = shinytheme("cosmo"),
                   
                   tabPanel("Global Crop Visualization",
                       
-                      #Cambell map output
+                      #yield map output
+                      leafletOutput("yield_map", height = 600),
                       
-                      
-                    )
+                      verbatimTextOutput("This")
+                    ),
                 ),
               )
-             )
+            )
     ),
     
   
@@ -109,7 +110,7 @@ ui <- fluidPage(theme = shinytheme("cosmo"),
     #Efficiency Panel
     tabPanel("Farming Efficiency",
          
-        titlePanel("This tab shows various graphs surrounding the products and their efficiency"),
+        titlePanel("This tab shows various graphs surrounding the products and their efficiency in production"),
           sidebarLayout(   
              sidebarPanel(
               
@@ -137,19 +138,22 @@ ui <- fluidPage(theme = shinytheme("cosmo"),
             mainPanel(
               
               tabsetPanel(
+                #Line Plot Panel
                 tabPanel("Efficiency Vs Product Graph",
               
               p("The plot below depicts the efficiency by which a given country produced a product over the time period 1990 to 2022 (in Kilograms per Hectare). Some products were not produced over that entire time range, and for those the x-axis is adjusted to show this.",
                 style = "font-size: 20px; text-align: center; margin-botton: 20px;"
               ), 
               
-              plotOutput("EfficiencyvsTime", width = 1600, height = 800),
+              plotOutput("EfficiencyvsTime", width = 800, height = 600),
               
               p("It is apparent that some crops have decreased in production over the time period, which could be due to climate, geopolitical, or financial considerations.",
-                style = "font-size: 15px; text-align: center; margin-botton: 15px:"
+                style = "font-size: 25px; text-align: center; margin-botton: 15px:"
               ),
               
                 ),
+              
+                #Diverging Bar Graph Panel
                 tabPanel("Percent Variation in Production",
                   
               sliderInput("Years", "Years of Production:",
@@ -160,7 +164,7 @@ ui <- fluidPage(theme = shinytheme("cosmo"),
                         ),
               hr(),
                 
-              plotOutput("PercentChangevsProduct", width = 2000, height = 800),
+              plotOutput("PercentChangevsProduct", width = 800, height = 600),
                 )
             )
                

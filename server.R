@@ -6,6 +6,7 @@ library(ggplot2)
 library(tidyverse)
 library(tidyr)
 library(sf)
+library(countrycode)
 
 countries_data <- readRDS("Countries_data_FailedStates_Islands/combined_countries_data.rds")
 geo <- geojson_read("countries.geo.json", what = "sp")
@@ -31,18 +32,6 @@ geo@data <-left_join(geo@data, most_produced_crop, by = c("name" = "Area"))
 efficiencydata <- readRDS("efficiency_data /combined_efficiency_data.rds")
 efficiencydata <- efficiencydata[efficiencydata$Item != "Hen eggs in shell, fresh", ]
 
-##for efficiency data plot 2
-percent_change_data <- efficiencydata %>%                                     
-  group_by(Area) %>%                        
-  mutate(lag = lag(Value),                        
-         ChangefromLast = (Value - lag) * 100 / lag,    
-         First = head(Value, 1),                  
-         BaselineChange =                       
-           case_when(Value != First ~ (Value - First) * 100 / First,
-                     TRUE ~ 1 * NA)) %>%            
-  select(Year, Area, Item, Value,                 
-         ChangefromLast, BaselineChange)
-percent_change_data$belowabove <- ifelse(percent_change_data$BaselineChange < 0, "below", "above")
  
 #Temp Heat Map Data Modification
 temp_merged <- reactive({
@@ -65,6 +54,35 @@ temp_merged <- reactive({
   #  merge by left join
   world %>%
     left_join(temp.data, by = "ISO3")
+})
+
+
+#Crop Yield Map data modification
+crop_merged <- reactive({
+  
+  #Filtering and joining data so that we can see the total yield of each country in each year for all crops   
+  yield_table <- efficiencydata %>% 
+    group_by(Area, Year) %>%
+    summarise(Total_Yield = sum(Value, na.rm = TRUE))
+  
+  
+  yield_table$Area <- recode(yield_table$Area, 
+                             "Czechoslovakia" = "Czech Republic", 
+                             "Serbia and Montenegro" = "Serbia")
+  
+  yield_table$Country_Code <- countrycode(yield_table$Area, origin = "country.name", destination = "iso3c")
+  
+  #Taking out any non matches
+  crop_data <- yield_table %>%
+    filter(!is.na(Country_Code)) %>%
+    mutate(Year = as.numeric(Year))
+  
+  
+  yield_geo <- st_read("countries.geo.json") %>%
+    rename(Country_Code = id)
+  
+  yield_geo %>%
+    left_join(crop_data, "Country_Code")
 })
 
 
@@ -156,7 +174,10 @@ server <- function(input, output, session) {
     
   })
   
-##Code for Farming efficiency tab
+  
+  
+#Code for Farming efficiency tab
+  #Altering Input 2 based on input 1
   observeEvent(input$selectedCountry, {
     
     filtered_efficiencydata <- efficiencydata %>%
@@ -167,40 +188,53 @@ server <- function(input, output, session) {
                       choices = c(unique(filtered_efficiencydata$Item)),
     )
   })
-  
-##GGplot for the given data
-  
+  #GGplot for the given data
   output$EfficiencyvsTime <- renderPlot({
     efficiencydata %>%
       filter(Area %in% input$selectedCountry & Item %in% input$selectedProduct) %>%
       ggplot(aes(Year, Value)) + 
-      geom_line() +
+      geom_line(color = 'blue', size = 2) +
       labs(title = paste("Efficiency vs Time for", input$selectedCountry, "and", paste(input$selectedProduct)),
            x = "Production Years",
            y = "Efficiency (kg/ha)")
   })
   
-##farming efficiency plot variance (almost there)
-  
+  #farming efficiency plot variance bar graph
   output$PercentChangevsProduct <- renderPlot({
+    percent_change_data <- efficiencydata %>%                                     
+      filter(Area %in% input$selectedCountry) %>%
+      group_by(Item) %>%
+      #Adding new column for percent change 
+      mutate(First = head(Value, 1),                  
+             BaselineChange =                       
+               case_when(Value != First ~ (Value - First) * 100 / First,
+                         TRUE ~ 1 * NA)) %>%            
+      select(Year, Area, Item, Value, BaselineChange)
+    
+    #Adding new column to make table show above or below the 1990 value
+    percent_change_data$belowabove <- ifelse(percent_change_data$BaselineChange < 0, "below", "above")
+    
+    #Continued modification
     percent_change_data %>%
-      filter(Area %in% input$selectedCountry & Year == input$Years) %>%
-      arrange(BaselineChange) %>%
-      mutate(Item = factor(Item, ordered = TRUE)) %>%
+      filter(Year == input$Years) %>%
+      arrange(BaselineChange, by_group = TRUE) %>%
+      #ggplot for processed data
       ggplot(aes(x=Item, y=BaselineChange, label=BaselineChange)) + 
       geom_bar(stat='identity', aes(fill=belowabove), width=.5)  +
       scale_fill_manual(name="Efficiency", 
                         labels = c("Above Average", "Below Average"), 
                         values = c("above"="#00ba38", "below"="#f8766d")) +
-      labs(subtitle="Percent change from earliest production value based on selected year", 
-           title= "Diverging Bar Graph") + 
+      labs(subtitle="Percent change from earliest production value of a given product based on selected year", 
+           title= paste("Diverging Bar Graph for", input$selectedCountry, "in", input$Years),
+           y = "Percent Change from Baseline",
+           x = paste("Products offered by", input$selectedCountry)) + 
+      #flipping x and y axis
       coord_flip()
     
   })
   
   
 #Temp variance heat map
-  
   output$temperature_map <- renderLeaflet({
     # Filter data for selected year
     year_data <- temp_merged() %>% 
@@ -233,6 +267,44 @@ server <- function(input, output, session) {
         pal = pal,
         values = ~Celsius,
         title = paste("Temp Change", input$selected_year, "(°C)"),
+        opacity = 1
+      )
+  })
+  
+#Crop Yield Heat Map
+  output$yield_map <- renderLeaflet({
+    
+    # Filter data for selected year
+    yield_data <- crop_merged() %>%
+      filter(Year == input$selected_year)
+    
+    # color p
+    pal <- colorNumeric(
+      palette = input$color_palette, 
+      domain = yield_data$Total_Yield,
+      na.color = "transparent"
+    )
+    
+    # make leaflet map + create sick hover pop up
+    leaflet(yield_data) %>%
+      addTiles() %>%
+      addPolygons(
+        fillColor = ~pal(Total_Yield),
+        weight = 0.5,
+        opacity = 1,
+        color = "white",
+        fillOpacity = 0.7,
+        popup = ~paste(
+          Area, "<br>",
+          "Year: ", Year, "<br>",
+          "Yield Change: ", round(Total_Yield, 1)
+        )
+      ) %>%
+      addLegend(
+        "bottomright",
+        pal = pal,
+        values = ~Total_Yield,
+        title = paste("Yield Change:", input$selected_year),
         opacity = 1
       )
   })
