@@ -7,8 +7,6 @@ library(tidyverse)
 library(tidyr)
 library(sf)
 
-#INTRODUCTION PAGE
-
 countries_data <- readRDS("Countries_data_FailedStates_Islands/combined_countries_data.rds")
 geo <- geojson_read("countries.geo.json", what = "sp")
 
@@ -73,6 +71,7 @@ temp_merged <- reactive({
 #start of server outputs
 server <- function(input, output, session) {
  
+  #introduction page
    #input introduction map 
   output$Intro_Map <- renderLeaflet({
     pal <- colorBin("Blues", domain = geo@data$Max_Production, na.color = "black")
