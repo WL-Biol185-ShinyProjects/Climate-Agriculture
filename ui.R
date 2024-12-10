@@ -46,7 +46,7 @@ ui <- fluidPage(theme = shinytheme("cosmo"),
              div(
                p(
                  "The map above provides an introduction to global agricultural production, showing two key insights for each country in 2022. the shading represents the total agricultural production in tons - the darker the shade, the higher the production. 
-                 For example, Brazil, the darkest shade, has the highest total agriculture production. Additionally, the map highlights the most produced crop in each country. Hover over a country to see its total production in tons and its most produced crop. 
+                 For example, Brazil, the darkest shade, has the highest total agriculture production in 2022. Additionally, the map highlights the most produced crop in each country. Hover over a country to see its total production in tons and its most produced crop. 
                  To dive deeper into how climate change and significant world events affect agriculture, explore the other tabs.",
                  style = "font-size: 30px; text-align: center; margin-top: 45px;"
                )
