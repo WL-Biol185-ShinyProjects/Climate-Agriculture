@@ -236,7 +236,7 @@ ui <- fluidPage(theme = shinytheme("cosmo"),
           label = "Select a World Event",
           choices = c(
             "Great Flood of 1993 (Mississippi River)",
-            "1994 Rwandan Genocide",
+            "1994 Rwandan Civil War",
             "2003 Iraq War",
             "2004 Indian Ocean Tsunami",
             "2011 Arab Spring",
@@ -246,7 +246,7 @@ ui <- fluidPage(theme = shinytheme("cosmo"),
           
           
           
-          selected = "1994 Rwandan Genocide"
+          selected = "1994 Rwandan Civil War"
         )
       ),
       
