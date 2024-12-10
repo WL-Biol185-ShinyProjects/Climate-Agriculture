@@ -183,46 +183,7 @@ ui <- fluidPage(theme = shinytheme("cosmo"),
         style = "font-size: 25px; text-align: center; margin-bottom: 45px; margin-top: 45px;"
       )
     ),
-    
-    p(
-      "The Seven Events Explored:",
-      style = "font-size: 23px; text-align: center; margin-bottom: 30px;"
-    ),
-    
-    p(
-      "1. The Great Flood of 1993: The Mississippi River flooded and it affected numerous states in the USA, including North Dakota, South Dakota, Nebraska, Kansas, Missouri, Wisconsin, and Illinois.",
-      style = "font-size: 18px; text-align: center; margin-bottom: 20px;"
-    ),
-    
-    p(
-      "2. The Rwandan Civil War (1994): A violent conflict in Rwanda that resulted in the loss of over 800,000 lives within approximately 100 days.",
-      style = "font-size: 18px; text-align: center; margin-bottom: 20px;"
-    ),
-    
-    p(
-      "3. The Iraq War (2003): The United States invaded Iraq to overthrow Saddam Hussein's regime, leading to prolonged violence.",
-      style = "font-size: 18px; text-align: center; margin-bottom: 20px;"
-    ),
-    
-    p(
-      "4. The Indian Ocean Tsunami (2004): A massive undersea earthquake, causing widespread destruction and loss of life across several countries in Southeast Asia, especially Indonesia.",
-      style = "font-size: 18px; text-align: center; margin-bottom: 20px;"
-    ),     
-    
-    p(
-      "5. Arab Spring (2011): A series of pro-democracy uprisings and protests across the Middle East and North Africa (we are focusing on the impact of agricultural production in Egypt).",
-      style = "font-size: 18px; text-align: center; margin-bottom: 20px;"
-    ), 
-    
-    p(
-      "6. The Russia Annexation of Crimea (2014): A controversial takeover in which Russia seized control of the Crimean Peninsula from Ukraine.",
-      style = "font-size: 18px; text-align: center; margin-bottom: 20px;"
-    ),       
-    
-    p(
-      "7. The Ebola Outbreak in West Africa (2014): A severe public health crisis that highlighted the need for global health preparedness.",
-      style = "font-size: 18px; text-align: center; margin-bottom: 40px;"
-    ),     
+  
     
     
     sidebarLayout(
@@ -248,9 +209,47 @@ ui <- fluidPage(theme = shinytheme("cosmo"),
       
       #displays scatterplot 
       mainPanel(
-        plotOutput("Yield_Plot", height = "600px")
+        plotOutput("Yield_Plot", height = "600px"),
         
+        p(
+          "The Seven Events Explored:",
+          style = "font-size: 20px; text-align: left; margin-bottom: 30px;"
+        ),
         
+        p(
+          "1. The Great Flood of 1993: The Mississippi River flooded and it affected numerous states in the USA, including North Dakota, South Dakota, Nebraska, Kansas, Missouri, Wisconsin, and Illinois.",
+          style = "font-size: 15px; text-align: left; margin-bottom: 20px;"
+        ),
+        
+        p(
+          "2. The Rwandan Civil War (1994): A violent conflict in Rwanda that resulted in the loss of over 800,000 lives within approximately 100 days.",
+          style = "font-size: 15px; text-align: left; margin-bottom: 20px;"
+        ),
+        
+        p(
+          "3. The Iraq War (2003): The United States invaded Iraq to overthrow Saddam Hussein's regime, leading to prolonged violence.",
+          style = "font-size: 15px; text-align: left; margin-bottom: 20px;"
+        ),
+        
+        p(
+          "4. The Indian Ocean Tsunami (2004): A massive undersea earthquake, causing widespread destruction and loss of life across several countries in Southeast Asia, especially Indonesia.",
+          style = "font-size: 15px; text-align: left; margin-bottom: 20px;"
+        ),     
+        
+        p(
+          "5. Arab Spring (2011): A series of pro-democracy uprisings and protests across the Middle East and North Africa (we are focusing on the impact of agricultural production in Egypt).",
+          style = "font-size: 15px; text-align: left; margin-bottom: 20px;"
+        ), 
+        
+        p(
+          "6. The Russia Annexation of Crimea (2014): A controversial takeover in which Russia seized control of the Crimean Peninsula from Ukraine.",
+          style = "font-size: 15px; text-align: left; margin-bottom: 20px;"
+        ),       
+        
+        p(
+          "7. The Ebola Outbreak in West Africa (2014): A severe public health crisis that highlighted the need for global health preparedness.",
+          style = "font-size: 15px; text-align: left;"
+        )      
         
           )
         )
