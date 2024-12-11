@@ -195,7 +195,7 @@ server <- function(input, output, session) {
     efficiencydata %>%
       filter(Area %in% input$selectedCountry & Item %in% input$selectedProduct) %>%
       ggplot(aes(Year, Value)) +
-      geom_line(color = 'blue', size = 2) +
+      geom_line(color = 'blue', linewidth = 2) +
       labs(title = paste("Efficiency vs Time for", input$selectedCountry, "and", paste(input$selectedProduct)),
            x = "Production Years",
            y = "Efficiency (kg/ha)")
@@ -220,7 +220,6 @@ server <- function(input, output, session) {
     percent_change_data %>%
       filter(Year == input$Years) %>%
       arrange(BaselineChange, by_group = TRUE) %>%
-      factor(Item, levels = Item) %>%
       #ggplot for processed data
       ggplot(aes(x=Item, y=BaselineChange, label=BaselineChange)) +
       geom_bar(stat='identity', aes(fill=belowabove), width=.5)  +

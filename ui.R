@@ -139,20 +139,26 @@ ui <- fluidPage(theme = shinytheme("cosmo"),
                 tabPanel("Efficiency Vs Product Graph",
 
               p("The plot below depicts the efficiency by which a given country produced a product over the time period 1990 to 2022 (in Kilograms per Hectare). Some products were not produced over that entire time range, and for those the x-axis is adjusted to show this.",
-                style = "font-size: 20px; text-align: center; margin-botton: 20px;"
+                style = "font-size: 20px; text-align: left; margin-botton: 20px; margin-top:10px;"
               ),
 
               plotOutput("EfficiencyvsTime", width = 1000, height = 600),
 
               p("It is apparent that some crops have decreased in production over the time period, which could be due to climate, geopolitical, or financial considerations.",
-                style = "font-size: 25px; text-align: center; margin-botton: 15px:"
-              ),
+                style = "font-size: 20px; text-align: center; margin-botton: 20px; margin-top: 10px;"
+                ),
 
                 ),
 
                 #Diverging Bar Graph Panel
                 tabPanel("Percent Variation in Production",
-
+                         
+              p("Pick a country and a year to see how that country's production of its agriculture changed as a percent from 1990.",
+                style = "font-size: 20px; text-align: left; margin-bottom: 10px; margin-top: 10px;"
+                ),
+              
+              hr(),
+              
               sliderInput("Years", "Years of Production:",
                 min = 1990,
                 max = 2022,
