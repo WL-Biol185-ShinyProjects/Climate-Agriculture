@@ -220,6 +220,7 @@ server <- function(input, output, session) {
     percent_change_data %>%
       filter(Year == input$Years) %>%
       arrange(BaselineChange, by_group = TRUE) %>%
+      factor(Item, levels = Item) %>%
       #ggplot for processed data
       ggplot(aes(x=Item, y=BaselineChange, label=BaselineChange)) +
       geom_bar(stat='identity', aes(fill=belowabove), width=.5)  +

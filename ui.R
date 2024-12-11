@@ -142,7 +142,7 @@ ui <- fluidPage(theme = shinytheme("cosmo"),
                 style = "font-size: 20px; text-align: center; margin-botton: 20px;"
               ),
 
-              plotOutput("EfficiencyvsTime", width = 800, height = 600),
+              plotOutput("EfficiencyvsTime", width = 1000, height = 600),
 
               p("It is apparent that some crops have decreased in production over the time period, which could be due to climate, geopolitical, or financial considerations.",
                 style = "font-size: 25px; text-align: center; margin-botton: 15px:"
@@ -161,7 +161,7 @@ ui <- fluidPage(theme = shinytheme("cosmo"),
                         ),
               hr(),
 
-              plotOutput("PercentChangevsProduct", width = 800, height = 600),
+              plotOutput("PercentChangevsProduct", width = 1200, height = 800),
                 )
             )
 
