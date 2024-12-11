@@ -96,8 +96,6 @@ ui <- fluidPage(theme = shinytheme("cosmo"),
                       
                       #yield map output
                       leafletOutput("yield_map", height = 600),
-                      
-                      verbatimTextOutput("This")
                     ),
                 ),
               )
