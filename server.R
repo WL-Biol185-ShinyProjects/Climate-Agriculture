@@ -138,7 +138,7 @@ server <- function(input, output, session) {
 
   output$Yield_Plot <- renderPlot ({
 
-  #picking years and the country of focus for the event
+  #Events of focus. Included the country where the event occurred. Looking two years after the event (important for accurate graph). 
   details_for_events <- list(
     "Great Flood of 1993 (Mississippi River)" = list(year = 1995, country = "United States of America"),
     "The Rwandan Civil War (1994)" = list(year = 1996, country = "Rwanda"),
@@ -159,15 +159,15 @@ server <- function(input, output, session) {
   #filtering the data
     data_for_event_tab <- countries_data %>%
       filter(
-        Year >= (event_year - 4) & Year <= event_year,
-        Area %in% event_country, #searched this up - %in% checks if something belongs to a vector or list - so it is checking if the countries in event_country is in the column AREA
+        Year >= (event_year - 4) & Year <= event_year, #Year of event will be in the middle, now we see the agricultural production 2 years before and after the event occured.  
+        Area %in% event_country, #checking if country's name matches the event's country 
         Unit == "t" ) %>%   #only data unit is in tons
 
-      group_by(Year, Area) %>%
-      summarize(Total_Production = sum(Value, na.rm = TRUE)) %>%
+      group_by(Year, Area) %>%    
+      summarize(Total_Production = sum(Value, na.rm = TRUE)) %>%  #calculating total crop production 
       ungroup()
 
-    #create the actual plot
+    #creating plot
     plot(
       data_for_event_tab$Year, #xaxis - years
       data_for_event_tab$Total_Production, #yaxis - total production
@@ -180,10 +180,11 @@ server <- function(input, output, session) {
 
   })
 
-#Code for Farming efficiency tab
+#FARMING EFFICIENCY TAB 
   #Altering Input 2 based on input 1
   observeEvent(input$selectedCountry, {
 
+    #filtering the data to only use the selected country on the tab 
     filtered_efficiencydata <- efficiencydata %>%
       filter(Area == input$selectedCountry)
 
@@ -192,33 +193,39 @@ server <- function(input, output, session) {
                       choices = c(unique(filtered_efficiencydata$Item)),
     )
   })
+  
   #GGplot for the given data
   output$EfficiencyvsTime <- renderPlot({
     efficiencydata %>%
       filter(Area %in% input$selectedCountry & Item %in% input$selectedProduct) %>%
+      
+      #creating a line plot 
       ggplot(aes(Year, Value)) +
       geom_line(color = 'blue', linewidth = 2) +
       labs(title = paste("Efficiency vs Time for", input$selectedCountry, "and", paste(input$selectedProduct)),
-           x = "Production Years",
-           y = "Efficiency (kg/ha)")
+           x = "Production Years",   #x-axis
+           y = "Efficiency (kg/ha)") #y-axis
   })
 
   #farming efficiency plot variance bar graph
   output$PercentChangevsProduct <- renderPlot({
+    
+    #using efficiency data to get percent change 
     percent_change_data <- efficiencydata %>%
       filter(Area %in% input$selectedCountry) %>%
       group_by(Item) %>%
+      
       #Adding new column for percent change
       mutate(First = head(Value, 1),
              BaselineChange =
-               case_when(Value != First ~ (Value - First) * 100 / First,
-                         TRUE ~ 1 * NA)) %>%
+               case_when(Value != First ~ (Value - First) * 100 / First, #calculating percent change 
+                         TRUE ~ 1 * NA)) %>% #Set to NA if there is no change 
       select(Year, Area, Item, Value, BaselineChange)
 
     #Adding new column to make table show above or below the 1990 value
     percent_change_data$belowabove <- ifelse(percent_change_data$BaselineChange < 0, "below", "above")
 
-    #Continued modification
+    #Continued modification (filter for selected year and creating the graph)
     percent_change_data %>%
       filter(Year == input$Years) %>%
       arrange(BaselineChange, by_group = TRUE) %>%
@@ -237,38 +244,38 @@ server <- function(input, output, session) {
 
   })
 
-
-#Temp variance heat map
+#Temp Variance Heat Map
   output$temperature_map <- renderLeaflet({
     # Filter data for selected year
     year_data <- temp_merged() %>%
       filter(Year == input$selected_year)
 
-    # color p
+    #Color Palette 
     pal <- colorNumeric(
       palette = input$color_palette,
       domain = year_data$Celsius,
       na.color = "transparent"
     )
 
-    # make leaflet map + create sick hover pop up
+    #Create Leaflet Map 
     leaflet(year_data) %>%
       addTiles() %>%
       addPolygons(
-        fillColor = ~pal(Celsius),
+        fillColor = ~pal(Celsius), #Fill the countries' based on the temperature change 
         weight = 0.5,
         opacity = 1,
         color = "white",
         fillOpacity = 0.7,
-        popup = ~paste(
-          Country, "<br>",
+        #Add popup to display the temperature details 
+        popup = ~paste(     
+          Country, "<br>",   
           "Year: ", Year, "<br>",
           "Temperature Change: ", round(Celsius, 2), "°C"
         )
       ) %>%
       addLegend(
-        "bottomright",
-        pal = pal,
+        "bottomright",      #position legend at the bottom-right 
+        pal = pal,          #Use the same color palette for the legend 
         values = ~Celsius,
         title = paste("Temp Change", input$selected_year, "(°C)"),
         opacity = 1
@@ -289,11 +296,11 @@ server <- function(input, output, session) {
       na.color = "transparent"
     )
 
-    # make leaflet map + create sick hover pop up
+    #Create Leaflet Map
     leaflet(yield_data) %>%
       addTiles() %>%
       addPolygons(
-        fillColor = ~pal(Total_Yield),
+        fillColor = ~pal(Total_Yield), #Fill the countries' based on the yield change 
         weight = 0.5,
         opacity = 1,
         color = "white",
@@ -305,8 +312,8 @@ server <- function(input, output, session) {
         )
       ) %>%
       addLegend(
-        "bottomright",
-        pal = pal,
+        "bottomright",    #position legend at the bottom-right
+        pal = pal,        #Use the same color palette for the legend 
         values = ~Total_Yield,
         title = paste("Yield Change:", input$selected_year),
         opacity = 1
