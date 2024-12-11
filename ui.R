@@ -12,17 +12,17 @@ countryfile <- "Countries_data_FailedStates_Islands/combined_countries_data.rds"
 countrynames <- readRDS(countryfile)
 
 
-#defining the UI
+#Defining the UI
 
 ui <- fluidPage(theme = shinytheme("cosmo"),
                 
   navbarPage(
     
-  #title of webpage
+  #Title of Webpage
     "Climate Change's Effect on Agricultural Production", 
   
     
-  #Intro panel
+  #Introduction Panel
     tabPanel("Introduction",
              
              div(
@@ -177,7 +177,7 @@ ui <- fluidPage(theme = shinytheme("cosmo"),
 
     ),
 
-  #WORLD EVENTS AFFECT ON AGRICULTURE
+  #World Events Tab
 
   tabPanel("World Events",
     titlePanel("How do Major Events in a Country Affect the Agriculture Production for that Country?"),
@@ -192,7 +192,7 @@ ui <- fluidPage(theme = shinytheme("cosmo"),
     ),
 
 
-
+    #The events the user can choose from 
     sidebarLayout(
       sidebarPanel(
         selectInput(
@@ -218,6 +218,8 @@ ui <- fluidPage(theme = shinytheme("cosmo"),
       mainPanel(
         plotOutput("Yield_Plot", height = "600px"),
 
+        
+        #description of the events 
         p(
           "The Seven Events Explored:",
           style = "font-size: 20px; text-align: left; margin-bottom: 30px;"
