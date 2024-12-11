@@ -8,35 +8,37 @@ library(tidyr)
 library(sf)
 library(countrycode)
 
-countries_data <- readRDS("Countries_data_FailedStates_Islands/combined_countries_data.rds")
-geo <- geojson_read("countries.geo.json", what = "sp")
 
+
+countries_data <- readRDS("Countries_data_FailedStates_Islands/combined_countries_data.rds") #Loading in countries dataset
+geo <- geojson_read("countries.geo.json", what = "sp") #Loading in GeoJSON file 
+
+
+#Prepping the data for the intro page 
 most_produced_crop <- countries_data %>%
-
-
   filter(Year == 2022, Unit == "t") %>% #filtering finding the most crops produced in tons in 2022
   group_by(Area) %>%  #grouping by country
   filter(Value == max(Value, na.rm = TRUE)) %>%
   ungroup() %>%  #remove the grouping
   select(
     Area,
-    Most_Produced_Crop = Item,
-    Max_Production = Value
+    Most_Produced_Crop = Item, #renaming column 
+    Max_Production = Value #renaming column 
   )
 
 
-#joining geojson with country data
+#joining GeoJSON with country data
 geo@data <-left_join(geo@data, most_produced_crop, by = c("name" = "Area"))
 
 #reading and processing efficiency data call
 efficiencydata <- readRDS("efficiency_data /combined_efficiency_data.rds")
 efficiencydata <- efficiencydata[efficiencydata$Item != "Hen eggs in shell, fresh", ]
 
-#for the yield data map
+#Loading data for crop yield map 
 crop_data <- readRDS("efficiency_data /combined_efficiency_data.rds")
 
 #Temp Heat Map Data Modification
-temp_merged <- reactive({
+temp_merged <- reactive({    #prepping the heatmap data for temp 
 
   fixed <- read.csv("fully_temp_data_cleaned.csv")
 
@@ -53,7 +55,7 @@ temp_merged <- reactive({
   world <- st_read("countries.geo.json") %>%
     rename(ISO3 = id)
 
-  #  merge by left join
+  # merge by left join
   world %>%
     left_join(temp.data, by = "ISO3")
 })
@@ -67,7 +69,7 @@ crop_merged <- reactive({
     group_by(Area, Year) %>%
     summarise(Total_Yield = sum(Value, na.rm = TRUE))
 
-
+  #correcting country names to match up with country dataset 
   yield_table$Area <- recode(yield_table$Area,
                              "Czechoslovakia" = "Czech Republic",
                              "Serbia and Montenegro" = "Serbia")
@@ -91,15 +93,17 @@ crop_merged <- reactive({
 #start of server outputs
 server <- function(input, output, session) {
 
-  #introduction page
+  #INTRODUCTION PAGE 
+  
    #input introduction map
   output$Intro_Map <- renderLeaflet({
-    pal <- colorBin("Blues", domain = geo@data$Max_Production, na.color = "black")
+    pal <- colorBin("Blues", domain = geo@data$Max_Production, na.color = "black") #Colors for the introduction map (black = countries not included/removed from dataset)
 
+    #Creating the leaflet map for the introduction page 
     leaflet(geo) %>%
       addTiles() %>%
       addPolygons(
-        fillColor = ~pal(Max_Production),
+        fillColor = ~pal(Max_Production),  #coloring the countries by their Max_Production (sum of total agriculture products in tons)
         color = "white",
         weight = 1,
         fillOpacity = 0.7,
@@ -120,7 +124,7 @@ server <- function(input, output, session) {
        #styling the labels
          labelOptions = labelOptions(
           style = list("font-weight" = "normal", padding = "3px 8px"),
-          textsize = "13px",
+          textsize = "15px",
           direction = "auto"
 
 
@@ -175,8 +179,6 @@ server <- function(input, output, session) {
     )
 
   })
-
-
 
 #Code for Farming efficiency tab
   #Altering Input 2 based on input 1
