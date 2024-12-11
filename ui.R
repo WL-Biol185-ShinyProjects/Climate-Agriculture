@@ -5,7 +5,7 @@ library(leaflet)
 library(dplyr)
 library(shinythemes)
 library(base)
-# library(sf)
+library(sf)
 
 #File Designations
 countryfile <- "Countries_data_FailedStates_Islands/combined_countries_data.rds"

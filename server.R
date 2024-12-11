@@ -5,7 +5,7 @@ library(dplyr)
 library(ggplot2)
 library(tidyverse)
 library(tidyr)
-# library(sf)
+library(sf)
 library(countrycode)
 
 countries_data <- readRDS("Countries_data_FailedStates_Islands/combined_countries_data.rds")
