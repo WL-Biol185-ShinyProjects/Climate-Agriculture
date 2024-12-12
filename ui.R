@@ -24,21 +24,21 @@ ui <- fluidPage(theme = shinytheme("cosmo"),
     
   #Introduction Panel
     tabPanel("Introduction",
-             
+            
              div(
                p( 
-                "Welcome to our application! 2023 marked the warmest year on record since 1850.  If global yearly caron emmissions continue to rise, it is predicted that by the end of this century global temperature will be 2.78 °C 
-                above the 1901-1960 average. This trend has far reaching implications, particularly for agricultural economies. The changing climate has significant consequences for global food production and food distribution. This 
-                app examines how climate change affects the agriculture sector utilizing data on countries across the world. We defined climate change as the year-over-year change in mean annual surface temperature per country (°C). 
+                "Welcome to our application! 2023 marked the warmest year on record since 1850.  If global yearly carbon emmissions continue to rise, it is predicted that by the end of this century global temperature will be 2.78 °C 
+                above the 1901-1960 average. This trend has far reaching implications, particularly for agricultural economies. The changing climate has significant consequences for global food production distribution. This 
+                app examines how climate change affects the agriculture sector by utilizing data on countries across the world. We defined climate change as the year-over-year change in mean annual surface temperature per country (°C). 
                 Use the tabs above to discover how climate shifts influence agricultural systems in various countries. Additionally, dive into our tab on significant world events to gain a broader understanding on how other factors, 
-                such as natural disasters and conflicts, also affect agricultural production. To avoid biasing the results, we exluded very small nations, small islands nations, the top failed states, and disputed territories, as these regions are influenced by additional 
-                factors beyond climate change that could impact agricultural production. These countries are shown in black on the map, meaning they are not included in the analysis.",
+                such as natural disasters and conflicts, also affect agricultural production. To avoid biasing the results, we exluded very small nations, small islands nations, the top failed states, and disputed territories, as these regions are inordinately influenced by additional 
+                factors beyond climate change that highly skew agricultural production data. These countries are shown in black on the map, meaning they are not included in the analysis.",
                  style = "font-size: 20px; text-align: center; margin-bottom: 45px;"
                  )
              ),
              
               p(
-                "IMPORTANT: this application only takes into account temperature data and agriculture data from the years of 1990 through 2022.", 
+                "IMPORTANT: this application only takes into account temperature data and agriculture data from the year 1990 to 2022.", 
                 style = "font-size: 15px; text-align: center; margin-bottom: 45px;"
               ),
              
@@ -46,7 +46,7 @@ ui <- fluidPage(theme = shinytheme("cosmo"),
              
              div(
                p(
-                 "The map above provides an introduction to global agricultural production, showing two key insights for each country in 2022. the shading represents the total agricultural production in tons - the darker the shade, the higher the production. 
+                 "The map above provides an overview of global agricultural production, showing two key insights for each country in 2022: total yield and most popular crop. The shading represents the total agricultural production in tons - the darker the shade, the higher the production. 
                  For example, Brazil, the darkest shade, has the highest total agriculture production in 2022. Additionally, the map highlights the most produced crop in each country. Hover over a country to see its total production in tons and its most produced crop. 
                  To dive deeper into how climate change and significant world events affect agriculture, explore the other tabs.",
                  style = "font-size: 20px; text-align: center; margin-top: 45px;"
@@ -118,13 +118,13 @@ ui <- fluidPage(theme = shinytheme("cosmo"),
                       
                       #description of temp heat map for app
                       p(
-                        "Using the year slider in the key above, this heat explores how average temperatures
-                        have changed around the world over time. It shows temperature anomalies for each country
-                        compared to each country's baseline temperature in 1990, making it easy to spot regions 
+                        "Using the year slider, this heat map explores how average annual temperatures
+                        have changed globally. The map shows a country's temperature variance 
+                       from its baseline temperature in 1960, making it easy to spot regions 
                         that have experienced significant warming or cooling trends. Paired with the crop yield heat map, 
-                        this tool can help you uncover potential links between climate change and agricultural productivity. 
+                        this tool can help you uncover links between climate change and agricultural productivity. 
                         While rising temperatures caused by global warming may harm certain areas, others could see 
-                        conditions that are more favorable for farming. This highlights the complex and often non-linear 
+                        conditions that are more favorable for farming. This highlights the complex and often nuanced 
                         ways climate change impacts agriculture on a global scale."
                       ),
                            
@@ -139,13 +139,14 @@ ui <- fluidPage(theme = shinytheme("cosmo"),
                       
                   #description of yield heat map for app
                   p(
-                    "Using the year slider, we are able to see how each country's total yield
+                    "Using the year slider, this heat map visualizes how each country's total yield
                     changes by percent increase or decrease with respect to the country's total yield in 1990.
-                    This map is designed to work in relationship with the temperature change heat map under this
-                    tab as well. We hope that the user can find a relationship between temperature change and 
-                    change in total yield. The relationship will not be linear in most cases because some 
-                    temperatures are more conducive to producing certain crops, but there is definitely correlation
-                    between temperature and crop change across the world. Additionally, Djibouti was
+                    This map is designed as a counterpart to the temperature change heat map under this
+                    tab. We hope that the user can find a relationship between temperature change and 
+                    change in total crop yield. The relationship between temp. and yield is not a strictly 
+                    1 to 1 linear correlation because 
+                    temperature changes affect different crops in different ways, but there is correlation
+                    between temperature and crop yield across the world. NOTE: Djibouti was
                     removed from this dataset because it was an outlier in positive yield growth."
                   )
                     ),
@@ -238,7 +239,7 @@ ui <- fluidPage(theme = shinytheme("cosmo"),
     div(
 
       p(
-        "In this tab, we explore the impact of significant world events on agricultural production to provide a different perspective on factors influencing agriculture other than climate change. While climate change is an important issue for agriculture, other events - such as natural disasters, wars, political uprisings, and epidemics. These events can affect infrastructure and hinder the production of crops. It is important to note that these charts are in the context of one country. Also, focus on the year of the event and the year following the event.",
+        "In this tab, we explore the impact of significant world events on agricultural production to provide a different perspective on factors influencing agriculture other than climate change. While climate change is an important issue for agriculture, other events - such as natural disasters, wars, political uprisings, and epidemics also play important roles. These events can affect infrastructure and hinder the production of crops. It is important to note that these charts are in the context of one country. Also, focus on the year of the event and the year following the event.",
         style = "font-size: 25px; text-align: center; margin-bottom: 45px; margin-top: 45px;"
       )
     ),
