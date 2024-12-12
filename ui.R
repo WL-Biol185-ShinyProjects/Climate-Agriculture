@@ -27,10 +27,12 @@ ui <- fluidPage(theme = shinytheme("cosmo"),
              
              div(
                p( 
-                "Welcome to our application! Here, you can explore the impacts of climate change on agriculture across the globe. Use the tabs above to discover how climate shifts influence agricultural systems
-                in various countries. Additionally, dive into our tab on significant world events to gain a broader understanding on how other factors, such as natural disasters and conflicts, also affect agricultural
-                production. To avoid biasing the results, we exluded small islands nations and the top ten failed states, as these regions are influenced by additional factors beyond climate change that could impact agricultural
-                production. These countries are shown in black on the map, meaning they are not included in the analysis.",
+                "Welcome to our application! 2023 marked the warmest year on record since 1850.  If global yearly caron emmissions continue to rise, it is predicted that by the end of this century global temperature will be 2.78 °C 
+                above the 1901-1960 average. This trend has far reaching implications, particularly for agricultural economies. The changing climate has significant consequences for global food production and food distribution. This 
+                app examines how climate change affects the agriculture sector utilizing data on countries across the world. We defined climate change as the year-over-year change in mean annual surface temperature per country (°C). 
+                Use the tabs above to discover how climate shifts influence agricultural systems in various countries. Additionally, dive into our tab on significant world events to gain a broader understanding on how other factors, 
+                such as natural disasters and conflicts, also affect agricultural production. To avoid biasing the results, we exluded very small nations and small islands nations and the top ten failed states, as these regions are influenced by additional 
+                factors beyond climate change that could impact agricultural production. These countries are shown in black on the map, meaning they are not included in the analysis.",
                  style = "font-size: 30px; text-align: center; margin-bottom: 45px;"
                  )
              ),
@@ -50,9 +52,37 @@ ui <- fluidPage(theme = shinytheme("cosmo"),
                  style = "font-size: 30px; text-align: center; margin-top: 45px;"
                )
               
+             ),
+             
+             div(
+               p(
+                 "Countries Removed From Analysis",
+                 style = "font-size: 30px; text-align: center; margin-top: 45px;"
+               ),
+               
+               p(
+                 "Failed States:",
+                 style = "font-size: 23px; text-align: left; margin-top: 20px;"
+               ),
+               
+               p(
+                 "Afganistan, Chad, Democratic Republic of the Congo, Sudan, South Sudan, Somalia, Syria, Yemen, Haiti, Western Sahara (considered a disputed territory)",
+                 style = "font-size: 15px; text-align: left; margin-top: 15px;"
+               ),
+               
+               p(
+                 "Very Small Nations/Island Nations:",
+                 style = "font-size: 23px; text-align: left; margin-top: 20px;"
+               ),
+             
+              p(
+                "Antigua and Barbuda, The Bahamas, Barbados, Cabo Verde, Cook Islands, Comoros, Dominica, Faroe Island, Fiji, French Polynesia, Grenada, Greenland, Guadeloupe, Jamaica, Marshall Islands, Martinique, Maldives, Mauritius, Malta, Nauru, New Caledonia, Niue, Puerto Rico, Reunion, Samoa, 
+                Sao Tome and Principe, Seychelles, Saint Kitts and Nevis, Saint Lucia, Saint Vincent and the Grenadines, Tokelau, Trinidad and Tobago, Tuvalu, Vanuatu",
+               style = "font-size: 15px; text-align: left; margin-top: 15px;"
              )
              
-            ),
+           )
+        ),
   
   
   #Heat Maps Panel
