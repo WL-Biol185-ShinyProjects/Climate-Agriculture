@@ -93,7 +93,16 @@ ui <- fluidPage(theme = shinytheme("cosmo"),
                   tabPanel("Global Crop Visualization",
                       
                       #yield map output
-                      leafletOutput("yield_map", height = 600),
+                      leafletOutput("yield_map", height = 300),
+                  p(
+                    "Using the year slider, we are able to see how each country's total yield
+                    changes by percent increase or decrease with respect to the country's total yield in 1990.
+                    This map is designed to work in relationship with the temperature change heat map under this
+                    tab as well. We hope that the user can find a relationship between temperature change and 
+                    change in total yield. The relationship will not be linear in most cases because some 
+                    temperatures are more conducive to producing certain crops, but there is definitely correlation
+                    between temperature and crop change across the world."
+                  )
                     ),
                 ),
               )
