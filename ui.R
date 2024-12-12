@@ -114,7 +114,17 @@ ui <- fluidPage(theme = shinytheme("cosmo"),
                   tabPanel("Global Temperature Visualization",
                            
                       #temp map output     
-                      leafletOutput("temperature_map", height = 600),
+                      leafletOutput("temperature_map", height = 300),
+                      p(
+                        "Using the year slider in the key above, this heat explores how average temperatures
+                        have changed around the world over time. It shows temperature anomalies for each country
+                        compared to each country's baseline temperature in 1990, making it easy to spot regions 
+                        that have experienced significant warming or cooling trends. Paired with the crop yield heat map, 
+                        this tool can help you uncover potential links between climate change and agricultural productivity. 
+                        While rising temperatures caused by global warming may harm certain areas, others could see 
+                        conditions that are more favorable for farming. This highlights the complex and often non-linear 
+                        ways climate change impacts agriculture on a global scale."
+                      ),
                            
                       # explanatory panel NOTE: look on stackoverflow for fix, ... wont show up
                       verbatimTextOutput("This")
