@@ -197,7 +197,7 @@ ui <- fluidPage(theme = shinytheme("cosmo"),
 
               plotOutput("EfficiencyvsTime", width = 1000, height = 600),
 
-              p("It is apparent that some crops have decreased in production over the time period, which could be due to climate, geopolitical, or financial considerations.",
+              p("It is apparent that some crops have decreased in production over the time period, which could be due to climate, geopolitical, or financial factors.",
                 style = "font-size: 20px; text-align: center; margin-botton: 20px; margin-top: 10px;"
                 ),
 
