@@ -274,8 +274,8 @@ ui <- fluidPage(theme = shinytheme("cosmo"),
         
         #description of the events 
         p(
-          "The Seven Events Explored:",
-          style = "font-size: 20px; text-align: left; margin-bottom: 30px;"
+          "The Seven Events Explored",
+          style = "font-size: 20px; text-align: center; margin-bottom: 30px;"
         ),
 
         p(
