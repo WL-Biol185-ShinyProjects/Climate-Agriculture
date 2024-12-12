@@ -115,6 +115,8 @@ ui <- fluidPage(theme = shinytheme("cosmo"),
                            
                       #temp map output     
                       leafletOutput("temperature_map", height = 300),
+                      
+                      #description of temp heat map for app
                       p(
                         "Using the year slider in the key above, this heat explores how average temperatures
                         have changed around the world over time. It shows temperature anomalies for each country
@@ -134,6 +136,8 @@ ui <- fluidPage(theme = shinytheme("cosmo"),
                       
                       #yield map output
                       leafletOutput("yield_map", height = 300),
+                      
+                  #description of yield heat map for app
                   p(
                     "Using the year slider, we are able to see how each country's total yield
                     changes by percent increase or decrease with respect to the country's total yield in 1990.
