@@ -45,7 +45,7 @@ crop.ui <- fluidPage(
 crop.server <- function(input, output, session) {
   
   crop_merged <- reactive({
-    # loadup data
+    # load up data
     crop_data <- readRDS("efficiency_data /combined_efficiency_data.rds")
     ##Djibouti is an outlier so it is removed for clarity of the heat map (Over 3000% growth)
     crop_data <- crop_data[crop_data$Area != "Djibouti", ]

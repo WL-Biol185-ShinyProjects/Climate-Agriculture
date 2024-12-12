@@ -33,13 +33,13 @@ ui <- fluidPage(theme = shinytheme("cosmo"),
                 Use the tabs above to discover how climate shifts influence agricultural systems in various countries. Additionally, dive into our tab on significant world events to gain a broader understanding on how other factors, 
                 such as natural disasters and conflicts, also affect agricultural production. To avoid biasing the results, we exluded very small nations, small islands nations, the top failed states, and disputed territories, as these regions are influenced by additional 
                 factors beyond climate change that could impact agricultural production. These countries are shown in black on the map, meaning they are not included in the analysis.",
-                 style = "font-size: 30px; text-align: center; margin-bottom: 45px;"
+                 style = "font-size: 20px; text-align: center; margin-bottom: 45px;"
                  )
              ),
              
               p(
                 "IMPORTANT: this application only takes into account temperature data and agriculture data from the years of 1990 through 2022.", 
-                style = "font-size: 20px; text-align: center; margin-bottom: 45px;"
+                style = "font-size: 15px; text-align: center; margin-bottom: 45px;"
               ),
              
               leafletOutput("Intro_Map", width = "100%", height = "600px"),
@@ -49,7 +49,7 @@ ui <- fluidPage(theme = shinytheme("cosmo"),
                  "The map above provides an introduction to global agricultural production, showing two key insights for each country in 2022. the shading represents the total agricultural production in tons - the darker the shade, the higher the production. 
                  For example, Brazil, the darkest shade, has the highest total agriculture production in 2022. Additionally, the map highlights the most produced crop in each country. Hover over a country to see its total production in tons and its most produced crop. 
                  To dive deeper into how climate change and significant world events affect agriculture, explore the other tabs.",
-                 style = "font-size: 30px; text-align: center; margin-top: 45px;"
+                 style = "font-size: 20px; text-align: center; margin-top: 45px;"
                )
               
              ),
@@ -145,7 +145,8 @@ ui <- fluidPage(theme = shinytheme("cosmo"),
                     tab as well. We hope that the user can find a relationship between temperature change and 
                     change in total yield. The relationship will not be linear in most cases because some 
                     temperatures are more conducive to producing certain crops, but there is definitely correlation
-                    between temperature and crop change across the world."
+                    between temperature and crop change across the world. Additionally, Djibouti was
+                    removed from this dataset because it was an outlier in positive yield growth."
                   )
                     ),
                 ),
