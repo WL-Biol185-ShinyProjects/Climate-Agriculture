@@ -31,7 +31,7 @@ ui <- fluidPage(theme = shinytheme("cosmo"),
                 above the 1901-1960 average. This trend has far reaching implications, particularly for agricultural economies. The changing climate has significant consequences for global food production and food distribution. This 
                 app examines how climate change affects the agriculture sector utilizing data on countries across the world. We defined climate change as the year-over-year change in mean annual surface temperature per country (°C). 
                 Use the tabs above to discover how climate shifts influence agricultural systems in various countries. Additionally, dive into our tab on significant world events to gain a broader understanding on how other factors, 
-                such as natural disasters and conflicts, also affect agricultural production. To avoid biasing the results, we exluded very small nations and small islands nations and the top ten failed states, as these regions are influenced by additional 
+                such as natural disasters and conflicts, also affect agricultural production. To avoid biasing the results, we exluded very small nations, small islands nations, the top failed states, and disputed territories, as these regions are influenced by additional 
                 factors beyond climate change that could impact agricultural production. These countries are shown in black on the map, meaning they are not included in the analysis.",
                  style = "font-size: 30px; text-align: center; margin-bottom: 45px;"
                  )
@@ -61,12 +61,12 @@ ui <- fluidPage(theme = shinytheme("cosmo"),
                ),
                
                p(
-                 "Failed States:",
+                 "Failed States/Disputed Territories:",
                  style = "font-size: 23px; text-align: left; margin-top: 20px;"
                ),
                
                p(
-                 "Afganistan, Chad, Democratic Republic of the Congo, Sudan, South Sudan, Somalia, Syria, Yemen, Haiti, Western Sahara (considered a disputed territory)",
+                 "Afganistan, Chad, Central African Republic, Democratic Republic of the Congo, Kosovo, Sudan, South Sudan, Somalia, Somaliland, Syria, Yemen, Haiti, Western Sahara",
                  style = "font-size: 15px; text-align: left; margin-top: 15px;"
                ),
                
@@ -78,7 +78,7 @@ ui <- fluidPage(theme = shinytheme("cosmo"),
               p(
                 "Antigua and Barbuda, The Bahamas, Barbados, Cabo Verde, Cook Islands, Comoros, Dominica, Faroe Island, Fiji, French Polynesia, Grenada, Greenland, Guadeloupe, Jamaica, Marshall Islands, Martinique, Maldives, Mauritius, Malta, Nauru, New Caledonia, Niue, Puerto Rico, Reunion, Samoa, 
                 Sao Tome and Principe, Seychelles, Saint Kitts and Nevis, Saint Lucia, Saint Vincent and the Grenadines, Tokelau, Trinidad and Tobago, Tuvalu, Vanuatu",
-               style = "font-size: 15px; text-align: left; margin-top: 15px;"
+               style = "font-size: 15px; text-align: left; margin-bottom: 25px; margin-top: 15px;"
              )
              
            )
