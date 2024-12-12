@@ -75,8 +75,6 @@ ui <- fluidPage(theme = shinytheme("cosmo"),
                                           "Magma" = "magma", 
                                           "Inferno" = "inferno"),
                               selected = "viridis"),
-                 
-                  checkboxInput("baseline_toggle", "Show values relative to baseline year (1990)")
                 
                 ), 
              

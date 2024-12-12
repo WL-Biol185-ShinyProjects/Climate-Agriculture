@@ -17,7 +17,7 @@ crop.ui <- fluidPage(
       
       # Create the slider for year
       sliderInput("selected_year", 
-                  "Select Year:",  min = 1990, max = 2020, 
+                  "Select Year:",  min = 1991, max = 2022, 
                   value = 2000,
                   step = 1,
                   sep = ""),
@@ -47,6 +47,8 @@ crop.server <- function(input, output, session) {
   crop_merged <- reactive({
     # loadup data
     crop_data <- readRDS("efficiency_data /combined_efficiency_data.rds")
+    ##Djibouti is an outlier so it is removed for clarity of the heat map (Over 3000% growth)
+    crop_data <- crop_data[crop_data$Area != "Djibouti", ]
     
  #Filtering and joining data so that we can see the total yield of each country in each year for all crops   
     yield_table <- crop_data %>% 
@@ -79,12 +81,17 @@ crop.server <- function(input, output, session) {
   output$yield_map <- renderLeaflet({
     # Filter data for selected year
     yield_data <- crop_merged() %>%
+      group_by(Country_Code) %>%
+      mutate(First = head(Total_Yield, 1),
+            BaselineChange =
+            case_when(Total_Yield != First ~ (Total_Yield - First) * 100 / First,
+                       TRUE ~ 1 * NA)) %>%
       filter(Year == input$selected_year)
     
     # color p
     pal <- colorNumeric(
       palette = input$color_palette, 
-      domain = yield_data$Total_Yield,
+      domain = yield_data$BaselineChange,
       na.color = "transparent"
     )
     
@@ -92,7 +99,7 @@ crop.server <- function(input, output, session) {
     leaflet(yield_data) %>%
       addTiles() %>%
       addPolygons(
-        fillColor = ~pal(Total_Yield),
+        fillColor = ~pal(BaselineChange),
         weight = 0.5,
         opacity = 1,
         color = "white",
@@ -100,13 +107,14 @@ crop.server <- function(input, output, session) {
         popup = ~paste(
           Area, "<br>",
           "Year: ", Year, "<br>",
-          "Yield Change: ", round(Total_Yield, 1)
+          "Total Yield: ", round(Total_Yield, 1), "<br>",
+          "% Yield Change: ", round(BaselineChange, 1)
         )
       ) %>%
       addLegend(
         "bottomright",
         pal = pal,
-        values = ~Total_Yield,
+        values = ~BaselineChange,
         title = paste("Yield Change:", input$selected_year),
         opacity = 1
       )

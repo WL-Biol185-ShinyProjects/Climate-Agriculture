@@ -36,6 +36,9 @@ efficiencydata <- efficiencydata[efficiencydata$Item != "Hen eggs in shell, fres
 
 #Loading data for crop yield map 
 crop_data <- readRDS("efficiency_data /combined_efficiency_data.rds")
+##Djibouti is an outlier so it is removed for clarity of the heat map (Over 3000% growth)
+crop_data <- crop_data[crop_data$Area != "Djibouti", ]
+
 
 #Temp Heat Map Data Modification
 temp_merged <- reactive({    #prepping the heatmap data for temp 
@@ -287,12 +290,17 @@ server <- function(input, output, session) {
 
     # Filter data for selected year
     yield_data <- crop_merged() %>%
+      group_by(Country_Code) %>%
+      mutate(First = head(Total_Yield, 1),
+             Basechange =
+               case_when(Total_Yield != First ~ (Total_Yield - First) * 100 / First,
+                         TRUE ~ 1 * NA)) %>%
       filter(Year == input$selected_year)
 
     # color p
     pal <- colorNumeric(
       palette = input$color_palette,
-      domain = yield_data$Total_Yield,
+      domain = yield_data$Basechange,
       na.color = "transparent"
     )
 
@@ -300,7 +308,7 @@ server <- function(input, output, session) {
     leaflet(yield_data) %>%
       addTiles() %>%
       addPolygons(
-        fillColor = ~pal(Total_Yield), #Fill the countries' based on the yield change 
+        fillColor = ~pal(Basechange), #Fill the countries' based on the % yield change 
         weight = 0.5,
         opacity = 1,
         color = "white",
@@ -308,14 +316,15 @@ server <- function(input, output, session) {
         popup = ~paste(
           Area, "<br>",
           "Year: ", Year, "<br>",
-          "Yield Change: ", round(Total_Yield, 1)
+          "Total Yield Change: ", round(Total_Yield, 1), "<br>",
+          "% Yield Change: ", round(Basechange, 1)
         )
       ) %>%
       addLegend(
         "bottomright",    #position legend at the bottom-right
         pal = pal,        #Use the same color palette for the legend 
-        values = ~Total_Yield,
-        title = paste("Yield Change:", input$selected_year),
+        values = ~Basechange,
+        title = paste("% Yield Change:", input$selected_year),
         opacity = 1
       )
   })
