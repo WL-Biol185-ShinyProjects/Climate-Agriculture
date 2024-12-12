@@ -79,7 +79,7 @@ crop.server <- function(input, output, session) {
   
   # Create the map
   output$yield_map <- renderLeaflet({
-    # Filter data for selected year
+    # Filter data for selected year and make new variable for change from baseline year
     yield_data <- crop_merged() %>%
       group_by(Country_Code) %>%
       mutate(First = head(Total_Yield, 1),
@@ -88,14 +88,14 @@ crop.server <- function(input, output, session) {
                        TRUE ~ 1 * NA)) %>%
       filter(Year == input$selected_year)
     
-    # color p
+    # Making palette based on percent change from baseline year
     pal <- colorNumeric(
       palette = input$color_palette, 
       domain = yield_data$BaselineChange,
       na.color = "transparent"
     )
     
-    # make leaflet map + create sick hover pop up
+    # making yield leaflet
     leaflet(yield_data) %>%
       addTiles() %>%
       addPolygons(
@@ -111,6 +111,7 @@ crop.server <- function(input, output, session) {
           "% Yield Change: ", round(BaselineChange, 1)
         )
       ) %>%
+      # Adding the key to give contex in percent change form
       addLegend(
         "bottomright",
         pal = pal,
